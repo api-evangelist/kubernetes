@@ -1,0 +1,3870 @@
+{
+    "id": "e63646904c9399411d93421e4b4f91ae",
+    "name": "Kubernetes",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "variables": [],
+    "order": [],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "611abf3e3c779e11c0e477d94e336ccb",
+            "name": "Get Endpoints",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/endpoints",
+            "description": "List objects of kind endpoints.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "52e6d542018e0733ff15389e798dab5e",
+            "name": "Get Events",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/events",
+            "description": "List objects of kind event.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "4f2adec11bec3639993fdf01e0cc8b4c",
+            "name": "Get Limitranges",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/limitranges",
+            "description": "List objects of kind limitrange.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "5814b79bdb77d8dbc72dae62b2ae4187",
+            "name": "Get Namespaces",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces",
+            "description": "List objects of kind namespace.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "fcf29aa53132be1d138949a89cbedf60",
+            "name": "Post Namespaces",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces",
+            "description": "Create a namespace.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "6dcba8a9b5c9fb0c3605b87754111c1d",
+            "name": "Post Namespaces Bindings",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/bindings",
+            "description": "Create a binding.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "1f8718fc5dd51fa15f2b895a3bf5eb01",
+            "name": "Get Namespaces Endpoints",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/endpoints",
+            "description": "List objects of kind endpoints.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "c10c97ba4df3685e1847506eb87e02b0",
+            "name": "Post Namespaces Endpoints",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/endpoints",
+            "description": "Create a endpoints.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "19c29e6c24646944b0c5b97e8ec61b28",
+            "name": "Get Namespaces Endpoints Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/endpoints\/{name}",
+            "description": "Read the specified endpoints.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "76f97b02ed972dfa9922609570b3b0b1",
+            "name": "Put Namespaces Endpoints Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/endpoints\/{name}",
+            "description": "Update the specified endpoints.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "5289dda65a2b7f5fc006069b3ead6afb",
+            "name": "Get Namespaces Events",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events",
+            "description": "List objects of kind event.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "b654f8c4d6d5dca18ef39e49cc5daff5",
+            "name": "Post Namespaces Events",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events",
+            "description": "Create a event.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "e0f8dfbbb8df7656ae4007bc46a2677d",
+            "name": "Delete Namespaces Events Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events\/{name}",
+            "description": "Delete a event.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "5eaab11ef70f425b17c37f7122f2f9a8",
+            "name": "Get Namespaces Events Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events\/{name}",
+            "description": "Read the specified event.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "6a050b80ea90c4074041d6a6aa5deee5",
+            "name": "Put Namespaces Events Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events\/{name}",
+            "description": "Update the specified event.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "5c5bc9e36589f1e2d3c8e05d28f907ab",
+            "name": "Get Namespaces Limitranges",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges",
+            "description": "List objects of kind limitrange.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "fe7ee69ea6325791bd56fbd15d47b84e",
+            "name": "Post Namespaces Limitranges",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges",
+            "description": "Create a limitrange.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "40787a44a6ba12098a85e751a2073cf9",
+            "name": "Delete Namespaces Limitranges Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges\/{name}",
+            "description": "Delete a limitrange.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "98d2664d5ed461b992ededac492e4d63",
+            "name": "Get Namespaces Limitranges Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges\/{name}",
+            "description": "Read the specified limitrange.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "bff8ac037a3944f1e7f3e3f45273a081",
+            "name": "Put Namespaces Limitranges Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges\/{name}",
+            "description": "Update the specified limitrange.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "3973bf1584a17b6aa0dfec7c5a9c2d98",
+            "name": "Get Namespaces Pods",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods",
+            "description": "List objects of kind pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "543dfc4a6f9cda23ec5d1286f79a5b68",
+            "name": "Post Namespaces Pods",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods",
+            "description": "Create a pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "c16d659fc9f2fbef75b886c574c1ad21",
+            "name": "Delete Namespaces Pods Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods\/{name}",
+            "description": "Delete a pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "23ae0918574951a151556873f8bf9957",
+            "name": "Get Namespaces Pods Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods\/{name}",
+            "description": "Read the specified pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "3a3e95421ac502df1d741a1156d5eb61",
+            "name": "Put Namespaces Pods Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods\/{name}",
+            "description": "Update the specified pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "98bcdd6ac4952ad1f0aa062f80b73d82",
+            "name": "Get Namespaces Replicationcontrollers",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers",
+            "description": "List objects of kind replicationcontroller.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "834c2a822e666236f4c222d99dc5c694",
+            "name": "Post Namespaces Replicationcontrollers",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers",
+            "description": "Create a replicationcontroller.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "08eec705a16d8583d018ecf00088b225",
+            "name": "Delete Namespaces Replicationcontrollers Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers\/{name}",
+            "description": "Delete a replicationcontroller.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "d256996fbdd5e2c7291e2554b46512fc",
+            "name": "Get Namespaces Replicationcontrollers Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers\/{name}",
+            "description": "Read the specified replicationcontroller.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "2da883389a369a05124f1e0bdbb5a5f4",
+            "name": "Put Namespaces Replicationcontrollers Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers\/{name}",
+            "description": "Update the specified replicationcontroller.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "83861dac7afb9cfa81a91bc34c0333e2",
+            "name": "Get Namespaces Resourcequotas",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas",
+            "description": "List objects of kind resourcequota.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "b6236507e02cf90a0870489f04d50079",
+            "name": "Post Namespaces Resourcequotas",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas",
+            "description": "Create a resourcequota.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "e86e2be5f221edb1c0305b251464fc2c",
+            "name": "Delete Namespaces Resourcequotas Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas\/{name}",
+            "description": "Delete a resourcequota.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "22ca75caf1ab3354e7e9cb6c1cbb9e7f",
+            "name": "Get Namespaces Resourcequotas Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas\/{name}",
+            "description": "Read the specified resourcequota.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "51ddcc3eb2b557bdb592e1b5bfcc6f40",
+            "name": "Put Namespaces Resourcequotas Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas\/{name}",
+            "description": "Update the specified resourcequota.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "51103ce5e06d738b31fc7d50e63bce39",
+            "name": "Post Namespaces Resourcequotausages",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotausages",
+            "description": "Create a resourcequotausage.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "fa8aa32627d89a1aac7b17c8e58afdec",
+            "name": "Get Namespaces Secrets",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets",
+            "description": "List objects of kind secret.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "0dfd6408753d1a23879ae39decbd6e43",
+            "name": "Post Namespaces Secrets",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets",
+            "description": "Create a secret.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "6347a803071447b28ab0312a3e1b6b35",
+            "name": "Delete Namespaces Secrets Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets\/{name}",
+            "description": "Delete a secret.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "68f5dc7648eb6388744eaaf5e37aaf8c",
+            "name": "Get Namespaces Secrets Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets\/{name}",
+            "description": "Read the specified secret.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "db0b1fc9b1971501a2abc67628792cf3",
+            "name": "Put Namespaces Secrets Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets\/{name}",
+            "description": "Update the specified secret.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "1b2e2683468ba289adcfab5549bee1bc",
+            "name": "Get Namespaces Services",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services",
+            "description": "List objects of kind service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "64318c0c4699d861cec16772a2c4ffdb",
+            "name": "Post Namespaces Services",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services",
+            "description": "Create a service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "0f685692e81ad2687db63947bd27fed6",
+            "name": "Delete Namespaces Services Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services\/{name}",
+            "description": "Delete a service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "4371a38446d7982a8737837f959b3e51",
+            "name": "Get Namespaces Services Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services\/{name}",
+            "description": "Read the specified service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "102d1d088d82c996b529a8a40e2ed0c2",
+            "name": "Put Namespaces Services Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services\/{name}",
+            "description": "Update the specified service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "3bc97bed5af9284a1eafaad1a7df4a04",
+            "name": "Delete Namespaces Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{name}",
+            "description": "Delete a namespace.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "8648e9d9220088e558fc2a0af9017898",
+            "name": "Get Namespaces Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{name}",
+            "description": "Read the specified namespace.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "d9920700299d5e7a9ed47907ac954800",
+            "name": "Put Namespaces Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{name}",
+            "description": "Update the specified namespace.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "26330925bc0f5d347b026db681682925",
+            "name": "Get Nodes",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes",
+            "description": "List objects of kind node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "5ece6ef246245c0edd209103460a1c5b",
+            "name": "Post Nodes",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes",
+            "description": "Create a node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "f8f3cd97222b5165632c613fad3d1f25",
+            "name": "Delete Nodes Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes\/{name}",
+            "description": "Delete a node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "89f9a73f9e25ae02779d4f30413152f1",
+            "name": "Get Nodes Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes\/{name}",
+            "description": "Read the specified node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "f3ed1417e46244ff8582690f5e97f446",
+            "name": "Put Nodes Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes\/{name}",
+            "description": "Update the specified node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "body",
+                    "description": "",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "e63f6624edda2fa6a6b1c5cf12152020",
+            "name": "Get Pods",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/pods",
+            "description": "List objects of kind pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "07b75f4d10e9c0695d083f3bb1cda038",
+            "name": "Delete Proxy Namespaces Pods Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}",
+            "description": "Proxy delete requests to pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "7c68e6276029605c894a570f4288a931",
+            "name": "Get Proxy Namespaces Pods Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}",
+            "description": "Proxy get requests to pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "86e6ce73ccb116655072e747414bd252",
+            "name": "Post Proxy Namespaces Pods Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}",
+            "description": "Proxy post requests to pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "365be9bde1529c29d1b5176fbc7d4265",
+            "name": "Put Proxy Namespaces Pods Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}",
+            "description": "Proxy put requests to pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "104a418c2b14a7d9518a093be776e6cb",
+            "name": "Delete Proxy Namespaces Pods Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}\/{path:*}",
+            "description": "Proxy delete requests to pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "6413ae6ccd34858b32bcae27f8891749",
+            "name": "Get Proxy Namespaces Pods Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}\/{path:*}",
+            "description": "Proxy get requests to pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "32770d800c7047b639240f8a45e036cb",
+            "name": "Post Proxy Namespaces Pods Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}\/{path:*}",
+            "description": "Proxy post requests to pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "b0423e42408506bfb42aaca8028e2986",
+            "name": "Put Proxy Namespaces Pods Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}\/{path:*}",
+            "description": "Proxy put requests to pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "4a3b7cab8a21d35103208b9d304328de",
+            "name": "Delete Proxy Namespaces Services Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}",
+            "description": "Proxy delete requests to service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "ac239b235dcf159f6d0c8cac5ea893a7",
+            "name": "Get Proxy Namespaces Services Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}",
+            "description": "Proxy get requests to service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "763ee2185c2b32d6edd860ce25d05aa7",
+            "name": "Post Proxy Namespaces Services Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}",
+            "description": "Proxy post requests to service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "f29ac0da3f106a2303c6d6beb6d213b9",
+            "name": "Put Proxy Namespaces Services Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}",
+            "description": "Proxy put requests to service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "06b16e04c3ed6d40d93db98e188b7eda",
+            "name": "Delete Proxy Namespaces Services Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}\/{path:*}",
+            "description": "Proxy delete requests to service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "997da2f2fcd0ef6648348505c8c2e7fa",
+            "name": "Get Proxy Namespaces Services Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}\/{path:*}",
+            "description": "Proxy get requests to service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "989791ffab06583734b7509a8f28f321",
+            "name": "Post Proxy Namespaces Services Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}\/{path:*}",
+            "description": "Proxy post requests to service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "de3fb0ba5f9803ef473892179e277fcd",
+            "name": "Put Proxy Namespaces Services Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}\/{path:*}",
+            "description": "Proxy put requests to service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "d28086baaa00e729d4cbbc85f5bdcb0a",
+            "name": "Delete Proxy Nodes Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}",
+            "description": "Proxy delete requests to node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "d613571d44413ea4463ca4f780c32997",
+            "name": "Get Proxy Nodes Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}",
+            "description": "Proxy get requests to node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "ac5188792d561d612baad1507988d8a1",
+            "name": "Post Proxy Nodes Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}",
+            "description": "Proxy post requests to node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "af3df8d38744bcb26c255c1fc24065c5",
+            "name": "Put Proxy Nodes Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}",
+            "description": "Proxy put requests to node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "e1cfce5b1dc3171675ad12aee1a1950c",
+            "name": "Delete Proxy Nodes Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}\/{path:*}",
+            "description": "Proxy delete requests to node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "delete",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "e02aa6f66cc923cd1ea83e995b137851",
+            "name": "Get Proxy Nodes Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}\/{path:*}",
+            "description": "Proxy get requests to node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "b0fd44b771897a1a8efb8dec3d3f29be",
+            "name": "Post Proxy Nodes Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}\/{path:*}",
+            "description": "Proxy post requests to node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "post",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "ac55223aeb05c4f461bfe0611b0960ff",
+            "name": "Put Proxy Nodes Name Path *",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}\/{path:*}",
+            "description": "Proxy put requests to node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "put",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "dc5da2aa877b92b7fde44eeb78375166",
+            "name": "Get Redirect Namespaces Pods Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/redirect\/namespaces\/{namespaces}\/pods\/{name}",
+            "description": "Redirect get request to pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "d6db4f2fb89a9c2393ee5d7042c75f21",
+            "name": "Get Redirect Namespaces Services Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/redirect\/namespaces\/{namespaces}\/services\/{name}",
+            "description": "Redirect get request to service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "4cf71f3e5b857f663b415a1b7af1777f",
+            "name": "Get Redirect Nodes Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/redirect\/nodes\/{name}",
+            "description": "Redirect get request to node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "1654bf00f29359261df2e0424330927e",
+            "name": "Get Replicationcontrollers",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/replicationcontrollers",
+            "description": "List objects of kind replicationcontroller.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "8d715ec44d5042f691ef864e814fd0c0",
+            "name": "Get Resourcequotas",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/resourcequotas",
+            "description": "List objects of kind resourcequota.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "6bcc09d02941ecff05bab9572ae5bd74",
+            "name": "Get Secrets",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/secrets",
+            "description": "List objects of kind secret.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "6b2e77af473114f2772157217ddb6c95",
+            "name": "Get Services",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/services",
+            "description": "List objects of kind service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "79895756231bd11a749434ae44dc9e2d",
+            "name": "Get Watch Endpoints",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/endpoints",
+            "description": "Watch a list of endpoints.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "54703c302c321850b0e5551d78340f5c",
+            "name": "Get Watch Events",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/events",
+            "description": "Watch a list of event.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "bced1044da540817aa75631523dab7a1",
+            "name": "Get Watch Limitranges",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/limitranges",
+            "description": "Watch a list of limitrange.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "202459d409f811edcfb751bac6e298fe",
+            "name": "Get Watch Namespaces",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces",
+            "description": "Watch a list of namespace.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "180d5c599dacd070ec4f8b3488e7b882",
+            "name": "Get Watch Namespaces Endpoints",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/endpoints",
+            "description": "Watch a list of endpoints.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "48ac3e7d398f0336beddd6b3e6841c36",
+            "name": "Get Watch Namespaces Endpoints Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/endpoints\/{name}",
+            "description": "Watch a particular endpoints.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "d61a0ddee00476d5622fbbed9042c20a",
+            "name": "Get Watch Namespaces Events",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/events",
+            "description": "Watch a list of event.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "d8f9fdfa065a6c5ee3eda9f21ce4d483",
+            "name": "Get Watch Namespaces Events Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/events\/{name}",
+            "description": "Watch a particular event.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "5ce9c424a71d831f0eaa922456388807",
+            "name": "Get Watch Namespaces Limitranges",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/limitranges",
+            "description": "Watch a list of limitrange.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "0cc29e6501b4980ac02b7d0181f19e70",
+            "name": "Get Watch Namespaces Limitranges Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/limitranges\/{name}",
+            "description": "Watch a particular limitrange.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "e47d3effb501522a9e05c7313a731bb0",
+            "name": "Get Watch Namespaces Pods",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/pods",
+            "description": "Watch a list of pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "fec8d96edcb9eb7e2c8844bc8c3ff6d0",
+            "name": "Get Watch Namespaces Pods Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/pods\/{name}",
+            "description": "Watch a particular pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "9ddd28aef5e6dca2ea6c7dd0bc99691e",
+            "name": "Get Watch Namespaces Replicationcontrollers",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/replicationcontrollers",
+            "description": "Watch a list of replicationcontroller.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "99ea2f0606d6537969c98028625b5e94",
+            "name": "Get Watch Namespaces Replicationcontrollers Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/replicationcontrollers\/{name}",
+            "description": "Watch a particular replicationcontroller.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "6db012b4a37f8a8a3cbd3e7b328a62c5",
+            "name": "Get Watch Namespaces Resourcequotas",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/resourcequotas",
+            "description": "Watch a list of resourcequota.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "263bf67c7eead91eb54275cc680f81fb",
+            "name": "Get Watch Namespaces Resourcequotas Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/resourcequotas\/{name}",
+            "description": "Watch a particular resourcequota.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "37572b78601eee9d258b1224aebcdecd",
+            "name": "Get Watch Namespaces Secrets",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/secrets",
+            "description": "Watch a list of secret.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "cad509a4c5890f785a2e83cfc0a012db",
+            "name": "Get Watch Namespaces Secrets Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/secrets\/{name}",
+            "description": "Watch a particular secret.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "d16b7e5dfc09ba2ac3f3f6591fd6be87",
+            "name": "Get Watch Namespaces Services",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/services",
+            "description": "Watch a list of service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "35495bd518ae6331d291eb4f06724bcc",
+            "name": "Get Watch Namespaces Services Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/services\/{name}",
+            "description": "Watch a particular service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                },
+                {
+                    "key": "namespaces",
+                    "description": "object name and auth scope, such as for teams and projects",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "1fc19954217e02ebaca986d4dc964203",
+            "name": "Get Watch Namespaces Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{name}",
+            "description": "Watch a particular namespace.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "babca9a7489a387f584a1e5f0a323b10",
+            "name": "Get Watch Nodes",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/nodes",
+            "description": "Watch a list of node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "3fe99faa3eb17b307f78456bba3e7998",
+            "name": "Get Watch Nodes Name",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/nodes\/{name}",
+            "description": "Watch a particular node.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "name",
+                    "description": "name of the Endpoints",
+                    "value": "",
+                    "equals": true,
+                    "enabled": true
+                }
+            ],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "37729b1d262bb96ea04fc0d7d4c7f93f",
+            "name": "Get Watch Pods",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/pods",
+            "description": "Watch a list of pod.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "0f27e4f4534693e41c6f795f6f6084ea",
+            "name": "Get Watch Replicationcontrollers",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/replicationcontrollers",
+            "description": "Watch a list of replicationcontroller.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "52e038381d8a48160a70ae8d5979f704",
+            "name": "Get Watch Resourcequotas",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/resourcequotas",
+            "description": "Watch a list of resourcequota.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "29d108845b8502dd54f345d4ff63ee5f",
+            "name": "Get Watch Secrets",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/secrets",
+            "description": "Watch a list of secret.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        },
+        {
+            "id": "9f942cc23c64fbfcf39f095b63abe542",
+            "name": "Get Watch Services",
+            "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/services",
+            "description": "Watch a list of service.",
+            "data": [],
+            "dataMode": "raw",
+            "headerData": null,
+            "method": "get",
+            "pathVariableData": [],
+            "queryParams": [],
+            "auth": null,
+            "events": null,
+            "folder": null,
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "responses": [],
+            "currentHelper": null,
+            "helperAttributes": null,
+            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "rawModeData": ""
+        }
+    ]
+}
