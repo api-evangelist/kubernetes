@@ -1,5 +1,5 @@
 {
-    "id": "e63646904c9399411d93421e4b4f91ae",
+    "id": "b95a48ed816ccc9736f16e6cc210f33d",
     "name": "Kubernetes",
     "description": null,
     "auth": null,
@@ -10,7 +10,7 @@
     "folders": [],
     "requests": [
         {
-            "id": "611abf3e3c779e11c0e477d94e336ccb",
+            "id": "07582cd41f70ff2c6cd7718bdb801be5",
             "name": "Get Endpoints",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/endpoints",
             "description": "List objects of kind endpoints.",
@@ -29,11 +29,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "52e6d542018e0733ff15389e798dab5e",
+            "id": "5b431b6c80ed5759e2d0f9aef67e5730",
             "name": "Get Events",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/events",
             "description": "List objects of kind event.",
@@ -52,11 +52,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "4f2adec11bec3639993fdf01e0cc8b4c",
+            "id": "03d252f87e621eee05a7a0b378e1a78a",
             "name": "Get Limitranges",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/limitranges",
             "description": "List objects of kind limitrange.",
@@ -75,11 +75,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "5814b79bdb77d8dbc72dae62b2ae4187",
+            "id": "cc8cb4879be74dddc10c2ccb1c3f5b28",
             "name": "Get Namespaces",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces",
             "description": "List objects of kind namespace.",
@@ -98,11 +98,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "fcf29aa53132be1d138949a89cbedf60",
+            "id": "998b876d5a05b79aa41ea330a86bb0c6",
             "name": "Post Namespaces",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces",
             "description": "Create a namespace.",
@@ -129,11 +129,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "6dcba8a9b5c9fb0c3605b87754111c1d",
+            "id": "d95780bb118fc37b94ba3992051d1a4f",
             "name": "Post Namespaces Bindings",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/bindings",
             "description": "Create a binding.",
@@ -167,11 +167,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "1f8718fc5dd51fa15f2b895a3bf5eb01",
+            "id": "8e3b75066e461a57e95c7192b38206ee",
             "name": "Get Namespaces Endpoints",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/endpoints",
             "description": "List objects of kind endpoints.",
@@ -198,11 +198,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "c10c97ba4df3685e1847506eb87e02b0",
+            "id": "404729c482528a988684fa3d65c36744",
             "name": "Post Namespaces Endpoints",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/endpoints",
             "description": "Create a endpoints.",
@@ -236,11 +236,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "19c29e6c24646944b0c5b97e8ec61b28",
+            "id": "d3e8bcea975260e02065dcfc48f72ad4",
             "name": "Get Namespaces Endpoints Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/endpoints\/{name}",
             "description": "Read the specified endpoints.",
@@ -274,11 +274,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "76f97b02ed972dfa9922609570b3b0b1",
+            "id": "1e48d5ca5f298965cf9b4452a4d14f24",
             "name": "Put Namespaces Endpoints Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/endpoints\/{name}",
             "description": "Update the specified endpoints.",
@@ -319,11 +319,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "5289dda65a2b7f5fc006069b3ead6afb",
+            "id": "fdd96d51894d1de0c933ffcdd6d6b2e9",
             "name": "Get Namespaces Events",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events",
             "description": "List objects of kind event.",
@@ -350,11 +350,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "b654f8c4d6d5dca18ef39e49cc5daff5",
+            "id": "8b69daed271f581e9c64f91883d89831",
             "name": "Post Namespaces Events",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events",
             "description": "Create a event.",
@@ -388,11 +388,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "e0f8dfbbb8df7656ae4007bc46a2677d",
+            "id": "fa28bff7748b4b7c50a322c6baf745f2",
             "name": "Delete Namespaces Events Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events\/{name}",
             "description": "Delete a event.",
@@ -426,11 +426,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "5eaab11ef70f425b17c37f7122f2f9a8",
+            "id": "a36b5dc4f5d50f037c8494ac5963882a",
             "name": "Get Namespaces Events Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events\/{name}",
             "description": "Read the specified event.",
@@ -464,11 +464,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "6a050b80ea90c4074041d6a6aa5deee5",
+            "id": "c7667f4e0913920d79ee686f83e47968",
             "name": "Put Namespaces Events Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/events\/{name}",
             "description": "Update the specified event.",
@@ -509,11 +509,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "5c5bc9e36589f1e2d3c8e05d28f907ab",
+            "id": "fbc99686b4b9516d93d1d4c7ee559f3f",
             "name": "Get Namespaces Limitranges",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges",
             "description": "List objects of kind limitrange.",
@@ -540,11 +540,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "fe7ee69ea6325791bd56fbd15d47b84e",
+            "id": "f3ca62c8e6a2d997951bb3ac6c34a3d5",
             "name": "Post Namespaces Limitranges",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges",
             "description": "Create a limitrange.",
@@ -578,11 +578,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "40787a44a6ba12098a85e751a2073cf9",
+            "id": "aa8a714d8413b59184e3729113f82c87",
             "name": "Delete Namespaces Limitranges Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges\/{name}",
             "description": "Delete a limitrange.",
@@ -616,11 +616,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "98d2664d5ed461b992ededac492e4d63",
+            "id": "42db3e8b138993832c809c9813d85f4c",
             "name": "Get Namespaces Limitranges Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges\/{name}",
             "description": "Read the specified limitrange.",
@@ -654,11 +654,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "bff8ac037a3944f1e7f3e3f45273a081",
+            "id": "13e1f1f53e3e2e5e689d96145a3616e2",
             "name": "Put Namespaces Limitranges Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/limitranges\/{name}",
             "description": "Update the specified limitrange.",
@@ -699,11 +699,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "3973bf1584a17b6aa0dfec7c5a9c2d98",
+            "id": "4a891643f5e0ceb43defbc5e3d7c0f0a",
             "name": "Get Namespaces Pods",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods",
             "description": "List objects of kind pod.",
@@ -730,11 +730,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "543dfc4a6f9cda23ec5d1286f79a5b68",
+            "id": "e2da4379fd7ea0ef186584698245eba2",
             "name": "Post Namespaces Pods",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods",
             "description": "Create a pod.",
@@ -768,11 +768,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "c16d659fc9f2fbef75b886c574c1ad21",
+            "id": "d6685f8fa70da061efa616f82a7cac5c",
             "name": "Delete Namespaces Pods Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods\/{name}",
             "description": "Delete a pod.",
@@ -806,11 +806,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "23ae0918574951a151556873f8bf9957",
+            "id": "f5b6e00bcaee93c0c071bc76fde651df",
             "name": "Get Namespaces Pods Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods\/{name}",
             "description": "Read the specified pod.",
@@ -844,11 +844,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "3a3e95421ac502df1d741a1156d5eb61",
+            "id": "9e57b112f2428faba7422ea4fc914f0c",
             "name": "Put Namespaces Pods Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/pods\/{name}",
             "description": "Update the specified pod.",
@@ -889,11 +889,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "98bcdd6ac4952ad1f0aa062f80b73d82",
+            "id": "6a5921deb006703b3fdb0d2f55c56375",
             "name": "Get Namespaces Replicationcontrollers",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers",
             "description": "List objects of kind replicationcontroller.",
@@ -920,11 +920,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "834c2a822e666236f4c222d99dc5c694",
+            "id": "fe962c433a79a060811515634f4bac16",
             "name": "Post Namespaces Replicationcontrollers",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers",
             "description": "Create a replicationcontroller.",
@@ -958,11 +958,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "08eec705a16d8583d018ecf00088b225",
+            "id": "d9986266aeb5ba22c4b9e3c78a7d8dfe",
             "name": "Delete Namespaces Replicationcontrollers Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers\/{name}",
             "description": "Delete a replicationcontroller.",
@@ -996,11 +996,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "d256996fbdd5e2c7291e2554b46512fc",
+            "id": "6c213f7477f0d7266162793787c7ad34",
             "name": "Get Namespaces Replicationcontrollers Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers\/{name}",
             "description": "Read the specified replicationcontroller.",
@@ -1034,11 +1034,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "2da883389a369a05124f1e0bdbb5a5f4",
+            "id": "cf961f40814756af28e3ee9cb807f38e",
             "name": "Put Namespaces Replicationcontrollers Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/replicationcontrollers\/{name}",
             "description": "Update the specified replicationcontroller.",
@@ -1079,11 +1079,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "83861dac7afb9cfa81a91bc34c0333e2",
+            "id": "022bc40032f8063bc4553ad502e4b682",
             "name": "Get Namespaces Resourcequotas",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas",
             "description": "List objects of kind resourcequota.",
@@ -1110,11 +1110,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "b6236507e02cf90a0870489f04d50079",
+            "id": "7a5089ddb2bc6e8e494ef4180ca15451",
             "name": "Post Namespaces Resourcequotas",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas",
             "description": "Create a resourcequota.",
@@ -1148,11 +1148,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "e86e2be5f221edb1c0305b251464fc2c",
+            "id": "e180848887fdd6cd7cadb8ab87113642",
             "name": "Delete Namespaces Resourcequotas Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas\/{name}",
             "description": "Delete a resourcequota.",
@@ -1186,11 +1186,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "22ca75caf1ab3354e7e9cb6c1cbb9e7f",
+            "id": "b03ba420a8052cde9360dea92829b234",
             "name": "Get Namespaces Resourcequotas Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas\/{name}",
             "description": "Read the specified resourcequota.",
@@ -1224,11 +1224,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "51ddcc3eb2b557bdb592e1b5bfcc6f40",
+            "id": "e84b3333ae4058af56c3e69acea45718",
             "name": "Put Namespaces Resourcequotas Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotas\/{name}",
             "description": "Update the specified resourcequota.",
@@ -1269,11 +1269,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "51103ce5e06d738b31fc7d50e63bce39",
+            "id": "93a4ba2415b1b8852871c7970fe1e57d",
             "name": "Post Namespaces Resourcequotausages",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/resourcequotausages",
             "description": "Create a resourcequotausage.",
@@ -1307,11 +1307,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "fa8aa32627d89a1aac7b17c8e58afdec",
+            "id": "c2921ce6be6d75bc94d6489c57056402",
             "name": "Get Namespaces Secrets",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets",
             "description": "List objects of kind secret.",
@@ -1338,11 +1338,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "0dfd6408753d1a23879ae39decbd6e43",
+            "id": "07cc208ee5a5d461efdd0c0d66617f1f",
             "name": "Post Namespaces Secrets",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets",
             "description": "Create a secret.",
@@ -1376,11 +1376,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "6347a803071447b28ab0312a3e1b6b35",
+            "id": "6a20f38beab6f8a840a4da49de7e40f2",
             "name": "Delete Namespaces Secrets Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets\/{name}",
             "description": "Delete a secret.",
@@ -1414,11 +1414,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "68f5dc7648eb6388744eaaf5e37aaf8c",
+            "id": "e2c8f969708a8738227891d3e6ea9ded",
             "name": "Get Namespaces Secrets Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets\/{name}",
             "description": "Read the specified secret.",
@@ -1452,11 +1452,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "db0b1fc9b1971501a2abc67628792cf3",
+            "id": "31fd86acd43afac4f9967ed0fccf837b",
             "name": "Put Namespaces Secrets Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/secrets\/{name}",
             "description": "Update the specified secret.",
@@ -1497,11 +1497,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "1b2e2683468ba289adcfab5549bee1bc",
+            "id": "05904e600a7266732902f4e1ac9070a1",
             "name": "Get Namespaces Services",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services",
             "description": "List objects of kind service.",
@@ -1528,11 +1528,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "64318c0c4699d861cec16772a2c4ffdb",
+            "id": "af3ef979350cf72cf0b1d6dfd31580fc",
             "name": "Post Namespaces Services",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services",
             "description": "Create a service.",
@@ -1566,11 +1566,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "0f685692e81ad2687db63947bd27fed6",
+            "id": "f8d8883c05caaa9ce45cfdd6f2de0153",
             "name": "Delete Namespaces Services Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services\/{name}",
             "description": "Delete a service.",
@@ -1604,11 +1604,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "4371a38446d7982a8737837f959b3e51",
+            "id": "531c3b89834ab8766b8f898fd0c9fde8",
             "name": "Get Namespaces Services Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services\/{name}",
             "description": "Read the specified service.",
@@ -1642,11 +1642,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "102d1d088d82c996b529a8a40e2ed0c2",
+            "id": "1920f2dac2bddd8c3b51f36fa788f4c3",
             "name": "Put Namespaces Services Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{namespaces}\/services\/{name}",
             "description": "Update the specified service.",
@@ -1687,11 +1687,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "3bc97bed5af9284a1eafaad1a7df4a04",
+            "id": "caa5f928ba2db2fd9355ea7bc7db0451",
             "name": "Delete Namespaces Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{name}",
             "description": "Delete a namespace.",
@@ -1718,11 +1718,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "8648e9d9220088e558fc2a0af9017898",
+            "id": "2d77847c3cbc397804ebda3da99e1e7a",
             "name": "Get Namespaces Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{name}",
             "description": "Read the specified namespace.",
@@ -1749,11 +1749,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "d9920700299d5e7a9ed47907ac954800",
+            "id": "5d5ed28145072b60117af6c3e378f0b0",
             "name": "Put Namespaces Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/namespaces\/{name}",
             "description": "Update the specified namespace.",
@@ -1787,11 +1787,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "26330925bc0f5d347b026db681682925",
+            "id": "4d6d4590bbe114dd2e11bbf87ae4de51",
             "name": "Get Nodes",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes",
             "description": "List objects of kind node.",
@@ -1810,11 +1810,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "5ece6ef246245c0edd209103460a1c5b",
+            "id": "0ca6409203e1db884e126ba7d4f5c575",
             "name": "Post Nodes",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes",
             "description": "Create a node.",
@@ -1841,11 +1841,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "f8f3cd97222b5165632c613fad3d1f25",
+            "id": "be9a8d112a8789b2203bda8c785bb503",
             "name": "Delete Nodes Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes\/{name}",
             "description": "Delete a node.",
@@ -1872,11 +1872,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "89f9a73f9e25ae02779d4f30413152f1",
+            "id": "d2e391cc3b999caf99245027f3121092",
             "name": "Get Nodes Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes\/{name}",
             "description": "Read the specified node.",
@@ -1903,11 +1903,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "f3ed1417e46244ff8582690f5e97f446",
+            "id": "b9c0e2ae69e8d5e5927f359b339e5a36",
             "name": "Put Nodes Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/nodes\/{name}",
             "description": "Update the specified node.",
@@ -1941,11 +1941,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "e63f6624edda2fa6a6b1c5cf12152020",
+            "id": "0f5e033773b5e46408b6ecfb4152e724",
             "name": "Get Pods",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/pods",
             "description": "List objects of kind pod.",
@@ -1964,11 +1964,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "07b75f4d10e9c0695d083f3bb1cda038",
+            "id": "e6d5fd87ff36a4d4580be3c000a576b2",
             "name": "Delete Proxy Namespaces Pods Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}",
             "description": "Proxy delete requests to pod.",
@@ -2002,11 +2002,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "7c68e6276029605c894a570f4288a931",
+            "id": "b583ad0871f201d99c4697065435be7d",
             "name": "Get Proxy Namespaces Pods Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}",
             "description": "Proxy get requests to pod.",
@@ -2040,11 +2040,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "86e6ce73ccb116655072e747414bd252",
+            "id": "d4569c75db30ab5c67a794bc9488f005",
             "name": "Post Proxy Namespaces Pods Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}",
             "description": "Proxy post requests to pod.",
@@ -2078,11 +2078,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "365be9bde1529c29d1b5176fbc7d4265",
+            "id": "7f5b8733ebb9e012de9b9b7164ea9a7b",
             "name": "Put Proxy Namespaces Pods Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}",
             "description": "Proxy put requests to pod.",
@@ -2116,11 +2116,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "104a418c2b14a7d9518a093be776e6cb",
+            "id": "0915296437c0ad66e45d996a5c63713b",
             "name": "Delete Proxy Namespaces Pods Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}\/{path:*}",
             "description": "Proxy delete requests to pod.",
@@ -2154,11 +2154,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "6413ae6ccd34858b32bcae27f8891749",
+            "id": "167e3067280a44201e3258aebd785def",
             "name": "Get Proxy Namespaces Pods Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}\/{path:*}",
             "description": "Proxy get requests to pod.",
@@ -2192,11 +2192,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "32770d800c7047b639240f8a45e036cb",
+            "id": "94f78fd0c0ee75824a49a3973edebb01",
             "name": "Post Proxy Namespaces Pods Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}\/{path:*}",
             "description": "Proxy post requests to pod.",
@@ -2230,11 +2230,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "b0423e42408506bfb42aaca8028e2986",
+            "id": "78e7c0eddc55c014a9b82a6ea9357dbb",
             "name": "Put Proxy Namespaces Pods Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/pods\/{name}\/{path:*}",
             "description": "Proxy put requests to pod.",
@@ -2268,11 +2268,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "4a3b7cab8a21d35103208b9d304328de",
+            "id": "64015169a0fa25c4acd25cede3d63889",
             "name": "Delete Proxy Namespaces Services Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}",
             "description": "Proxy delete requests to service.",
@@ -2306,11 +2306,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "ac239b235dcf159f6d0c8cac5ea893a7",
+            "id": "41fedaf7147092b4ff4804f00425b7de",
             "name": "Get Proxy Namespaces Services Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}",
             "description": "Proxy get requests to service.",
@@ -2344,11 +2344,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "763ee2185c2b32d6edd860ce25d05aa7",
+            "id": "c05ef9844cef46fcba7903b469481001",
             "name": "Post Proxy Namespaces Services Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}",
             "description": "Proxy post requests to service.",
@@ -2382,11 +2382,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "f29ac0da3f106a2303c6d6beb6d213b9",
+            "id": "40aefe768564fe7ede73d246d0a17f70",
             "name": "Put Proxy Namespaces Services Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}",
             "description": "Proxy put requests to service.",
@@ -2420,11 +2420,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "06b16e04c3ed6d40d93db98e188b7eda",
+            "id": "ad65ed76c4534f58a96001d50bd6d2b3",
             "name": "Delete Proxy Namespaces Services Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}\/{path:*}",
             "description": "Proxy delete requests to service.",
@@ -2458,11 +2458,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "997da2f2fcd0ef6648348505c8c2e7fa",
+            "id": "562c0a74c6e07e427b7f98eff75fe9fb",
             "name": "Get Proxy Namespaces Services Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}\/{path:*}",
             "description": "Proxy get requests to service.",
@@ -2496,11 +2496,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "989791ffab06583734b7509a8f28f321",
+            "id": "344799427cacf48cfaa1aaf27eb124ff",
             "name": "Post Proxy Namespaces Services Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}\/{path:*}",
             "description": "Proxy post requests to service.",
@@ -2534,11 +2534,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "de3fb0ba5f9803ef473892179e277fcd",
+            "id": "58cb087f5b6a21598d0e884ebff36b61",
             "name": "Put Proxy Namespaces Services Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/namespaces\/{namespaces}\/services\/{name}\/{path:*}",
             "description": "Proxy put requests to service.",
@@ -2572,11 +2572,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "d28086baaa00e729d4cbbc85f5bdcb0a",
+            "id": "c0662422c6c5edfded3e80589020eb3a",
             "name": "Delete Proxy Nodes Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}",
             "description": "Proxy delete requests to node.",
@@ -2603,11 +2603,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "d613571d44413ea4463ca4f780c32997",
+            "id": "b3f6441b6986a56e94526446bc3e9300",
             "name": "Get Proxy Nodes Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}",
             "description": "Proxy get requests to node.",
@@ -2634,11 +2634,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "ac5188792d561d612baad1507988d8a1",
+            "id": "ab5036be0e7dbf5fb57b33e3ab7817d2",
             "name": "Post Proxy Nodes Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}",
             "description": "Proxy post requests to node.",
@@ -2665,11 +2665,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "af3df8d38744bcb26c255c1fc24065c5",
+            "id": "64a379cf932650334f70b29940e68d6d",
             "name": "Put Proxy Nodes Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}",
             "description": "Proxy put requests to node.",
@@ -2696,11 +2696,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "e1cfce5b1dc3171675ad12aee1a1950c",
+            "id": "05e3a1f6f9218213f18589012f5c8bda",
             "name": "Delete Proxy Nodes Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}\/{path:*}",
             "description": "Proxy delete requests to node.",
@@ -2727,11 +2727,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "e02aa6f66cc923cd1ea83e995b137851",
+            "id": "87248eecc4e4b1b5c4a7af6cfb0755c9",
             "name": "Get Proxy Nodes Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}\/{path:*}",
             "description": "Proxy get requests to node.",
@@ -2758,11 +2758,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "b0fd44b771897a1a8efb8dec3d3f29be",
+            "id": "493845999546110d052d97873d214deb",
             "name": "Post Proxy Nodes Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}\/{path:*}",
             "description": "Proxy post requests to node.",
@@ -2789,11 +2789,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "ac55223aeb05c4f461bfe0611b0960ff",
+            "id": "064a63783119d1e075a83772db748aa0",
             "name": "Put Proxy Nodes Name Path *",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/proxy\/nodes\/{name}\/{path:*}",
             "description": "Proxy put requests to node.",
@@ -2820,11 +2820,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "dc5da2aa877b92b7fde44eeb78375166",
+            "id": "d83b4ef4591baca3a24b5c46fa5c03f7",
             "name": "Get Redirect Namespaces Pods Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/redirect\/namespaces\/{namespaces}\/pods\/{name}",
             "description": "Redirect get request to pod.",
@@ -2858,11 +2858,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "d6db4f2fb89a9c2393ee5d7042c75f21",
+            "id": "93ae30ce5ffb00f2c763152fb0eed3b8",
             "name": "Get Redirect Namespaces Services Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/redirect\/namespaces\/{namespaces}\/services\/{name}",
             "description": "Redirect get request to service.",
@@ -2896,11 +2896,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "4cf71f3e5b857f663b415a1b7af1777f",
+            "id": "c48e022042ad73135548482a05b22050",
             "name": "Get Redirect Nodes Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/redirect\/nodes\/{name}",
             "description": "Redirect get request to node.",
@@ -2927,11 +2927,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "1654bf00f29359261df2e0424330927e",
+            "id": "d7b6a930247e200469b788d4b8edcfc3",
             "name": "Get Replicationcontrollers",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/replicationcontrollers",
             "description": "List objects of kind replicationcontroller.",
@@ -2950,11 +2950,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "8d715ec44d5042f691ef864e814fd0c0",
+            "id": "169438eec71eea0de8bac8568112d9a6",
             "name": "Get Resourcequotas",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/resourcequotas",
             "description": "List objects of kind resourcequota.",
@@ -2973,11 +2973,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "6bcc09d02941ecff05bab9572ae5bd74",
+            "id": "7ba996319e5d125070dc2793f04c006a",
             "name": "Get Secrets",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/secrets",
             "description": "List objects of kind secret.",
@@ -2996,11 +2996,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "6b2e77af473114f2772157217ddb6c95",
+            "id": "22ceb8534a21358514fcb48b78b81eb6",
             "name": "Get Services",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/services",
             "description": "List objects of kind service.",
@@ -3019,11 +3019,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "79895756231bd11a749434ae44dc9e2d",
+            "id": "a27ab9c43d5d0cc88765030698406ff2",
             "name": "Get Watch Endpoints",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/endpoints",
             "description": "Watch a list of endpoints.",
@@ -3042,11 +3042,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "54703c302c321850b0e5551d78340f5c",
+            "id": "dafff92809dff6512cc92bc370a91b68",
             "name": "Get Watch Events",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/events",
             "description": "Watch a list of event.",
@@ -3065,11 +3065,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "bced1044da540817aa75631523dab7a1",
+            "id": "fd57d858f37f4f57f912921ec104fa46",
             "name": "Get Watch Limitranges",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/limitranges",
             "description": "Watch a list of limitrange.",
@@ -3088,11 +3088,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "202459d409f811edcfb751bac6e298fe",
+            "id": "91778363c45e3fadb980e9023e019c42",
             "name": "Get Watch Namespaces",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces",
             "description": "Watch a list of namespace.",
@@ -3111,11 +3111,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "180d5c599dacd070ec4f8b3488e7b882",
+            "id": "d70381a89fa5e5ba47a9832b5fd06b3d",
             "name": "Get Watch Namespaces Endpoints",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/endpoints",
             "description": "Watch a list of endpoints.",
@@ -3142,11 +3142,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "48ac3e7d398f0336beddd6b3e6841c36",
+            "id": "f6642f88ff99210e67758099486b4348",
             "name": "Get Watch Namespaces Endpoints Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/endpoints\/{name}",
             "description": "Watch a particular endpoints.",
@@ -3180,11 +3180,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "d61a0ddee00476d5622fbbed9042c20a",
+            "id": "f2c37ea1d067d25af910c6f4523136fd",
             "name": "Get Watch Namespaces Events",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/events",
             "description": "Watch a list of event.",
@@ -3211,11 +3211,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "d8f9fdfa065a6c5ee3eda9f21ce4d483",
+            "id": "e7dc939abae246a9355fe786cc1e7d20",
             "name": "Get Watch Namespaces Events Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/events\/{name}",
             "description": "Watch a particular event.",
@@ -3249,11 +3249,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "5ce9c424a71d831f0eaa922456388807",
+            "id": "ca0a2c11553b88cb1162982a8691396f",
             "name": "Get Watch Namespaces Limitranges",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/limitranges",
             "description": "Watch a list of limitrange.",
@@ -3280,11 +3280,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "0cc29e6501b4980ac02b7d0181f19e70",
+            "id": "d9350f673c8ad8aa5595271d50b8421f",
             "name": "Get Watch Namespaces Limitranges Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/limitranges\/{name}",
             "description": "Watch a particular limitrange.",
@@ -3318,11 +3318,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "e47d3effb501522a9e05c7313a731bb0",
+            "id": "0f3bac251e1135a7398d2a388fd2e2de",
             "name": "Get Watch Namespaces Pods",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/pods",
             "description": "Watch a list of pod.",
@@ -3349,11 +3349,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "fec8d96edcb9eb7e2c8844bc8c3ff6d0",
+            "id": "9ef3addd27837758b6e73540affb2bcf",
             "name": "Get Watch Namespaces Pods Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/pods\/{name}",
             "description": "Watch a particular pod.",
@@ -3387,11 +3387,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "9ddd28aef5e6dca2ea6c7dd0bc99691e",
+            "id": "4505b8699a8a62795c530221080cf9d8",
             "name": "Get Watch Namespaces Replicationcontrollers",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/replicationcontrollers",
             "description": "Watch a list of replicationcontroller.",
@@ -3418,11 +3418,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "99ea2f0606d6537969c98028625b5e94",
+            "id": "6d41d4d53b8299e1bca4a1df759c1604",
             "name": "Get Watch Namespaces Replicationcontrollers Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/replicationcontrollers\/{name}",
             "description": "Watch a particular replicationcontroller.",
@@ -3456,11 +3456,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "6db012b4a37f8a8a3cbd3e7b328a62c5",
+            "id": "e731858842ebd35fe7f235c0d89fb856",
             "name": "Get Watch Namespaces Resourcequotas",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/resourcequotas",
             "description": "Watch a list of resourcequota.",
@@ -3487,11 +3487,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "263bf67c7eead91eb54275cc680f81fb",
+            "id": "b9a95cda1ebaf5a231fc3ed02f20ae2a",
             "name": "Get Watch Namespaces Resourcequotas Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/resourcequotas\/{name}",
             "description": "Watch a particular resourcequota.",
@@ -3525,11 +3525,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "37572b78601eee9d258b1224aebcdecd",
+            "id": "a0cf54afecc4f5f667f9b9d81e92ee1d",
             "name": "Get Watch Namespaces Secrets",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/secrets",
             "description": "Watch a list of secret.",
@@ -3556,11 +3556,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "cad509a4c5890f785a2e83cfc0a012db",
+            "id": "d4e5116f77f8d3a29ceeca81bd75a246",
             "name": "Get Watch Namespaces Secrets Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/secrets\/{name}",
             "description": "Watch a particular secret.",
@@ -3594,11 +3594,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "d16b7e5dfc09ba2ac3f3f6591fd6be87",
+            "id": "5e4eb574fe1b413ed6691539c751b29d",
             "name": "Get Watch Namespaces Services",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/services",
             "description": "Watch a list of service.",
@@ -3625,11 +3625,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "35495bd518ae6331d291eb4f06724bcc",
+            "id": "3840c76cd67481dc2e017f27279be4fb",
             "name": "Get Watch Namespaces Services Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{namespaces}\/services\/{name}",
             "description": "Watch a particular service.",
@@ -3663,11 +3663,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "1fc19954217e02ebaca986d4dc964203",
+            "id": "bdb246389b19d73ef7e7d209fd7df587",
             "name": "Get Watch Namespaces Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/namespaces\/{name}",
             "description": "Watch a particular namespace.",
@@ -3694,11 +3694,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "babca9a7489a387f584a1e5f0a323b10",
+            "id": "ef508806cb49c782e1ef100e7726b0f4",
             "name": "Get Watch Nodes",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/nodes",
             "description": "Watch a list of node.",
@@ -3717,11 +3717,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "3fe99faa3eb17b307f78456bba3e7998",
+            "id": "71a1b31e238d342de61469e4e6d0e345",
             "name": "Get Watch Nodes Name",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/nodes\/{name}",
             "description": "Watch a particular node.",
@@ -3748,11 +3748,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "37729b1d262bb96ea04fc0d7d4c7f93f",
+            "id": "64014d30678a4ba4da51b55528ff74c4",
             "name": "Get Watch Pods",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/pods",
             "description": "Watch a list of pod.",
@@ -3771,11 +3771,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "0f27e4f4534693e41c6f795f6f6084ea",
+            "id": "321af20a12bbd2feb531fe9cb3f2daa5",
             "name": "Get Watch Replicationcontrollers",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/replicationcontrollers",
             "description": "Watch a list of replicationcontroller.",
@@ -3794,11 +3794,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "52e038381d8a48160a70ae8d5979f704",
+            "id": "a7daed5d977dfde6117feca4a8f90080",
             "name": "Get Watch Resourcequotas",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/resourcequotas",
             "description": "Watch a list of resourcequota.",
@@ -3817,11 +3817,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "29d108845b8502dd54f345d4ff63ee5f",
+            "id": "e436562d97414941c54b518e867dc8ce",
             "name": "Get Watch Secrets",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/secrets",
             "description": "Watch a list of secret.",
@@ -3840,11 +3840,11 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         },
         {
-            "id": "9f942cc23c64fbfcf39f095b63abe542",
+            "id": "4042d2d18dc6af65716b8f1dd2720a06",
             "name": "Get Watch Services",
             "url": "\/api\/v1beta3127.0.0.1:6443\/api\/v1beta3\/watch\/services",
             "description": "Watch a list of service.",
@@ -3863,7 +3863,7 @@
             "responses": [],
             "currentHelper": null,
             "helperAttributes": null,
-            "collectionId": "e63646904c9399411d93421e4b4f91ae",
+            "collectionId": "b95a48ed816ccc9736f16e6cc210f33d",
             "rawModeData": ""
         }
     ]
