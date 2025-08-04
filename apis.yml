@@ -5,7 +5,11 @@ apis:
   - aid: kubernetes:kubernetes
     name: Kubernetes
     tags:
-      - API
+      - Containers
+      - Deployment
+      - Scaling
+      - Orchestration
+      - Automation
     humanURL: ' https://kubernetes.io/'
     properties:
       - url: ' https://kubernetes.io/'
@@ -13,7 +17,11 @@ apis:
     description: 'Production-Grade Container Orchestration '
 name: Kubernetes
 tags:
-  - API
+  - Containers
+  - Deployment
+  - Scaling
+  - Orchestration
+  - Automation
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
