@@ -46,3 +46,27 @@ common:
   - name: Bluesky
     url: https://bsky.app/profile/kubernetes.io
     type: Bluesky
+  - name: Kubernetes
+    description: 'null'
+    url: https://kubernetes.io/
+    type: Website
+  - name: Kubernetes Documentation | Kubernetes
+    description: 'null'
+    url: https://kubernetes.io/docs/home/
+    type: Documentation
+  - name: Kubernetes Blog | Kubernetes
+    description: 'null'
+    url: https://kubernetes.io/blog/
+    type: Blog
+  - name: Training | Kubernetes
+    description: 'null'
+    url: https://kubernetes.io/training/
+    type: Training
+  - name: Partners | Kubernetes
+    description: 'null'
+    url: https://kubernetes.io/partners/
+    type: Partners
+  - name: Releases | Kubernetes
+    description: 'null'
+    url: https://kubernetes.io/releases/
+    type: ChangeLog
