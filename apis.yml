@@ -175,7 +175,7 @@ common:
     type: CaseStudies
     description: Real-world case studies of organizations using Kubernetes in production.
 created: '2025-06-05'
-modified: '2026-01-30'
+modified: '2026-03-16'
 position: Consuming
 description: >-
   Kubernetes, also known as K8s, is an open source system for automating
@@ -188,5 +188,5 @@ description: >-
   project.
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
