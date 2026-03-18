@@ -24,6 +24,18 @@ apis:
         type: OpenAPI
       - url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
         type: OpenAPIRepository
+      - url: https://kubernetes.io/docs/reference/access-authn-authz/
+        type: Authentication
+      - url: https://kubernetes.io/docs/reference/using-api/client-libraries/
+        type: Client Libraries
+      - url: https://kubernetes.io/docs/reference/using-api/deprecation-guide/
+        type: Migration Guide
+      - type: OpenAPI
+        url: openapi/kubernetes-api-openapi.yml
+      - type: AsyncAPI
+        url: asyncapi/kubernetes-watch-asyncapi.yml
+      - type: JSONSchema
+        url: json-schema/kubernetes-resource-schema.json
     description: >-
       The Kubernetes API lets you query and manipulate the state of objects in
       Kubernetes. The core of Kubernetes control plane is the API server and the
@@ -174,8 +186,24 @@ common:
     name: Case Studies
     type: CaseStudies
     description: Real-world case studies of organizations using Kubernetes in production.
+  - url: https://kubernetes.io/community/code-of-conduct/
+    name: Code of Conduct
+    type: CodeOfConduct
+    description: >-
+      Kubernetes community code of conduct based on the CNCF Code of Conduct,
+      governing participation in Kubernetes project spaces.
+  - url: https://kubernetes.io/docs/reference/using-api/deprecation-policy/
+    name: Deprecation Policy
+    type: DeprecationPolicy
+    description: >-
+      Kubernetes deprecation policy describing the rules for deprecating and
+      removing APIs, features, and flags across versions.
+  - type: JSONSchema
+    url: json-schema/kubernetes-resource-schema.json
+  - type: JSON-LD
+    url: json-ld/kubernetes-context.jsonld
 created: '2025-06-05'
-modified: '2026-03-16'
+modified: '2026-03-18'
 position: Consuming
 description: >-
   Kubernetes, also known as K8s, is an open source system for automating

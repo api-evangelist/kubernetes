@@ -1,0 +1,249 @@
+asyncapi: 2.6.0
+info:
+  title: Kubernetes Watch Events
+  description: >-
+    The Kubernetes Watch API provides a streaming event interface for receiving
+    real-time notifications about changes to cluster resources. Clients subscribe
+    to resource types and receive a stream of ADDED, MODIFIED, DELETED, and
+    BOOKMARK events as objects are created, changed, or removed. Watch is used
+    by controllers, operators, and clients to maintain synchronized state without
+    polling. The watch stream is delivered via HTTP chunked transfer encoding or
+    WebSocket over the Kubernetes API server.
+  version: v1.32.0
+  contact:
+    name: Kubernetes Community
+    url: https://kubernetes.io/community/
+externalDocs:
+  description: Kubernetes API Concepts - Watch
+  url: https://kubernetes.io/docs/reference/using-api/api-concepts/
+servers:
+  kubernetesApiServer:
+    url: 'https://kubernetes.default.svc'
+    protocol: https
+    description: >-
+      In-cluster Kubernetes API server. External access requires the cluster's
+      API server endpoint, typically obtained via kubectl config view.
+    security:
+      - bearerAuth: []
+      - clientCertificate: []
+channels:
+  /api/v1/pods:
+    description: >-
+      Watch stream for Pod objects across all namespaces. Clients receive events
+      for every pod creation, update, and deletion across the cluster.
+    subscribe:
+      operationId: watchAllPods
+      summary: Watch all pods cluster-wide
+      description: >-
+        Opens a watch stream for all pods across all namespaces. The stream
+        produces WatchEvent messages each time a pod is created, modified,
+        deleted, or when a bookmark checkpoint is issued. Use ?watch=true query
+        parameter to activate streaming.
+      message:
+        $ref: '#/components/messages/WatchEvent'
+  /api/v1/namespaces/{namespace}/pods:
+    description: >-
+      Watch stream for Pod objects scoped to a single namespace. More efficient
+      than cluster-wide watch when monitoring a specific application namespace.
+    parameters:
+      namespace:
+        $ref: '#/components/parameters/Namespace'
+    subscribe:
+      operationId: watchNamespacedPods
+      summary: Watch pods in a namespace
+      description: >-
+        Opens a watch stream for pods within the specified namespace. Produces
+        WatchEvent messages for pod lifecycle transitions and state changes
+        within the namespace scope.
+      message:
+        $ref: '#/components/messages/WatchEvent'
+  /apis/apps/v1/namespaces/{namespace}/deployments:
+    description: >-
+      Watch stream for Deployment objects in a namespace. Used by deployment
+      controllers, GitOps tools, and monitoring systems to track rollout
+      progress and configuration changes.
+    parameters:
+      namespace:
+        $ref: '#/components/parameters/Namespace'
+    subscribe:
+      operationId: watchNamespacedDeployments
+      summary: Watch deployments in a namespace
+      description: >-
+        Opens a watch stream for deployments in the specified namespace.
+        Produces WatchEvent messages when deployments are created, their
+        replica count changes, rollouts complete, or specs are updated.
+      message:
+        $ref: '#/components/messages/WatchEvent'
+  /api/v1/namespaces/{namespace}/services:
+    description: >-
+      Watch stream for Service objects in a namespace. Service changes
+      include creation, deletion, and updates to ports and selectors.
+    parameters:
+      namespace:
+        $ref: '#/components/parameters/Namespace'
+    subscribe:
+      operationId: watchNamespacedServices
+      summary: Watch services in a namespace
+      description: >-
+        Opens a watch stream for services within the specified namespace.
+        Consumers receive WatchEvent messages when services are created,
+        their configuration is updated, or they are deleted.
+      message:
+        $ref: '#/components/messages/WatchEvent'
+  /api/v1/nodes:
+    description: >-
+      Watch stream for Node objects in the cluster. Node events include
+      registration of new nodes, condition changes (Ready, MemoryPressure),
+      and node deletions during scale-down or maintenance.
+    subscribe:
+      operationId: watchNodes
+      summary: Watch all cluster nodes
+      description: >-
+        Opens a watch stream for all nodes in the cluster. Produces WatchEvent
+        messages when nodes join or leave the cluster, or when node conditions
+        change, such as when a node transitions to NotReady.
+      message:
+        $ref: '#/components/messages/WatchEvent'
+  /api/v1/namespaces:
+    description: >-
+      Watch stream for Namespace objects. Namespace events include creation
+      of new namespaces, label updates, and termination when deleted.
+    subscribe:
+      operationId: watchNamespaces
+      summary: Watch all namespaces
+      description: >-
+        Opens a watch stream for all namespaces. Consumers receive WatchEvent
+        messages when namespaces are created, modified, or enter the
+        Terminating phase prior to deletion.
+      message:
+        $ref: '#/components/messages/WatchEvent'
+  /apis/events.k8s.io/v1/namespaces/{namespace}/events:
+    description: >-
+      Watch stream for Event objects in a namespace. Events capture occurrences
+      such as pod scheduling, container image pulls, restarts, and failures.
+    parameters:
+      namespace:
+        $ref: '#/components/parameters/Namespace'
+    subscribe:
+      operationId: watchNamespacedEvents
+      summary: Watch events in a namespace
+      description: >-
+        Opens a watch stream for Kubernetes events in the specified namespace.
+        Produces WatchEvent messages as the cluster records activity such as
+        scheduled pods, image pull completions, container crashes, and
+        resource quota violations.
+      message:
+        $ref: '#/components/messages/WatchEvent'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: httpApiKey
+      name: Authorization
+      in: header
+      description: >-
+        Kubernetes service account token or user token. Include in the
+        Authorization header as 'Bearer <token>'.
+    clientCertificate:
+      type: X509
+      description: >-
+        Client certificate authentication using a TLS certificate issued by
+        the cluster certificate authority.
+  parameters:
+    Namespace:
+      description: The namespace name to scope the watch stream to.
+      schema:
+        type: string
+  messages:
+    WatchEvent:
+      name: WatchEvent
+      title: Kubernetes Watch Event
+      summary: A single event in a Kubernetes watch stream
+      description: >-
+        A WatchEvent is delivered to watch stream subscribers each time a
+        watched resource changes. The type field indicates the nature of the
+        change (ADDED, MODIFIED, DELETED, BOOKMARK, ERROR), and the object
+        field contains the current state of the resource at the time of
+        the event.
+      payload:
+        $ref: '#/components/schemas/WatchEvent'
+  schemas:
+    WatchEvent:
+      type: object
+      required:
+        - type
+        - object
+      description: >-
+        An event delivered over a Kubernetes watch stream representing a
+        state change to a resource. The object field contains the full
+        resource as it exists after the change.
+      properties:
+        type:
+          type: string
+          enum:
+            - ADDED
+            - MODIFIED
+            - DELETED
+            - BOOKMARK
+            - ERROR
+          description: >-
+            Type of change that triggered this event. ADDED when a resource
+            is created. MODIFIED when a resource's spec, status, or metadata
+            changes. DELETED when a resource is removed. BOOKMARK is a
+            periodic checkpoint containing only the resourceVersion, used
+            to allow clients to resume watching from a known point.
+            ERROR indicates a watch stream error.
+        object:
+          type: object
+          description: >-
+            The Kubernetes resource object at the time of the event. For
+            BOOKMARK events, only the apiVersion, kind, and metadata
+            (with resourceVersion) are populated. For ERROR events, this
+            contains a Status object.
+          properties:
+            apiVersion:
+              type: string
+              description: API version of the resource.
+            kind:
+              type: string
+              description: Kind of the resource.
+            metadata:
+              type: object
+              description: Standard Kubernetes object metadata.
+              properties:
+                name:
+                  type: string
+                  description: Name of the resource.
+                namespace:
+                  type: string
+                  description: Namespace of the resource.
+                uid:
+                  type: string
+                  description: Unique identifier for the resource.
+                resourceVersion:
+                  type: string
+                  description: >-
+                    Resource version at the time of this event. Used to
+                    resume a watch stream from this point.
+                generation:
+                  type: integer
+                  description: Generation of the resource spec.
+                creationTimestamp:
+                  type: string
+                  format: date-time
+                  description: Time the resource was created.
+                deletionTimestamp:
+                  type: string
+                  format: date-time
+                  description: >-
+                    Time at which the resource will be deleted. Present
+                    when the resource has been marked for deletion.
+                labels:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Labels applied to the resource.
+                annotations:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Annotations applied to the resource.

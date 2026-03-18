@@ -1,0 +1,286 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "k8s": "https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "oci": "https://opencontainers.org/schema/1.0/",
+
+    "Pod": {
+      "@id": "k8s:pod-v1-core",
+      "@context": {
+        "spec": "k8s:podspec-v1-core",
+        "status": "k8s:podstatus-v1-core",
+        "metadata": "k8s:objectmeta-v1-meta"
+      }
+    },
+
+    "Deployment": {
+      "@id": "k8s:deployment-v1-apps",
+      "@context": {
+        "spec": "k8s:deploymentspec-v1-apps",
+        "status": "k8s:deploymentstatus-v1-apps",
+        "metadata": "k8s:objectmeta-v1-meta"
+      }
+    },
+
+    "StatefulSet": {
+      "@id": "k8s:statefulset-v1-apps",
+      "@context": {
+        "spec": "k8s:statefulsetspec-v1-apps",
+        "status": "k8s:statefulsetstatus-v1-apps"
+      }
+    },
+
+    "DaemonSet": {
+      "@id": "k8s:daemonset-v1-apps",
+      "@context": {
+        "spec": "k8s:daemonsetspec-v1-apps",
+        "status": "k8s:daemonsetstatus-v1-apps"
+      }
+    },
+
+    "Service": {
+      "@id": "k8s:service-v1-core",
+      "@context": {
+        "spec": "k8s:servicespec-v1-core",
+        "status": "k8s:servicestatus-v1-core"
+      }
+    },
+
+    "Namespace": {
+      "@id": "k8s:namespace-v1-core",
+      "@context": {
+        "spec": "k8s:namespacespec-v1-core",
+        "status": "k8s:namespacestatus-v1-core",
+        "phase": {
+          "@id": "k8s:namespacestatus-phase-v1-core",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Node": {
+      "@id": "k8s:node-v1-core",
+      "@context": {
+        "spec": "k8s:nodespec-v1-core",
+        "status": "k8s:nodestatus-v1-core"
+      }
+    },
+
+    "ConfigMap": {
+      "@id": "k8s:configmap-v1-core",
+      "@context": {
+        "data": "k8s:configmap-data-v1-core",
+        "binaryData": "k8s:configmap-binarydata-v1-core"
+      }
+    },
+
+    "Secret": {
+      "@id": "k8s:secret-v1-core",
+      "@context": {
+        "type": "k8s:secret-type-v1-core",
+        "data": "k8s:secret-data-v1-core",
+        "stringData": "k8s:secret-stringdata-v1-core"
+      }
+    },
+
+    "Job": {
+      "@id": "k8s:job-v1-batch",
+      "@context": {
+        "spec": "k8s:jobspec-v1-batch",
+        "status": "k8s:jobstatus-v1-batch"
+      }
+    },
+
+    "CronJob": {
+      "@id": "k8s:cronjob-v1-batch",
+      "@context": {
+        "spec": "k8s:cronjobspec-v1-batch",
+        "status": "k8s:cronjobstatus-v1-batch",
+        "schedule": {
+          "@id": "k8s:cronjobspec-schedule-v1-batch",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "ClusterRole": {
+      "@id": "k8s:clusterrole-v1-rbac.authorization.k8s.io",
+      "@context": {
+        "rules": "k8s:policyrule-v1-rbac.authorization.k8s.io"
+      }
+    },
+
+    "ClusterRoleBinding": {
+      "@id": "k8s:clusterrolebinding-v1-rbac.authorization.k8s.io",
+      "@context": {
+        "roleRef": "k8s:roleref-v1-rbac.authorization.k8s.io",
+        "subjects": "k8s:subject-v1-rbac.authorization.k8s.io"
+      }
+    },
+
+    "ServiceAccount": {
+      "@id": "k8s:serviceaccount-v1-core",
+      "@context": {
+        "secrets": "k8s:serviceaccount-secrets-v1-core"
+      }
+    },
+
+    "HorizontalPodAutoscaler": {
+      "@id": "k8s:horizontalpodautoscaler-v2-autoscaling",
+      "@context": {
+        "spec": "k8s:horizontalpodautoscalerspec-v2-autoscaling",
+        "status": "k8s:horizontalpodautoscalerstatus-v2-autoscaling",
+        "minReplicas": {
+          "@id": "k8s:horizontalpodautoscalerspec-minReplicas-v2-autoscaling",
+          "@type": "xsd:integer"
+        },
+        "maxReplicas": {
+          "@id": "k8s:horizontalpodautoscalerspec-maxReplicas-v2-autoscaling",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Event": {
+      "@id": "k8s:event-v1-events.k8s.io",
+      "@context": {
+        "eventTime": {
+          "@id": "k8s:event-eventTime-v1-events.k8s.io",
+          "@type": "xsd:dateTime"
+        },
+        "action": "k8s:event-action-v1-events.k8s.io",
+        "reason": "k8s:event-reason-v1-events.k8s.io",
+        "note": "k8s:event-note-v1-events.k8s.io",
+        "type": "k8s:event-type-v1-events.k8s.io",
+        "regarding": "k8s:objectreference-v1-core",
+        "reportingComponent": "k8s:event-reportingComponent-v1-events.k8s.io"
+      }
+    },
+
+    "ObjectMeta": {
+      "@id": "k8s:objectmeta-v1-meta",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "namespace": {
+          "@id": "k8s:objectmeta-namespace-v1-meta",
+          "@type": "xsd:string"
+        },
+        "uid": {
+          "@id": "dcterms:identifier",
+          "@type": "xsd:string"
+        },
+        "resourceVersion": {
+          "@id": "k8s:objectmeta-resourceVersion-v1-meta",
+          "@type": "xsd:string"
+        },
+        "generation": {
+          "@id": "k8s:objectmeta-generation-v1-meta",
+          "@type": "xsd:integer"
+        },
+        "creationTimestamp": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "deletionTimestamp": {
+          "@id": "k8s:objectmeta-deletionTimestamp-v1-meta",
+          "@type": "xsd:dateTime"
+        },
+        "labels": {
+          "@id": "k8s:objectmeta-labels-v1-meta",
+          "@container": "@index"
+        },
+        "annotations": {
+          "@id": "k8s:objectmeta-annotations-v1-meta",
+          "@container": "@index"
+        },
+        "ownerReferences": {
+          "@id": "k8s:ownerreference-v1-meta",
+          "@container": "@set"
+        },
+        "finalizers": {
+          "@id": "k8s:objectmeta-finalizers-v1-meta",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "apiVersion": {
+      "@id": "k8s:apiversion",
+      "@type": "xsd:string"
+    },
+    "kind": {
+      "@id": "k8s:kind",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "k8s:objectmeta-v1-meta"
+    },
+    "spec": {
+      "@id": "k8s:spec"
+    },
+    "status": {
+      "@id": "k8s:status"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "namespace": {
+      "@id": "k8s:namespace",
+      "@type": "xsd:string"
+    },
+    "labels": {
+      "@id": "k8s:labels",
+      "@container": "@index"
+    },
+    "annotations": {
+      "@id": "k8s:annotations",
+      "@container": "@index"
+    },
+    "replicas": {
+      "@id": "k8s:replicas",
+      "@type": "xsd:integer"
+    },
+    "image": {
+      "@id": "oci:image",
+      "@type": "xsd:string"
+    },
+    "containers": {
+      "@id": "k8s:containers",
+      "@container": "@set"
+    },
+    "volumes": {
+      "@id": "k8s:volumes",
+      "@container": "@set"
+    },
+    "ports": {
+      "@id": "k8s:ports",
+      "@container": "@set"
+    },
+    "env": {
+      "@id": "k8s:env",
+      "@container": "@set"
+    },
+    "resources": {
+      "@id": "k8s:resources"
+    },
+    "selector": {
+      "@id": "k8s:selector"
+    },
+    "template": {
+      "@id": "k8s:template"
+    },
+    "creationTimestamp": {
+      "@id": "dcterms:created",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

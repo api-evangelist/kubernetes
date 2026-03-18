@@ -1,0 +1,2227 @@
+openapi: 3.1.0
+info:
+  title: Kubernetes API
+  description: >-
+    The Kubernetes API lets you query and manipulate the state of objects in
+    Kubernetes. The core of Kubernetes control plane is the API server and the
+    HTTP API that it exposes. Users, the different parts of your cluster, and
+    external components all communicate with one another through the API server.
+    The API is a resource-based (RESTful) programmatic interface provided via
+    HTTP that supports retrieving, creating, updating, and deleting primary
+    resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).
+  version: v1.32.0
+  contact:
+    name: Kubernetes Community
+    url: https://kubernetes.io/community/
+  termsOfService: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Kubernetes API Reference Documentation
+  url: https://kubernetes.io/docs/reference/kubernetes-api/
+servers:
+  - url: https://kubernetes.default.svc
+    description: In-cluster Kubernetes API Server
+tags:
+  - name: Workloads
+    description: >-
+      Workload resources including Pods, Deployments, StatefulSets, DaemonSets,
+      ReplicaSets, Jobs, and CronJobs for managing containerized applications.
+  - name: Services
+    description: >-
+      Service discovery and networking resources including Services, Endpoints,
+      Ingresses, and NetworkPolicies for exposing and routing traffic.
+  - name: Config
+    description: >-
+      Configuration and storage resources including ConfigMaps, Secrets,
+      PersistentVolumes, and PersistentVolumeClaims.
+  - name: Cluster
+    description: >-
+      Cluster-level resources including Namespaces, Nodes, ServiceAccounts,
+      and RBAC resources for cluster administration.
+  - name: RBAC
+    description: >-
+      Role-based access control resources including Roles, RoleBindings,
+      ClusterRoles, and ClusterRoleBindings for managing authorization.
+  - name: Autoscaling
+    description: >-
+      Autoscaling resources including HorizontalPodAutoscalers for automatically
+      scaling workloads based on observed metrics.
+  - name: Events
+    description: >-
+      Event resources capturing occurrences within the cluster such as pod
+      scheduling, container restarts, and resource state changes.
+security:
+  - bearerAuth: []
+  - clientCertificate: []
+paths:
+  /api/v1/namespaces:
+    get:
+      operationId: listNamespaces
+      summary: List namespaces
+      description: >-
+        Returns a list of all namespaces in the cluster. Namespaces provide a
+        mechanism for isolating groups of resources within a single cluster.
+      tags:
+        - Cluster
+      parameters:
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/FieldSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Continue'
+        - $ref: '#/components/parameters/ResourceVersion'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of namespaces
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNamespace
+      summary: Create a namespace
+      description: >-
+        Creates a new namespace in the cluster. Namespaces provide a scope for
+        names and allow cluster resources to be divided among multiple users.
+      tags:
+        - Cluster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Namespace'
+      responses:
+        '201':
+          description: Namespace created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Namespace'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /api/v1/namespaces/{name}:
+    get:
+      operationId: getNamespace
+      summary: Get a namespace
+      description: >-
+        Returns the specified namespace object including its current status,
+        labels, annotations, and resource quotas.
+      tags:
+        - Cluster
+      parameters:
+        - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Namespace details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Namespace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: replaceNamespace
+      summary: Replace a namespace
+      description: >-
+        Replaces the specified namespace object. The entire resource is replaced
+        with the provided body; use PATCH for partial updates.
+      tags:
+        - Cluster
+      parameters:
+        - $ref: '#/components/parameters/NameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Namespace'
+      responses:
+        '200':
+          description: Namespace updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Namespace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteNamespace
+      summary: Delete a namespace
+      description: >-
+        Deletes the specified namespace and all resources contained within it.
+        The namespace enters a Terminating state while resources are being
+        removed, and is fully deleted once all contained resources are gone.
+      tags:
+        - Cluster
+      parameters:
+        - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Namespace deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Namespace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/namespaces/{namespace}/pods:
+    get:
+      operationId: listNamespacedPods
+      summary: List pods in a namespace
+      description: >-
+        Returns a list of all pods in the specified namespace. Pods are the
+        smallest deployable units of computing that you can create and manage
+        in Kubernetes. Each pod runs one or more containers.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/FieldSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Continue'
+        - $ref: '#/components/parameters/ResourceVersion'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of pods
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNamespacedPod
+      summary: Create a pod
+      description: >-
+        Creates a new pod in the specified namespace. The API server schedules
+        the pod to a node based on resource requirements, node selectors,
+        affinity rules, and available capacity.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pod'
+      responses:
+        '201':
+          description: Pod created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pod'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/namespaces/{namespace}/pods/{name}:
+    get:
+      operationId: getNamespacedPod
+      summary: Get a pod
+      description: >-
+        Returns the specified pod object including its current phase, container
+        statuses, resource allocations, and scheduling information.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Pod details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pod'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: replaceNamespacedPod
+      summary: Replace a pod
+      description: >-
+        Replaces the specified pod with the provided definition. Note that many
+        pod fields are immutable after creation; use Deployments for managing
+        pod lifecycle and updates.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pod'
+      responses:
+        '200':
+          description: Pod updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pod'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteNamespacedPod
+      summary: Delete a pod
+      description: >-
+        Deletes the specified pod. By default, Kubernetes sends SIGTERM to the
+        container and waits for the grace period before forcefully terminating
+        it. Running pods will be restarted by their controller (e.g. Deployment).
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+        - $ref: '#/components/parameters/GracePeriod'
+      responses:
+        '200':
+          description: Pod deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pod'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/namespaces/{namespace}/pods/{name}/log:
+    get:
+      operationId: readNamespacedPodLog
+      summary: Read pod logs
+      description: >-
+        Returns the log output from a container in the specified pod. Supports
+        streaming with the follow parameter, filtering by timestamps, and
+        reading from specific containers in multi-container pods.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+        - name: container
+          in: query
+          description: >-
+            Name of the container to read logs from. Defaults to only container
+            if there is only one, otherwise required.
+          schema:
+            type: string
+        - name: follow
+          in: query
+          description: >-
+            Whether to stream log output. If false, returns current log snapshot.
+          schema:
+            type: boolean
+        - name: tailLines
+          in: query
+          description: Number of lines from the end of the log to retrieve.
+          schema:
+            type: integer
+        - name: sinceSeconds
+          in: query
+          description: Only return logs newer than a relative duration in seconds.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Pod log output
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /apis/apps/v1/namespaces/{namespace}/deployments:
+    get:
+      operationId: listNamespacedDeployments
+      summary: List deployments in a namespace
+      description: >-
+        Returns a list of all deployments in the specified namespace. Deployments
+        provide declarative updates for Pods and ReplicaSets, enabling rolling
+        updates, rollbacks, and scaling of stateless applications.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/FieldSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of deployments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNamespacedDeployment
+      summary: Create a deployment
+      description: >-
+        Creates a new deployment in the specified namespace. Deployments manage
+        a set of identical pods based on a pod template and ensure the desired
+        number of replicas are running at all times.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Deployment'
+      responses:
+        '201':
+          description: Deployment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apis/apps/v1/namespaces/{namespace}/deployments/{name}:
+    get:
+      operationId: getNamespacedDeployment
+      summary: Get a deployment
+      description: >-
+        Returns the specified deployment including its current rollout status,
+        desired replica count, available replicas, and update strategy.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Deployment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: replaceNamespacedDeployment
+      summary: Replace a deployment
+      description: >-
+        Replaces the specified deployment configuration. Updating the pod
+        template spec triggers a rolling update of the managed pods according
+        to the deployment's update strategy.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Deployment'
+      responses:
+        '200':
+          description: Deployment updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteNamespacedDeployment
+      summary: Delete a deployment
+      description: >-
+        Deletes the specified deployment and its managed ReplicaSet and pods.
+        The pods are terminated gracefully according to the configured
+        termination grace period.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Deployment deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /apis/apps/v1/namespaces/{namespace}/deployments/{name}/scale:
+    get:
+      operationId: getNamespacedDeploymentScale
+      summary: Get deployment scale
+      description: >-
+        Returns the current scale subresource for the specified deployment,
+        including desired and actual replica counts.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Deployment scale object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scale'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: replaceNamespacedDeploymentScale
+      summary: Scale a deployment
+      description: >-
+        Updates the replica count of the specified deployment by replacing the
+        scale subresource. The deployment controller adjusts the number of
+        running pods to match the new desired replica count.
+      tags:
+        - Workloads
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Scale'
+      responses:
+        '200':
+          description: Deployment scale updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scale'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/namespaces/{namespace}/services:
+    get:
+      operationId: listNamespacedServices
+      summary: List services in a namespace
+      description: >-
+        Returns a list of all services in the specified namespace. Services
+        provide stable network identities and load balancing for pods,
+        abstracting away individual pod IP addresses.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/FieldSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of services
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNamespacedService
+      summary: Create a service
+      description: >-
+        Creates a new service in the specified namespace. Services can be of
+        type ClusterIP, NodePort, LoadBalancer, or ExternalName, each providing
+        different mechanisms for exposing pods to traffic.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '201':
+          description: Service created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/namespaces/{namespace}/services/{name}:
+    get:
+      operationId: getNamespacedService
+      summary: Get a service
+      description: >-
+        Returns the specified service including its cluster IP, selector,
+        ports, and current endpoint assignments.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Service details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: replaceNamespacedService
+      summary: Replace a service
+      description: >-
+        Replaces the specified service configuration. Updates to the selector
+        immediately affect which pods the service routes traffic to.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '200':
+          description: Service updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteNamespacedService
+      summary: Delete a service
+      description: >-
+        Deletes the specified service. Any external load balancers provisioned
+        for a LoadBalancer-type service will also be deprovisioned.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Service deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/namespaces/{namespace}/configmaps:
+    get:
+      operationId: listNamespacedConfigMaps
+      summary: List ConfigMaps in a namespace
+      description: >-
+        Returns a list of all ConfigMaps in the specified namespace. ConfigMaps
+        allow you to decouple configuration from pod images so that containerized
+        applications can be made portable.
+      tags:
+        - Config
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of ConfigMaps
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigMapList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNamespacedConfigMap
+      summary: Create a ConfigMap
+      description: >-
+        Creates a new ConfigMap in the specified namespace. ConfigMaps store
+        non-confidential data as key-value pairs that can be consumed as
+        environment variables, command-line arguments, or configuration files.
+      tags:
+        - Config
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigMap'
+      responses:
+        '201':
+          description: ConfigMap created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigMap'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/namespaces/{namespace}/secrets:
+    get:
+      operationId: listNamespacedSecrets
+      summary: List Secrets in a namespace
+      description: >-
+        Returns a list of Secrets in the specified namespace. Secrets store
+        sensitive information such as passwords, OAuth tokens, and SSH keys,
+        with access controlled via RBAC.
+      tags:
+        - Config
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of Secrets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNamespacedSecret
+      summary: Create a Secret
+      description: >-
+        Creates a new Secret in the specified namespace. Secret data is stored
+        base64-encoded and can be mounted as files or exposed as environment
+        variables in pods.
+      tags:
+        - Config
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Secret'
+      responses:
+        '201':
+          description: Secret created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Secret'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/nodes:
+    get:
+      operationId: listNodes
+      summary: List nodes
+      description: >-
+        Returns a list of all nodes in the cluster. Nodes are the worker
+        machines in Kubernetes that run containerized applications. Each node
+        contains the services necessary to run pods and is managed by the
+        control plane.
+      tags:
+        - Cluster
+      parameters:
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/FieldSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of nodes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/nodes/{name}:
+    get:
+      operationId: getNode
+      summary: Get a node
+      description: >-
+        Returns the specified node including its capacity, allocatable
+        resources, conditions (Ready, MemoryPressure, DiskPressure), and
+        system information.
+      tags:
+        - Cluster
+      parameters:
+        - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Node details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /apis/rbac.authorization.k8s.io/v1/clusterroles:
+    get:
+      operationId: listClusterRoles
+      summary: List ClusterRoles
+      description: >-
+        Returns a list of all ClusterRoles in the cluster. ClusterRoles define
+        a set of permissions applicable across the entire cluster, unlike
+        namespace-scoped Roles.
+      tags:
+        - RBAC
+      parameters:
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of ClusterRoles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterRoleList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createClusterRole
+      summary: Create a ClusterRole
+      description: >-
+        Creates a new ClusterRole defining cluster-wide permissions. ClusterRoles
+        are bound to subjects (users, groups, service accounts) via
+        ClusterRoleBindings to grant cluster-wide access.
+      tags:
+        - RBAC
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterRole'
+      responses:
+        '201':
+          description: ClusterRole created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterRole'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apis/autoscaling/v2/namespaces/{namespace}/horizontalpodautoscalers:
+    get:
+      operationId: listNamespacedHorizontalPodAutoscalers
+      summary: List HorizontalPodAutoscalers in a namespace
+      description: >-
+        Returns a list of all HorizontalPodAutoscalers (HPAs) in the specified
+        namespace. HPAs automatically scale the number of pod replicas based on
+        observed CPU utilization, memory usage, or custom metrics.
+      tags:
+        - Autoscaling
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of HPAs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HorizontalPodAutoscalerList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNamespacedHorizontalPodAutoscaler
+      summary: Create a HorizontalPodAutoscaler
+      description: >-
+        Creates a new HorizontalPodAutoscaler in the specified namespace.
+        Configure target resource utilization thresholds and min/max replica
+        bounds to enable automatic workload scaling.
+      tags:
+        - Autoscaling
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HorizontalPodAutoscaler'
+      responses:
+        '201':
+          description: HPA created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HorizontalPodAutoscaler'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apis/events.k8s.io/v1/namespaces/{namespace}/events:
+    get:
+      operationId: listNamespacedEvents
+      summary: List events in a namespace
+      description: >-
+        Returns a list of events in the specified namespace. Events are records
+        of occurrences that happened in the cluster, such as pod scheduling
+        decisions, container restarts, resource quota violations, and node
+        conditions changes.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/NamespaceParam'
+        - $ref: '#/components/parameters/FieldSelector'
+        - $ref: '#/components/parameters/LabelSelector'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Kubernetes service account token or user token issued by the cluster's
+        authentication provider. Include in the Authorization header as
+        'Bearer <token>'.
+    clientCertificate:
+      type: mutualTLS
+      description: >-
+        Client certificate authentication using a TLS certificate issued by
+        the cluster's certificate authority.
+  parameters:
+    NamespaceParam:
+      name: namespace
+      in: path
+      required: true
+      description: The namespace name to scope the request to.
+      schema:
+        type: string
+    NameParam:
+      name: name
+      in: path
+      required: true
+      description: The name of the resource to operate on.
+      schema:
+        type: string
+    LabelSelector:
+      name: labelSelector
+      in: query
+      description: >-
+        Selector expression to filter resources by label. Supports equality
+        (=, ==, !=), set-based (in, notin, exists) operations.
+        Example: app=nginx,tier=frontend
+      schema:
+        type: string
+    FieldSelector:
+      name: fieldSelector
+      in: query
+      description: >-
+        Selector expression to filter resources by field values. Supports
+        equality (=, ==, !=) on specific fields. Example:
+        status.phase=Running,spec.nodeName=node1
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: >-
+        Maximum number of resources to return in a single response. Use with
+        the continue parameter to paginate through large result sets.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+    Continue:
+      name: continue
+      in: query
+      description: >-
+        Pagination token returned in a previous response's metadata.continue
+        field. Use to retrieve the next page of results.
+      schema:
+        type: string
+    ResourceVersion:
+      name: resourceVersion
+      in: query
+      description: >-
+        When specified with a watch call, shows changes that occur after the
+        specified resourceVersion. When specified in a list request, returns
+        results at least as new as the specified resourceVersion.
+      schema:
+        type: string
+    Watch:
+      name: watch
+      in: query
+      description: >-
+        Watch for changes to the described resources and return them as a
+        stream of add, update, and remove notifications. Specify resourceVersion
+        to watch from a specific version.
+      schema:
+        type: boolean
+    GracePeriod:
+      name: gracePeriodSeconds
+      in: query
+      description: >-
+        Duration in seconds to wait before forcefully terminating the resource.
+        Defaults to the resource's terminationGracePeriodSeconds setting.
+      schema:
+        type: integer
+        minimum: 0
+  responses:
+    BadRequest:
+      description: Bad request — invalid resource specification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    NotFound:
+      description: Not found — the specified resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    Conflict:
+      description: Conflict — a resource with that name already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+  schemas:
+    ObjectMeta:
+      type: object
+      description: >-
+        Standard Kubernetes object metadata included on all persistent resources.
+        Contains identifying information, ownership references, and system-managed
+        fields like resourceVersion and uid.
+      properties:
+        name:
+          type: string
+          description: Unique name of the object within a namespace or cluster scope.
+        namespace:
+          type: string
+          description: >-
+            Namespace that scopes the resource name. Not all resource types
+            are namespaced.
+        uid:
+          type: string
+          description: >-
+            Unique identifier generated by the server for this object. Remains
+            constant for the lifetime of the object.
+        resourceVersion:
+          type: string
+          description: >-
+            Opaque string that identifies an internal server version of the object.
+            Used for optimistic concurrency control and watch operations.
+        generation:
+          type: integer
+          description: >-
+            Sequence number representing the generation of the desired state.
+            Incremented by the server on spec changes.
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the object was created.
+        deletionTimestamp:
+          type: string
+          format: date-time
+          description: >-
+            Time at which the object will be deleted. Set by the server when
+            a delete is requested.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Map of string keys and values to organize and select resources.
+            Labels are queryable via label selectors.
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Map of non-identifying metadata. Annotations may contain arbitrary
+            data and are not queryable by the API.
+        ownerReferences:
+          type: array
+          description: >-
+            List of objects that own this object. Garbage collection will
+            delete this object when all owners are deleted.
+          items:
+            $ref: '#/components/schemas/OwnerReference'
+    OwnerReference:
+      type: object
+      description: >-
+        Reference to an owning resource that manages this object's lifecycle
+        via garbage collection.
+      required:
+        - apiVersion
+        - kind
+        - name
+        - uid
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the owner resource.
+        kind:
+          type: string
+          description: Kind of the owner resource.
+        name:
+          type: string
+          description: Name of the owner resource.
+        uid:
+          type: string
+          description: UID of the owner resource.
+        controller:
+          type: boolean
+          description: Whether this reference points to the managing controller.
+    ResourceRequirements:
+      type: object
+      description: >-
+        Compute resource requirements for a container, specifying resource
+        limits and requests for CPU and memory.
+      properties:
+        requests:
+          type: object
+          description: >-
+            Minimum resources required. The container will not be scheduled
+            unless these resources are available on the node.
+          additionalProperties:
+            type: string
+        limits:
+          type: object
+          description: >-
+            Maximum resources the container may consume. The container is
+            throttled (CPU) or killed (memory) if it exceeds limits.
+          additionalProperties:
+            type: string
+    ContainerPort:
+      type: object
+      description: >-
+        A network port that a container exposes. Used for documentation and
+        for service discovery via protocol and port number.
+      required:
+        - containerPort
+      properties:
+        name:
+          type: string
+          description: Name for the port, referenced by services.
+        containerPort:
+          type: integer
+          minimum: 1
+          maximum: 65535
+          description: Port number to expose on the container's IP address.
+        protocol:
+          type: string
+          enum:
+            - TCP
+            - UDP
+            - SCTP
+          description: Protocol for the port. Defaults to TCP.
+        hostPort:
+          type: integer
+          description: Port to expose on the node. Most containers do not need this.
+    Container:
+      type: object
+      description: >-
+        A single container to run within a pod. Defines the container image,
+        command, environment, resource requirements, ports, and volume mounts.
+      required:
+        - name
+        - image
+      properties:
+        name:
+          type: string
+          description: Unique name of the container within the pod.
+        image:
+          type: string
+          description: >-
+            Container image name in the format [registry/]repository[:tag].
+            The tag defaults to 'latest' if not specified.
+        command:
+          type: array
+          items:
+            type: string
+          description: Entrypoint command array. Replaces the container image's ENTRYPOINT.
+        args:
+          type: array
+          items:
+            type: string
+          description: Arguments to the entrypoint. Replaces the container image's CMD.
+        env:
+          type: array
+          description: List of environment variables to set in the container.
+          items:
+            $ref: '#/components/schemas/EnvVar'
+        ports:
+          type: array
+          description: List of ports to expose from the container.
+          items:
+            $ref: '#/components/schemas/ContainerPort'
+        resources:
+          $ref: '#/components/schemas/ResourceRequirements'
+        imagePullPolicy:
+          type: string
+          enum:
+            - Always
+            - Never
+            - IfNotPresent
+          description: >-
+            Image pull policy. Defaults to Always if the tag is :latest,
+            otherwise IfNotPresent.
+    EnvVar:
+      type: object
+      description: An environment variable to set in a container.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the environment variable.
+        value:
+          type: string
+          description: Literal string value for the environment variable.
+    PodSpec:
+      type: object
+      description: >-
+        Specification for the desired behavior of a pod, including the
+        containers to run, volumes to mount, scheduling constraints, and
+        restart policy.
+      required:
+        - containers
+      properties:
+        containers:
+          type: array
+          description: >-
+            List of containers to run in the pod. Each pod must have at
+            least one container.
+          items:
+            $ref: '#/components/schemas/Container'
+        initContainers:
+          type: array
+          description: >-
+            List of init containers that run before app containers. Each
+            init container must complete successfully before the next starts.
+          items:
+            $ref: '#/components/schemas/Container'
+        nodeName:
+          type: string
+          description: >-
+            Name of the node to schedule this pod on. If specified, bypasses
+            the scheduler's decision.
+        nodeSelector:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Map of key-value pairs that must match node labels for scheduling.
+        restartPolicy:
+          type: string
+          enum:
+            - Always
+            - OnFailure
+            - Never
+          description: Restart policy for all containers. Defaults to Always.
+        serviceAccountName:
+          type: string
+          description: >-
+            Name of the service account to use when mounting service account
+            tokens into pods.
+        terminationGracePeriodSeconds:
+          type: integer
+          description: >-
+            Duration in seconds the pod needs to terminate gracefully.
+            Defaults to 30 seconds.
+    PodStatus:
+      type: object
+      description: >-
+        Most recently observed status of the pod. This data may not be
+        up-to-date and is populated by the system.
+      properties:
+        phase:
+          type: string
+          enum:
+            - Pending
+            - Running
+            - Succeeded
+            - Failed
+            - Unknown
+          description: Current lifecycle phase of the pod.
+        podIP:
+          type: string
+          description: IP address allocated to the pod. Routable within the cluster.
+        hostIP:
+          type: string
+          description: IP address of the host node running this pod.
+        startTime:
+          type: string
+          format: date-time
+          description: Time at which the pod was acknowledged by the kubelet.
+        conditions:
+          type: array
+          description: Current service state of the pod.
+          items:
+            $ref: '#/components/schemas/PodCondition'
+    PodCondition:
+      type: object
+      description: Condition representing the current state of a pod component.
+      required:
+        - type
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - PodScheduled
+            - ContainersReady
+            - Initialized
+            - Ready
+          description: Type of pod condition.
+        status:
+          type: string
+          enum:
+            - 'True'
+            - 'False'
+            - Unknown
+          description: Status of the condition.
+        message:
+          type: string
+          description: Human-readable message indicating details about the condition.
+        reason:
+          type: string
+          description: Brief machine-readable reason for the condition's last transition.
+    Pod:
+      type: object
+      description: >-
+        A Pod represents the smallest deployable unit in Kubernetes, encapsulating
+        one or more containers with shared storage and network. Pods are
+        ephemeral by nature and managed by higher-level workload controllers.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+          description: API version of the resource.
+        kind:
+          type: string
+          const: Pod
+          description: Kind identifier for the resource.
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/PodSpec'
+        status:
+          $ref: '#/components/schemas/PodStatus'
+    PodList:
+      type: object
+      description: A list of pods returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: PodList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pod'
+    DeploymentSpec:
+      type: object
+      description: >-
+        Specification for a Deployment, defining the desired state including
+        replica count, pod template, and update strategy.
+      required:
+        - selector
+        - template
+      properties:
+        replicas:
+          type: integer
+          minimum: 0
+          description: Desired number of pod replicas. Defaults to 1.
+        selector:
+          $ref: '#/components/schemas/LabelSelector'
+        template:
+          $ref: '#/components/schemas/PodTemplateSpec'
+        strategy:
+          $ref: '#/components/schemas/DeploymentStrategy'
+        minReadySeconds:
+          type: integer
+          description: >-
+            Minimum seconds a newly created pod should be ready without crashing
+            before being considered available.
+        revisionHistoryLimit:
+          type: integer
+          description: Number of old ReplicaSets to retain for rollback. Defaults to 10.
+    LabelSelector:
+      type: object
+      description: >-
+        A label selector is a query over a set of resources. matchLabels
+        specifies key-value pairs that must match, while matchExpressions
+        supports set-based criteria.
+      properties:
+        matchLabels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of key-value pairs that must match resource labels exactly.
+        matchExpressions:
+          type: array
+          description: List of label selector requirements using set-based operators.
+          items:
+            $ref: '#/components/schemas/LabelSelectorRequirement'
+    LabelSelectorRequirement:
+      type: object
+      description: A requirement that uses set-based operators to match labels.
+      required:
+        - key
+        - operator
+      properties:
+        key:
+          type: string
+          description: Label key that the selector applies to.
+        operator:
+          type: string
+          enum:
+            - In
+            - NotIn
+            - Exists
+            - DoesNotExist
+          description: Represents the key's relationship to a set of values.
+        values:
+          type: array
+          items:
+            type: string
+          description: Array of string values used with In and NotIn operators.
+    PodTemplateSpec:
+      type: object
+      description: >-
+        Template for creating pod replicas. Contains pod metadata (labels,
+        annotations) and a pod spec.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/PodSpec'
+    DeploymentStrategy:
+      type: object
+      description: >-
+        Strategy for replacing existing pods with new ones during an update.
+        Supports RollingUpdate (default) and Recreate strategies.
+      properties:
+        type:
+          type: string
+          enum:
+            - Recreate
+            - RollingUpdate
+          description: >-
+            Type of deployment. Recreate kills all existing pods before
+            creating new ones. RollingUpdate gradually replaces old pods.
+        rollingUpdate:
+          type: object
+          description: Rolling update configuration. Only valid when type is RollingUpdate.
+          properties:
+            maxUnavailable:
+              description: >-
+                Maximum number of pods that can be unavailable during the
+                update. Can be an absolute number or percentage.
+              oneOf:
+                - type: integer
+                - type: string
+            maxSurge:
+              description: >-
+                Maximum number of pods that can be scheduled above the
+                desired number during an update.
+              oneOf:
+                - type: integer
+                - type: string
+    DeploymentStatus:
+      type: object
+      description: >-
+        Most recently observed status of a Deployment including replica
+        counts and rollout conditions.
+      properties:
+        replicas:
+          type: integer
+          description: Total number of non-terminated pods targeted by this deployment.
+        updatedReplicas:
+          type: integer
+          description: Total number of pods targeted by this deployment that have the desired template spec.
+        readyReplicas:
+          type: integer
+          description: Total number of ready pods targeted by this deployment.
+        availableReplicas:
+          type: integer
+          description: Total number of available pods targeted by this deployment.
+        observedGeneration:
+          type: integer
+          description: The generation observed by the deployment controller.
+    Deployment:
+      type: object
+      description: >-
+        A Deployment provides declarative updates for Pods and ReplicaSets.
+        You describe a desired state in a Deployment and the controller
+        changes the actual state to match the desired state at a controlled rate.
+      properties:
+        apiVersion:
+          type: string
+          const: apps/v1
+          description: API version of the resource.
+        kind:
+          type: string
+          const: Deployment
+          description: Kind identifier for the resource.
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/DeploymentSpec'
+        status:
+          $ref: '#/components/schemas/DeploymentStatus'
+    DeploymentList:
+      type: object
+      description: A list of deployments returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: DeploymentList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deployment'
+    Scale:
+      type: object
+      description: >-
+        Scale represents the scaling subresource of a workload resource.
+        Used to read and update the replica count independently of the
+        full resource spec.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Scale
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          type: object
+          properties:
+            replicas:
+              type: integer
+              description: Desired number of replicas.
+        status:
+          type: object
+          properties:
+            replicas:
+              type: integer
+              description: Actual number of observed replicas.
+    ServicePort:
+      type: object
+      description: A port that a service exposes, mapping from a service port to a target port.
+      required:
+        - port
+      properties:
+        name:
+          type: string
+          description: Name of the port within the service. Required for multi-port services.
+        protocol:
+          type: string
+          enum:
+            - TCP
+            - UDP
+            - SCTP
+          description: IP protocol for the port. Defaults to TCP.
+        port:
+          type: integer
+          description: Port number that the service listens on.
+        targetPort:
+          description: Port on the pod that traffic is forwarded to.
+          oneOf:
+            - type: integer
+            - type: string
+        nodePort:
+          type: integer
+          description: >-
+            Port on each node on which the service is exposed when type is
+            NodePort or LoadBalancer.
+    ServiceSpec:
+      type: object
+      description: >-
+        Specification for the desired behavior of a service, including the
+        port mappings, pod selector, and service type.
+      properties:
+        type:
+          type: string
+          enum:
+            - ClusterIP
+            - NodePort
+            - LoadBalancer
+            - ExternalName
+          description: >-
+            How the service is exposed. ClusterIP (default) exposes within the
+            cluster only; NodePort adds a node-level port; LoadBalancer provisions
+            a cloud load balancer; ExternalName maps to a DNS name.
+        selector:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Map of key-value pairs that identify the pods this service routes
+            traffic to.
+        ports:
+          type: array
+          description: List of ports the service exposes.
+          items:
+            $ref: '#/components/schemas/ServicePort'
+        clusterIP:
+          type: string
+          description: >-
+            IP address of the service within the cluster. Assigned automatically
+            unless None (headless service) is specified.
+        externalName:
+          type: string
+          description: >-
+            External DNS name that the service maps to. Only used when
+            type is ExternalName.
+    Service:
+      type: object
+      description: >-
+        A Service is an abstraction that defines a logical set of pods and a
+        policy for accessing them. Services enable decoupling between consumer
+        and producer pods through stable virtual IPs and DNS names.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Service
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/ServiceSpec'
+    ServiceList:
+      type: object
+      description: A list of services returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: ServiceList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+    ConfigMap:
+      type: object
+      description: >-
+        A ConfigMap holds non-confidential configuration data as key-value pairs.
+        Pods can consume ConfigMaps as environment variables, command-line
+        arguments, or configuration files in a volume.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: ConfigMap
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        data:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of UTF-8 string data. Use binaryData for binary content.
+        binaryData:
+          type: object
+          additionalProperties:
+            type: string
+            format: byte
+          description: Map of binary data. Keys must not overlap with data keys.
+    ConfigMapList:
+      type: object
+      description: A list of ConfigMaps returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: ConfigMapList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigMap'
+    Secret:
+      type: object
+      description: >-
+        A Secret stores sensitive information such as passwords, OAuth tokens,
+        and TLS certificates. Secret data is base64-encoded and access is
+        controlled via RBAC.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Secret
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        type:
+          type: string
+          description: >-
+            Type of secret. Common types: Opaque (generic), kubernetes.io/tls,
+            kubernetes.io/service-account-token, kubernetes.io/dockerconfigjson.
+          default: Opaque
+        data:
+          type: object
+          additionalProperties:
+            type: string
+            format: byte
+          description: Map of base64-encoded secret data.
+        stringData:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Map of plain-text string data. Values are encoded to base64 before
+            storage. Takes precedence over data for matching keys.
+    SecretList:
+      type: object
+      description: A list of Secrets returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: SecretList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Secret'
+    NodeSpec:
+      type: object
+      description: Specification of a node, including taints and configuration sources.
+      properties:
+        podCIDR:
+          type: string
+          description: Pod IP range assigned to the node.
+        providerID:
+          type: string
+          description: >-
+            Provider-specific node identifier, as recognized by the cloud
+            controller manager.
+        taints:
+          type: array
+          description: >-
+            List of taints applied to the node. Pods must tolerate taints to
+            be scheduled on the node.
+          items:
+            $ref: '#/components/schemas/Taint'
+        unschedulable:
+          type: boolean
+          description: When true, prevents new pods from being scheduled on the node.
+    Taint:
+      type: object
+      description: >-
+        A taint applied to a node that repels pods without a matching toleration.
+        Used for dedicated nodes, nodes with special hardware, or node evictions.
+      required:
+        - key
+        - effect
+      properties:
+        key:
+          type: string
+          description: Taint key applied to the node.
+        value:
+          type: string
+          description: Taint value associated with the key.
+        effect:
+          type: string
+          enum:
+            - NoSchedule
+            - PreferNoSchedule
+            - NoExecute
+          description: Effect of the taint on pods without a matching toleration.
+    NodeStatus:
+      type: object
+      description: >-
+        Most recently observed status of the node including capacity,
+        allocatable resources, conditions, and system info.
+      properties:
+        capacity:
+          type: object
+          additionalProperties:
+            type: string
+          description: Total resources available on the node including CPU and memory.
+        allocatable:
+          type: object
+          additionalProperties:
+            type: string
+          description: Resources available for pods on the node after system overhead.
+        conditions:
+          type: array
+          description: Current conditions of the node such as Ready, MemoryPressure, DiskPressure.
+          items:
+            $ref: '#/components/schemas/NodeCondition'
+    NodeCondition:
+      type: object
+      description: Condition describing the current state of a node component.
+      required:
+        - type
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - Ready
+            - MemoryPressure
+            - DiskPressure
+            - PIDPressure
+            - NetworkUnavailable
+          description: Type of node condition.
+        status:
+          type: string
+          enum:
+            - 'True'
+            - 'False'
+            - Unknown
+          description: Status of the condition.
+        message:
+          type: string
+          description: Human-readable message indicating details about the condition.
+        reason:
+          type: string
+          description: Machine-readable reason for the condition's last transition.
+    Node:
+      type: object
+      description: >-
+        A Node is a worker machine in Kubernetes. Each node contains the services
+        necessary to run pods and is managed by the control plane. Nodes have
+        resources including CPU, memory, and storage that pods consume.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Node
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/NodeSpec'
+        status:
+          $ref: '#/components/schemas/NodeStatus'
+    NodeList:
+      type: object
+      description: A list of nodes returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: NodeList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Node'
+    PolicyRule:
+      type: object
+      description: >-
+        A rule that grants a set of verbs on a set of resources within an
+        API group. All fields are combined with AND logic.
+      properties:
+        verbs:
+          type: array
+          items:
+            type: string
+          description: >-
+            Verbs allowed on the resources. Common: get, list, watch, create,
+            update, patch, delete, deletecollection.
+        apiGroups:
+          type: array
+          items:
+            type: string
+          description: >-
+            API groups the resources belong to. Use "" for the core group.
+        resources:
+          type: array
+          items:
+            type: string
+          description: Resources this rule applies to. Use "*" to match all resources.
+        resourceNames:
+          type: array
+          items:
+            type: string
+          description: List of resource names the rule applies to. Empty means all.
+    ClusterRole:
+      type: object
+      description: >-
+        A ClusterRole defines a set of permissions applicable across the entire
+        cluster. Rules grant access to specific API groups, resources, and verbs.
+        ClusterRoles are bound to subjects via ClusterRoleBindings.
+      properties:
+        apiVersion:
+          type: string
+          const: rbac.authorization.k8s.io/v1
+        kind:
+          type: string
+          const: ClusterRole
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        rules:
+          type: array
+          description: List of policy rules granting permissions.
+          items:
+            $ref: '#/components/schemas/PolicyRule'
+    ClusterRoleList:
+      type: object
+      description: A list of ClusterRoles returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: ClusterRoleList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterRole'
+    HorizontalPodAutoscaler:
+      type: object
+      description: >-
+        A HorizontalPodAutoscaler automatically scales the number of pod replicas
+        in a workload based on observed resource metrics (CPU, memory) or custom
+        metrics from external sources.
+      properties:
+        apiVersion:
+          type: string
+          const: autoscaling/v2
+        kind:
+          type: string
+          const: HorizontalPodAutoscaler
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          type: object
+          properties:
+            scaleTargetRef:
+              type: object
+              description: Reference to the resource being scaled.
+              required:
+                - kind
+                - name
+              properties:
+                apiVersion:
+                  type: string
+                kind:
+                  type: string
+                name:
+                  type: string
+            minReplicas:
+              type: integer
+              minimum: 1
+              description: Minimum replica count. Defaults to 1.
+            maxReplicas:
+              type: integer
+              description: Maximum replica count. Must be greater than minReplicas.
+        status:
+          type: object
+          properties:
+            currentReplicas:
+              type: integer
+              description: Current replica count.
+            desiredReplicas:
+              type: integer
+              description: Desired replica count as computed by the autoscaler.
+            lastScaleTime:
+              type: string
+              format: date-time
+              description: Timestamp of the last scaling action.
+    HorizontalPodAutoscalerList:
+      type: object
+      description: A list of HPAs returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: HorizontalPodAutoscalerList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HorizontalPodAutoscaler'
+    Event:
+      type: object
+      description: >-
+        An Event records an occurrence in the cluster. Events capture information
+        about resource lifecycle changes, scheduling decisions, container restarts,
+        and error conditions. Events have a short retention period in the cluster.
+      properties:
+        apiVersion:
+          type: string
+          const: events.k8s.io/v1
+        kind:
+          type: string
+          const: Event
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        eventTime:
+          type: string
+          format: date-time
+          description: Time at which the event occurred.
+        action:
+          type: string
+          description: What action was taken (e.g. Killing, Scheduling, Pulling).
+        reason:
+          type: string
+          description: Short machine-readable reason for the event (e.g. BackOff, Created).
+        note:
+          type: string
+          description: Human-readable description of the event.
+        type:
+          type: string
+          enum:
+            - Normal
+            - Warning
+          description: Type of event. Normal for informational events, Warning for issues.
+        regarding:
+          $ref: '#/components/schemas/ObjectReference'
+        reportingComponent:
+          type: string
+          description: Name of the controller that emitted this event.
+    ObjectReference:
+      type: object
+      description: >-
+        A reference to an object in the cluster, used to identify the resource
+        that an event or other resource is associated with.
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the referenced object.
+        kind:
+          type: string
+          description: Kind of the referenced object.
+        namespace:
+          type: string
+          description: Namespace of the referenced object.
+        name:
+          type: string
+          description: Name of the referenced object.
+        uid:
+          type: string
+          description: UID of the referenced object.
+    EventList:
+      type: object
+      description: A list of events returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: EventList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    Namespace:
+      type: object
+      description: >-
+        A Namespace provides a mechanism for isolating groups of resources within
+        a single cluster. Names of resources need to be unique within a namespace,
+        but not across namespaces. Namespace-based scoping is applicable only for
+        namespaced objects.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Namespace
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          type: object
+          properties:
+            finalizers:
+              type: array
+              items:
+                type: string
+              description: >-
+                List of finalizers that must all be empty before the namespace
+                is fully deleted.
+        status:
+          type: object
+          properties:
+            phase:
+              type: string
+              enum:
+                - Active
+                - Terminating
+              description: Current lifecycle phase of the namespace.
+    NamespaceList:
+      type: object
+      description: A list of namespaces returned by list operations.
+      required:
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: NamespaceList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Namespace'
+    ListMeta:
+      type: object
+      description: >-
+        Metadata that all list responses include, containing pagination state and
+        the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: >-
+            Token used to retrieve the next page of results in a paginated
+            list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
+    Status:
+      type: object
+      description: >-
+        Status is a return value for calls that don't return other objects.
+        It is used to convey error messages, reasons, and codes for both
+        success and failure responses.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Status
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable description of the status.
+        reason:
+          type: string
+          description: Machine-readable description of why the operation is in this status.
+        status:
+          type: string
+          enum:
+            - Success
+            - Failure
+          description: Outcome of the operation.
