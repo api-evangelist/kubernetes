@@ -5,13 +5,13 @@ apis:
   - aid: kubernetes:kubernetes
     name: Kubernetes API
     tags:
-      - Containers
-      - Deployment
-      - Scaling
-      - Orchestration
       - Automation
       - Cloud Native
       - CNCF
+      - Containers
+      - Deployment
+      - Orchestration
+      - Scaling
     humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
     baseURL: https://kubernetes.default.svc
     properties:
@@ -22,8 +22,7 @@ apis:
       - url: >-
           https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json
         type: OpenAPI
-      - url: 
-          https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
+      - url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
         type: OpenAPIRepository
       - url: https://kubernetes.io/docs/reference/access-authn-authz/
         type: Authentication
@@ -45,14 +44,14 @@ apis:
       server.
 name: Kubernetes
 tags:
-  - Containers
-  - Deployment
-  - Scaling
-  - Orchestration
   - Automation
   - Cloud Native
   - CNCF
+  - Containers
+  - Deployment
   - Open Source
+  - Orchestration
+  - Scaling
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
@@ -162,8 +161,7 @@ common:
   - url: https://github.com/kubernetes/kubernetes/security/policy
     name: Security Policy
     type: SecurityPolicy
-    description: Information about reporting security vulnerabilities in 
-      Kubernetes.
+    description: Information about reporting security vulnerabilities in Kubernetes.
   - url: https://www.cncf.io/projects/kubernetes/
     name: CNCF Project Page
     type: Foundation
@@ -179,18 +177,15 @@ common:
   - url: https://kubernetes.io/docs/setup/
     name: Getting Started
     type: GettingStarted
-    description: Documentation for setting up and configuring Kubernetes 
-      clusters.
+    description: Documentation for setting up and configuring Kubernetes clusters.
   - url: https://kubernetes.io/docs/tutorials/
     name: Tutorials
     type: Tutorials
-    description: Hands-on tutorials covering various Kubernetes topics and use 
-      cases.
+    description: Hands-on tutorials covering various Kubernetes topics and use cases.
   - url: https://kubernetes.io/case-studies/
     name: Case Studies
     type: CaseStudies
-    description: Real-world case studies of organizations using Kubernetes in 
-      production.
+    description: Real-world case studies of organizations using Kubernetes in production.
   - url: https://kubernetes.io/community/code-of-conduct/
     name: Code of Conduct
     type: CodeOfConduct

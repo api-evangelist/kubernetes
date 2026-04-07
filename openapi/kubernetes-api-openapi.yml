@@ -21,34 +21,30 @@ servers:
   - url: https://kubernetes.default.svc
     description: In-cluster Kubernetes API Server
 tags:
-  - name: Workloads
-    description: >-
-      Workload resources including Pods, Deployments, StatefulSets, DaemonSets,
-      ReplicaSets, Jobs, and CronJobs for managing containerized applications.
-  - name: Services
-    description: >-
-      Service discovery and networking resources including Services, Endpoints,
-      Ingresses, and NetworkPolicies for exposing and routing traffic.
-  - name: Config
-    description: >-
-      Configuration and storage resources including ConfigMaps, Secrets,
-      PersistentVolumes, and PersistentVolumeClaims.
-  - name: Cluster
-    description: >-
-      Cluster-level resources including Namespaces, Nodes, ServiceAccounts,
-      and RBAC resources for cluster administration.
-  - name: RBAC
-    description: >-
-      Role-based access control resources including Roles, RoleBindings,
-      ClusterRoles, and ClusterRoleBindings for managing authorization.
   - name: Autoscaling
     description: >-
       Autoscaling resources including HorizontalPodAutoscalers for automatically
       scaling workloads based on observed metrics.
+  - name: Cluster
+    description: >-
+      Cluster-level resources including Namespaces, Nodes, ServiceAccounts,
+      and RBAC resources for cluster administration.
+  - name: Config
+    description: >-
+      Configuration and storage resources including ConfigMaps, Secrets,
+      PersistentVolumes, and PersistentVolumeClaims.
   - name: Events
     description: >-
       Event resources capturing occurrences within the cluster such as pod
       scheduling, container restarts, and resource state changes.
+  - name: RBAC
+    description: >-
+      Role-based access control resources including Roles, RoleBindings,
+      ClusterRoles, and ClusterRoleBindings for managing authorization.
+  - name: Workloads
+    description: >-
+      Workload resources including Pods, Deployments, StatefulSets, DaemonSets,
+      ReplicaSets, Jobs, and CronJobs for managing containerized applications.
 security:
   - bearerAuth: []
   - clientCertificate: []
@@ -542,8 +538,7 @@ paths:
         Returns a list of all services in the specified namespace. Services
         provide stable network identities and load balancing for pods,
         abstracting away individual pod IP addresses.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/NamespaceParam'
         - $ref: '#/components/parameters/LabelSelector'
@@ -566,8 +561,7 @@ paths:
         Creates a new service in the specified namespace. Services can be of
         type ClusterIP, NodePort, LoadBalancer, or ExternalName, each providing
         different mechanisms for exposing pods to traffic.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/NamespaceParam'
       requestBody:
@@ -594,8 +588,7 @@ paths:
       description: >-
         Returns the specified service including its cluster IP, selector,
         ports, and current endpoint assignments.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/NamespaceParam'
         - $ref: '#/components/parameters/NameParam'
@@ -616,8 +609,7 @@ paths:
       description: >-
         Replaces the specified service configuration. Updates to the selector
         immediately affect which pods the service routes traffic to.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/NamespaceParam'
         - $ref: '#/components/parameters/NameParam'
@@ -644,8 +636,7 @@ paths:
       description: >-
         Deletes the specified service. Any external load balancers provisioned
         for a LoadBalancer-type service will also be deprovisioned.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/NamespaceParam'
         - $ref: '#/components/parameters/NameParam'
