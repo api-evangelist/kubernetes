@@ -22,7 +22,8 @@ apis:
       - url: >-
           https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json
         type: OpenAPI
-      - url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
+      - url: 
+          https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
         type: OpenAPIRepository
       - url: https://kubernetes.io/docs/reference/access-authn-authz/
         type: Authentication
@@ -161,7 +162,8 @@ common:
   - url: https://github.com/kubernetes/kubernetes/security/policy
     name: Security Policy
     type: SecurityPolicy
-    description: Information about reporting security vulnerabilities in Kubernetes.
+    description: Information about reporting security vulnerabilities in 
+      Kubernetes.
   - url: https://www.cncf.io/projects/kubernetes/
     name: CNCF Project Page
     type: Foundation
@@ -177,15 +179,18 @@ common:
   - url: https://kubernetes.io/docs/setup/
     name: Getting Started
     type: GettingStarted
-    description: Documentation for setting up and configuring Kubernetes clusters.
+    description: Documentation for setting up and configuring Kubernetes 
+      clusters.
   - url: https://kubernetes.io/docs/tutorials/
     name: Tutorials
     type: Tutorials
-    description: Hands-on tutorials covering various Kubernetes topics and use cases.
+    description: Hands-on tutorials covering various Kubernetes topics and use 
+      cases.
   - url: https://kubernetes.io/case-studies/
     name: Case Studies
     type: CaseStudies
-    description: Real-world case studies of organizations using Kubernetes in production.
+    description: Real-world case studies of organizations using Kubernetes in 
+      production.
   - url: https://kubernetes.io/community/code-of-conduct/
     name: Code of Conduct
     type: CodeOfConduct
@@ -206,14 +211,11 @@ created: '2025-06-05'
 modified: '2026-03-18'
 position: Consuming
 description: >-
-  Kubernetes, also known as K8s, is an open source system for automating
-  deployment, scaling, and management of containerized applications. It groups
-  containers that make up an application into logical units for easy management
-  and discovery. Kubernetes builds upon 15 years of experience of running
-  production workloads at Google, combined with best-of-breed ideas and
-  practices from the community. Originally designed by Google, Kubernetes is now
-  maintained by the Cloud Native Computing Foundation (CNCF) as a graduated
-  project.
+  Kubernetes, also known as K8s, is an open source system for automating deployment,
+  scaling, and management of containerized applications. It groups containers that
+  make up an application into logical units for easy management and discovery. Kubernetes
+  builds upon 15 years of experience of running production workloads at Google, combined
+  with best-of-breed ideas and practices from the community.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
