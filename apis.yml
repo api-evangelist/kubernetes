@@ -203,7 +203,7 @@ common:
   - type: JSON-LD
     url: json-ld/kubernetes-context.jsonld
 created: '2025-06-05'
-modified: '2026-03-18'
+modified: '2026-04-28'
 position: Consuming
 description: >-
   Kubernetes, also known as K8s, is an open source system for automating deployment,
