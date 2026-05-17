@@ -52,7 +52,7 @@ tags:
   - Open Source
   - Orchestration
   - Scaling
-type: Contract
+kind: contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
@@ -136,7 +136,7 @@ common:
       communication.
   - url: https://slack.k8s.io
     name: Slack Signup
-    type: Signup
+    type: SignUp
     description: Invitation link to join the Kubernetes Slack workspace.
   - url: https://www.youtube.com/@KubernetesCommunity
     name: YouTube
@@ -200,7 +200,7 @@ common:
       removing APIs, features, and flags across versions.
   - type: JSONSchema
     url: json-schema/kubernetes-resource-schema.json
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/kubernetes-context.jsonld
 created: '2025-06-05'
 modified: '2026-04-28'
