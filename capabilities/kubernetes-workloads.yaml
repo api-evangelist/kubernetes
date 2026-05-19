@@ -1,0 +1,483 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kubernetes API — Workloads
+  description: 'Kubernetes API — Workloads. 13 operations. Lead operation: Kubernetes List pods in a namespace. Self-contained
+    Naftiko capability covering one Kubernetes business surface.'
+  tags:
+  - Kubernetes
+  - Workloads
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    KUBERNETES_API_KEY: KUBERNETES_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: kubernetes-workloads
+    baseUri: https://kubernetes.default.svc
+    description: Kubernetes API — Workloads business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-namespaces-namespace-pods
+      path: /api/v1/namespaces/{namespace}/pods
+      operations:
+      - name: listnamespacedpods
+        method: GET
+        description: Kubernetes List pods in a namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createnamespacedpod
+        method: POST
+        description: Kubernetes Create a pod
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-namespaces-namespace-pods-name
+      path: /api/v1/namespaces/{namespace}/pods/{name}
+      operations:
+      - name: getnamespacedpod
+        method: GET
+        description: Kubernetes Get a pod
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: replacenamespacedpod
+        method: PUT
+        description: Kubernetes Replace a pod
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletenamespacedpod
+        method: DELETE
+        description: Kubernetes Delete a pod
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-namespaces-namespace-pods-name-log
+      path: /api/v1/namespaces/{namespace}/pods/{name}/log
+      operations:
+      - name: readnamespacedpodlog
+        method: GET
+        description: Kubernetes Read pod logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: container
+          in: query
+          type: string
+          description: Name of the container to read logs from. Defaults to only container if there is only one, otherwise
+            required.
+        - name: follow
+          in: query
+          type: boolean
+          description: Whether to stream log output. If false, returns current log snapshot.
+        - name: tailLines
+          in: query
+          type: integer
+          description: Number of lines from the end of the log to retrieve.
+        - name: sinceSeconds
+          in: query
+          type: integer
+          description: Only return logs newer than a relative duration in seconds.
+    - name: apis-apps-v1-namespaces-namespace-deployments
+      path: /apis/apps/v1/namespaces/{namespace}/deployments
+      operations:
+      - name: listnamespaceddeployments
+        method: GET
+        description: Kubernetes List deployments in a namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createnamespaceddeployment
+        method: POST
+        description: Kubernetes Create a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: apis-apps-v1-namespaces-namespace-deployments-name
+      path: /apis/apps/v1/namespaces/{namespace}/deployments/{name}
+      operations:
+      - name: getnamespaceddeployment
+        method: GET
+        description: Kubernetes Get a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: replacenamespaceddeployment
+        method: PUT
+        description: Kubernetes Replace a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletenamespaceddeployment
+        method: DELETE
+        description: Kubernetes Delete a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: apis-apps-v1-namespaces-namespace-deployments-name-scale
+      path: /apis/apps/v1/namespaces/{namespace}/deployments/{name}/scale
+      operations:
+      - name: getnamespaceddeploymentscale
+        method: GET
+        description: Kubernetes Get deployment scale
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: replacenamespaceddeploymentscale
+        method: PUT
+        description: Kubernetes Scale a deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.KUBERNETES_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: kubernetes-workloads-rest
+    port: 8080
+    description: REST adapter for Kubernetes API — Workloads. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/v1/namespaces/{namespace}/pods
+      name: api-v1-namespaces-namespace-pods
+      description: REST surface for api-v1-namespaces-namespace-pods.
+      operations:
+      - method: GET
+        name: listnamespacedpods
+        description: Kubernetes List pods in a namespace
+        call: kubernetes-workloads.listnamespacedpods
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createnamespacedpod
+        description: Kubernetes Create a pod
+        call: kubernetes-workloads.createnamespacedpod
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/namespaces/{namespace}/pods/{name}
+      name: api-v1-namespaces-namespace-pods-name
+      description: REST surface for api-v1-namespaces-namespace-pods-name.
+      operations:
+      - method: GET
+        name: getnamespacedpod
+        description: Kubernetes Get a pod
+        call: kubernetes-workloads.getnamespacedpod
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: replacenamespacedpod
+        description: Kubernetes Replace a pod
+        call: kubernetes-workloads.replacenamespacedpod
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletenamespacedpod
+        description: Kubernetes Delete a pod
+        call: kubernetes-workloads.deletenamespacedpod
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/namespaces/{namespace}/pods/{name}/log
+      name: api-v1-namespaces-namespace-pods-name-log
+      description: REST surface for api-v1-namespaces-namespace-pods-name-log.
+      operations:
+      - method: GET
+        name: readnamespacedpodlog
+        description: Kubernetes Read pod logs
+        call: kubernetes-workloads.readnamespacedpodlog
+        with:
+          container: rest.container
+          follow: rest.follow
+          tailLines: rest.tailLines
+          sinceSeconds: rest.sinceSeconds
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apis/apps/v1/namespaces/{namespace}/deployments
+      name: apis-apps-v1-namespaces-namespace-deployments
+      description: REST surface for apis-apps-v1-namespaces-namespace-deployments.
+      operations:
+      - method: GET
+        name: listnamespaceddeployments
+        description: Kubernetes List deployments in a namespace
+        call: kubernetes-workloads.listnamespaceddeployments
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createnamespaceddeployment
+        description: Kubernetes Create a deployment
+        call: kubernetes-workloads.createnamespaceddeployment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apis/apps/v1/namespaces/{namespace}/deployments/{name}
+      name: apis-apps-v1-namespaces-namespace-deployments-name
+      description: REST surface for apis-apps-v1-namespaces-namespace-deployments-name.
+      operations:
+      - method: GET
+        name: getnamespaceddeployment
+        description: Kubernetes Get a deployment
+        call: kubernetes-workloads.getnamespaceddeployment
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: replacenamespaceddeployment
+        description: Kubernetes Replace a deployment
+        call: kubernetes-workloads.replacenamespaceddeployment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletenamespaceddeployment
+        description: Kubernetes Delete a deployment
+        call: kubernetes-workloads.deletenamespaceddeployment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/apis/apps/v1/namespaces/{namespace}/deployments/{name}/scale
+      name: apis-apps-v1-namespaces-namespace-deployments-name-scale
+      description: REST surface for apis-apps-v1-namespaces-namespace-deployments-name-scale.
+      operations:
+      - method: GET
+        name: getnamespaceddeploymentscale
+        description: Kubernetes Get deployment scale
+        call: kubernetes-workloads.getnamespaceddeploymentscale
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: replacenamespaceddeploymentscale
+        description: Kubernetes Scale a deployment
+        call: kubernetes-workloads.replacenamespaceddeploymentscale
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: kubernetes-workloads-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Kubernetes API — Workloads. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: kubernetes-list-pods-namespace
+      description: Kubernetes List pods in a namespace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kubernetes-workloads.listnamespacedpods
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-create-pod
+      description: Kubernetes Create a pod
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: kubernetes-workloads.createnamespacedpod
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-get-pod
+      description: Kubernetes Get a pod
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kubernetes-workloads.getnamespacedpod
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-replace-pod
+      description: Kubernetes Replace a pod
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: kubernetes-workloads.replacenamespacedpod
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-delete-pod
+      description: Kubernetes Delete a pod
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: kubernetes-workloads.deletenamespacedpod
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-read-pod-logs
+      description: Kubernetes Read pod logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kubernetes-workloads.readnamespacedpodlog
+      with:
+        container: tools.container
+        follow: tools.follow
+        tailLines: tools.tailLines
+        sinceSeconds: tools.sinceSeconds
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-list-deployments-namespace
+      description: Kubernetes List deployments in a namespace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kubernetes-workloads.listnamespaceddeployments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-create-deployment
+      description: Kubernetes Create a deployment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: kubernetes-workloads.createnamespaceddeployment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-get-deployment
+      description: Kubernetes Get a deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kubernetes-workloads.getnamespaceddeployment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-replace-deployment
+      description: Kubernetes Replace a deployment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: kubernetes-workloads.replacenamespaceddeployment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-delete-deployment
+      description: Kubernetes Delete a deployment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: kubernetes-workloads.deletenamespaceddeployment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-get-deployment-scale
+      description: Kubernetes Get deployment scale
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kubernetes-workloads.getnamespaceddeploymentscale
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: kubernetes-scale-deployment
+      description: Kubernetes Scale a deployment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: kubernetes-workloads.replacenamespaceddeploymentscale
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

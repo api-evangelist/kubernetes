@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kubernetes API — Events
+  description: 'Kubernetes API — Events. 1 operations. Lead operation: Kubernetes List events in a namespace. Self-contained
+    Naftiko capability covering one Kubernetes business surface.'
+  tags:
+  - Kubernetes
+  - Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    KUBERNETES_API_KEY: KUBERNETES_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: kubernetes-events
+    baseUri: https://kubernetes.default.svc
+    description: Kubernetes API — Events business capability. Self-contained, no shared references.
+    resources:
+    - name: apis-events.k8s.io-v1-namespaces-namespace-events
+      path: /apis/events.k8s.io/v1/namespaces/{namespace}/events
+      operations:
+      - name: listnamespacedevents
+        method: GET
+        description: Kubernetes List events in a namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.KUBERNETES_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: kubernetes-events-rest
+    port: 8080
+    description: REST adapter for Kubernetes API — Events. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/apis/events-k8s-io/v1/namespaces/{namespace}/events
+      name: apis-events-k8s-io-v1-namespaces-namespace-events
+      description: REST surface for apis-events.k8s.io-v1-namespaces-namespace-events.
+      operations:
+      - method: GET
+        name: listnamespacedevents
+        description: Kubernetes List events in a namespace
+        call: kubernetes-events.listnamespacedevents
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: kubernetes-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Kubernetes API — Events. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: kubernetes-list-events-namespace
+      description: Kubernetes List events in a namespace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: kubernetes-events.listnamespacedevents
+      outputParameters:
+      - type: object
+        mapping: $.
