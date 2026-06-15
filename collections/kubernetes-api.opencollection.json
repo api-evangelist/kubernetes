@@ -1,0 +1,1078 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubernetes API",
+    "version": "v1.32.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces",
+            "params": [
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token returned in a previous response's metadata.continue field. Use to retrieve the next page of results."
+              },
+              {
+                "name": "resourceVersion",
+                "value": "",
+                "type": "query",
+                "description": "When specified with a watch call, shows changes that occur after the specified resourceVersion. When specified in a list request, returns results at least as new as the specified resourceVersion."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all namespaces in the cluster. Namespaces provide a mechanism for isolating groups of resources within a single cluster."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new namespace in the cluster. Namespaces provide a scope for names and allow cluster resources to be divided among multiple users."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Get a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Returns the specified namespace object including its current status, labels, annotations, and resource quotas."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Replace a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the specified namespace object. The entire resource is replaced with the provided body; use PATCH for partial updates."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Delete a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Deletes the specified namespace and all resources contained within it. The namespace enters a Terminating state while resources are being removed, and is fully deleted once all contained resources are gone."
+        },
+        {
+          "info": {
+            "name": "Kubernetes List nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/nodes",
+            "params": [
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all nodes in the cluster. Nodes are the worker machines in Kubernetes that run containerized applications. Each node contains the services necessary to run pods and is managed by the control plane."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Get a node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/nodes/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Returns the specified node including its capacity, allocatable resources, conditions (Ready, MemoryPressure, DiskPressure), and system information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workloads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List pods in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/pods",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token returned in a previous response's metadata.continue field. Use to retrieve the next page of results."
+              },
+              {
+                "name": "resourceVersion",
+                "value": "",
+                "type": "query",
+                "description": "When specified with a watch call, shows changes that occur after the specified resourceVersion. When specified in a list request, returns results at least as new as the specified resourceVersion."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all pods in the specified namespace. Pods are the smallest deployable units of computing that you can create and manage in Kubernetes. Each pod runs one or more containers."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/pods",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new pod in the specified namespace. The API server schedules the pod to a node based on resource requirements, node selectors, affinity rules, and available capacity."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Get a pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/pods/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Returns the specified pod object including its current phase, container statuses, resource allocations, and scheduling information."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Replace a pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/pods/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the specified pod with the provided definition. Note that many pod fields are immutable after creation; use Deployments for managing pod lifecycle and updates."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Delete a pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/pods/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              },
+              {
+                "name": "gracePeriodSeconds",
+                "value": "",
+                "type": "query",
+                "description": "Duration in seconds to wait before forcefully terminating the resource. Defaults to the resource's terminationGracePeriodSeconds setting."
+              }
+            ]
+          },
+          "docs": "Deletes the specified pod. By default, Kubernetes sends SIGTERM to the container and waits for the grace period before forcefully terminating it. Running pods will be restarted by their controller (e.g. Deployment)."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Read pod logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/pods/:name/log",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query",
+                "description": "Name of the container to read logs from. Defaults to only container if there is only one, otherwise required."
+              },
+              {
+                "name": "follow",
+                "value": "",
+                "type": "query",
+                "description": "Whether to stream log output. If false, returns current log snapshot."
+              },
+              {
+                "name": "tailLines",
+                "value": "",
+                "type": "query",
+                "description": "Number of lines from the end of the log to retrieve."
+              },
+              {
+                "name": "sinceSeconds",
+                "value": "",
+                "type": "query",
+                "description": "Only return logs newer than a relative duration in seconds."
+              }
+            ]
+          },
+          "docs": "Returns the log output from a container in the specified pod. Supports streaming with the follow parameter, filtering by timestamps, and reading from specific containers in multi-container pods."
+        },
+        {
+          "info": {
+            "name": "Kubernetes List deployments in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/apis/apps/v1/namespaces/:namespace/deployments",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all deployments in the specified namespace. Deployments provide declarative updates for Pods and ReplicaSets, enabling rolling updates, rollbacks, and scaling of stateless applications."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/apis/apps/v1/namespaces/:namespace/deployments",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new deployment in the specified namespace. Deployments manage a set of identical pods based on a pod template and ensure the desired number of replicas are running at all times."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Get a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/apis/apps/v1/namespaces/:namespace/deployments/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Returns the specified deployment including its current rollout status, desired replica count, available replicas, and update strategy."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Replace a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://kubernetes.default.svc/apis/apps/v1/namespaces/:namespace/deployments/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the specified deployment configuration. Updating the pod template spec triggers a rolling update of the managed pods according to the deployment's update strategy."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Delete a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://kubernetes.default.svc/apis/apps/v1/namespaces/:namespace/deployments/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Deletes the specified deployment and its managed ReplicaSet and pods. The pods are terminated gracefully according to the configured termination grace period."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Get deployment scale",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/apis/apps/v1/namespaces/:namespace/deployments/:name/scale",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Returns the current scale subresource for the specified deployment, including desired and actual replica counts."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Scale a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://kubernetes.default.svc/apis/apps/v1/namespaces/:namespace/deployments/:name/scale",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the replica count of the specified deployment by replacing the scale subresource. The deployment controller adjusts the number of running pods to match the new desired replica count."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List services in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all services in the specified namespace. Services provide stable network identities and load balancing for pods, abstracting away individual pod IP addresses."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new service in the specified namespace. Services can be of type ClusterIP, NodePort, LoadBalancer, or ExternalName, each providing different mechanisms for exposing pods to traffic."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Get a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Returns the specified service including its cluster IP, selector, ports, and current endpoint assignments."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Replace a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the specified service configuration. Updates to the selector immediately affect which pods the service routes traffic to."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Delete a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Deletes the specified service. Any external load balancers provisioned for a LoadBalancer-type service will also be deprovisioned."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List ConfigMaps in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/configmaps",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all ConfigMaps in the specified namespace. ConfigMaps allow you to decouple configuration from pod images so that containerized applications can be made portable."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a ConfigMap",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/configmaps",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new ConfigMap in the specified namespace. ConfigMaps store non-confidential data as key-value pairs that can be consumed as environment variables, command-line arguments, or configuration files."
+        },
+        {
+          "info": {
+            "name": "Kubernetes List Secrets in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/secrets",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of Secrets in the specified namespace. Secrets store sensitive information such as passwords, OAuth tokens, and SSH keys, with access controlled via RBAC."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/secrets",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Secret in the specified namespace. Secret data is stored base64-encoded and can be mounted as files or exposed as environment variables in pods."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RBAC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List ClusterRoles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/apis/rbac.authorization.k8s.io/v1/clusterroles",
+            "params": [
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all ClusterRoles in the cluster. ClusterRoles define a set of permissions applicable across the entire cluster, unlike namespace-scoped Roles."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a ClusterRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/apis/rbac.authorization.k8s.io/v1/clusterroles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new ClusterRole defining cluster-wide permissions. ClusterRoles are bound to subjects (users, groups, service accounts) via ClusterRoleBindings to grant cluster-wide access."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Autoscaling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List HorizontalPodAutoscalers in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all HorizontalPodAutoscalers (HPAs) in the specified namespace. HPAs automatically scale the number of pod replicas based on observed CPU utilization, memory usage, or custom metrics."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a HorizontalPodAutoscaler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new HorizontalPodAutoscaler in the specified namespace. Configure target resource utilization thresholds and min/max replica bounds to enable automatic workload scaling."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List events in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/apis/events.k8s.io/v1/namespaces/:namespace/events",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of events in the specified namespace. Events are records of occurrences that happened in the cluster, such as pod scheduling decisions, container restarts, resource quota violations, and node conditions changes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
