@@ -106,7 +106,7 @@ common:
     description: Information about the Kubernetes community including how to get involved and communication channels.
   - url: https://discuss.kubernetes.io/
     name: Discussion Forum
-    type: Forum
+    type: Forums
     description: Official Kubernetes community forum for discussions, announcements, and user support.
   - url: https://kubernetes.slack.com
     name: Slack
@@ -114,7 +114,7 @@ common:
     description: Kubernetes Slack workspace with 170+ channels for real-time community communication.
   - url: https://slack.k8s.io
     name: Slack Signup
-    type: SignUp
+    type: Signup
     description: Invitation link to join the Kubernetes Slack workspace.
   - url: https://www.youtube.com/@KubernetesCommunity
     name: YouTube
