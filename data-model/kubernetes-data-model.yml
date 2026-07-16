@@ -1,0 +1,77 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/kubernetes-api-openapi.yml
+docs: https://kubernetes.io/docs/reference/kubernetes-api/
+description: >-
+  Entity-relationship graph derived from the captured OpenAPI schemas ($ref links
+  and id/selector reference fields). Kubernetes objects are namespaced (or
+  cluster-scoped), share the ObjectMeta envelope, and reference each other through
+  ownerReferences, label selectors, and typed references rather than opaque id
+  prefixes.
+identity:
+  scheme: metadata.name (unique within namespace + group/version/resource)
+  cross_object_reference: ownerReferences, labelSelector, typed *Ref fields
+  cluster_scoped: [Namespace, Node, ClusterRole, PersistentVolume]
+entities:
+  - name: Namespace
+    scope: cluster
+    contains: [Pod, Deployment, Service, ConfigMap, Secret, Event, HorizontalPodAutoscaler]
+  - name: Pod
+    scope: namespaced
+  - name: Deployment
+    scope: namespaced
+  - name: Service
+    scope: namespaced
+  - name: ConfigMap
+    scope: namespaced
+  - name: Secret
+    scope: namespaced
+  - name: Node
+    scope: cluster
+  - name: ClusterRole
+    scope: cluster
+  - name: HorizontalPodAutoscaler
+    scope: namespaced
+  - name: Event
+    scope: namespaced
+relationships:
+  - from: Pod
+    to: Namespace
+    type: belongs_to
+    via: metadata.namespace
+  - from: Deployment
+    to: Pod
+    type: has_many
+    via: spec.selector (LabelSelector) → PodTemplateSpec
+  - from: Deployment
+    to: Scale
+    type: has_one
+    via: /scale subresource
+  - from: Service
+    to: Pod
+    type: has_many
+    via: spec.selector (label match)
+  - from: Pod
+    to: ConfigMap
+    type: references
+    via: spec.containers[].envFrom / volumes (configMap)
+  - from: Pod
+    to: Secret
+    type: references
+    via: spec.containers[].envFrom / volumes (secret) / imagePullSecrets
+  - from: Pod
+    to: Node
+    type: belongs_to
+    via: spec.nodeName / status
+  - from: HorizontalPodAutoscaler
+    to: Deployment
+    type: targets
+    via: spec.scaleTargetRef
+  - from: Event
+    to: ObjectReference
+    type: references
+    via: involvedObject
+  - from: "*"
+    to: "*"
+    type: owned_by
+    via: metadata.ownerReferences

@@ -1,0 +1,53 @@
+generated: '2026-06-20'
+method: derived
+format: kubernetes-status
+source: openapi/kubernetes-api-openapi.yml
+docs: https://kubernetes.io/docs/reference/using-api/api-concepts/#response-status-kind
+description: >-
+  Kubernetes does not use RFC 9457 problem+json. Error (and some success)
+  responses are returned as a Status object (kind: Status, status: Failure)
+  carrying an integer HTTP code, a machine-readable reason (e.g. NotFound,
+  AlreadyExists, Invalid, Forbidden, Conflict), and a human-readable message,
+  optionally with a details block. The problems[] below are derived from the
+  4xx responses present in the captured OpenAPI; reason strings follow the
+  upstream metav1.StatusReason vocabulary.
+envelope:
+  kind: Status
+  media_type: application/json
+  fields: [apiVersion, kind, status, code, reason, message, details]
+problems:
+  - status: 400
+    reason: BadRequest
+    title: Bad request — invalid resource specification
+    remediation: >-
+      The request body or parameters could not be parsed or validated. Check the
+      object schema and required fields.
+    source_response: openapi/kubernetes-api-openapi.yml#/components/responses/BadRequest
+  - status: 401
+    reason: Unauthorized
+    title: Unauthorized — missing or invalid authentication credentials
+    remediation: >-
+      Provide a valid bearer token or client certificate. Verify the kubeconfig
+      credentials or service-account token are current.
+    source_response: openapi/kubernetes-api-openapi.yml#/components/responses/Unauthorized
+  - status: 403
+    reason: Forbidden
+    title: Forbidden — authenticated but not authorized (RBAC)
+    remediation: >-
+      The subject lacks RBAC permission for the verb/resource/namespace. Grant a
+      Role/ClusterRole binding covering the operation.
+    note: >-
+      Not present as a named response in the captured spec but returned by the
+      API server whenever authorization (RBAC/webhook) denies the request.
+  - status: 404
+    reason: NotFound
+    title: Not found — the specified resource does not exist
+    remediation: Verify the resource name, namespace, and apiVersion/kind (group/version/resource).
+    source_response: openapi/kubernetes-api-openapi.yml#/components/responses/NotFound
+  - status: 409
+    reason: Conflict / AlreadyExists
+    title: Conflict — resourceVersion conflict or resource already exists
+    remediation: >-
+      For creates, the named object already exists. For updates, the object was
+      modified concurrently — re-read to get the current resourceVersion and retry.
+    source_response: openapi/kubernetes-api-openapi.yml#/components/responses/Conflict

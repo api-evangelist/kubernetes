@@ -1,0 +1,39 @@
+generated: '2026-06-20'
+method: searched
+source: https://kubernetes.io/releases/
+docs: https://kubernetes.io/releases/
+changelog_url: https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG
+description: >-
+  Kubernetes release changelog. The project ships ~3 time-based minor releases
+  per year; per-release detail lives in the sig-release CHANGELOG and each
+  version's release notes. Recent window only.
+scheme: semver
+current_version: v1.36.2
+entries:
+  - version: '1.36'
+    name: Haru
+    date: '2026-04-22'
+    latest_patch: 1.36.2
+    highlights:
+      - User namespaces graduate to GA
+      - Fine-grained kubelet API authorization graduates
+      - Declarative validation graduates to GA
+      - In-place vertical scaling for pod-level resources
+      - Server-side sharded list and watch
+    breaking: false
+  - version: '1.35'
+    name: Timbernetes (The World Tree)
+    date: '2025-12-17'
+    latest_patch: 1.35.6
+    highlights:
+      - In-place pod resize graduates to stable
+      - Job managed-by goes GA
+      - Workload-aware scheduling introduced
+      - Fine-grained supplemental groups control
+    breaking: false
+  - version: '1.34'
+    date: '2025-08'
+    latest_patch: 1.34.9
+    highlights:
+      - Prior stable release in the currently-supported window
+    breaking: false

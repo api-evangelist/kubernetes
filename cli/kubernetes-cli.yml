@@ -1,0 +1,57 @@
+generated: '2026-06-20'
+method: searched
+source: https://kubernetes.io/docs/reference/kubectl/
+description: >-
+  kubectl is the first-party Kubernetes command-line client. It talks to the
+  control-plane API server (using kubeconfig credentials) to inspect, create,
+  update, and delete cluster resources, and to run debugging and administrative
+  flows. The binary is catalogued in packages/ conceptually; this file captures
+  its command surface.
+name: kubectl
+docs: https://kubernetes.io/docs/reference/kubectl/
+reference: https://kubernetes.io/docs/reference/kubectl/generated/kubectl/
+cheatsheet: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+install:
+  - method: krew-plugins
+    note: kubectl plugins are managed via the krew plugin manager (https://krew.sigs.k8s.io/)
+  - method: package-manager
+    examples:
+      - "brew install kubectl"
+      - "apt-get install -y kubectl (via pkgs.k8s.io apt repo)"
+      - "choco install kubernetes-cli"
+  - method: direct-download
+    note: curl the versioned binary from dl.k8s.io (https://kubernetes.io/docs/tasks/tools/)
+config: uses ~/.kube/config (KUBECONFIG) for cluster endpoints and credentials
+command_groups:
+  - group: Basic / Beginner
+    commands: [create, expose, run, set]
+  - group: Basic / Intermediate
+    commands: [explain, get, edit, delete]
+  - group: Deploy
+    commands: [rollout, scale, autoscale]
+  - group: Cluster Management
+    commands: [certificate, cluster-info, top, cordon, uncordon, drain, taint]
+  - group: Troubleshooting & Debugging
+    commands: [describe, logs, attach, exec, port-forward, proxy, cp, auth, debug, events]
+  - group: Advanced (declarative)
+    commands: [diff, apply, patch, replace, wait, kustomize]
+  - group: Settings
+    commands: [label, annotate, completion]
+  - group: Other
+    commands: [api-resources, api-versions, config, plugin, version, help]
+key_flows:
+  - name: apply-manifest
+    example: kubectl apply -f deployment.yaml
+    description: Declaratively create/update resources with server-side field ownership.
+  - name: tail-logs
+    example: kubectl logs -f deploy/my-app
+    description: Stream logs from a workload's pods.
+  - name: exec-into-pod
+    example: kubectl exec -it my-pod -- /bin/sh
+    description: Open an interactive shell in a running container.
+  - name: port-forward
+    example: kubectl port-forward svc/my-svc 8080:80
+    description: Forward a local port to a service/pod for local access.
+  - name: rollout-status
+    example: kubectl rollout status deploy/my-app
+    description: Watch a deployment roll out and roll back if needed.

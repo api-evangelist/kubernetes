@@ -1,0 +1,54 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/kubernetes-api-openapi.yml
+description: >-
+  Industry / cross-cutting standard conformance for the Kubernetes API, derived
+  from the captured OpenAPI plus documented API conventions. Kubernetes defines
+  its own strong resource conventions rather than adopting most web-API cross-cutting
+  standards (its error model is the Status object, not RFC 9457).
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      Core spec declares http bearer + mutualTLS, not oauth2 flows. Real clusters
+      can integrate OIDC (bearer JWT) via the authentication config, but the API
+      server itself is not an OAuth2 authorization server.
+  - id: oidc
+    conforms: partial
+    evidence: >-
+      The API server supports OIDC token authentication as a configurable
+      authenticator; ID tokens are presented as bearer credentials.
+  - id: mutual-tls
+    conforms: true
+    evidence: openapi securityScheme clientCertificate (type mutualTLS)
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use the Kubernetes Status object (application/json) with code/reason/message,
+      not application/problem+json.
+  - id: json-patch
+    conforms: true
+    evidence: >-
+      The API server supports JSON Patch (RFC 6902), JSON Merge Patch (RFC 7386),
+      strategic-merge-patch, and server-side apply via Content-Type on PATCH.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      List operations support chunked pagination via the limit and continue
+      parameters (components.parameters Limit, Continue).
+  - id: resource-versioning
+    conforms: true
+    evidence: >-
+      Optimistic concurrency via resourceVersion; watch semantics keyed off it
+      (components.parameters ResourceVersion, Watch).
+  - id: label-field-selectors
+    conforms: true
+    evidence: components.parameters LabelSelector, FieldSelector on list operations
+  - id: fhir-r4
+    conforms: false
+  - id: scim2
+    conforms: false
+  - id: odata
+    conforms: false
+  - id: json-api
+    conforms: false

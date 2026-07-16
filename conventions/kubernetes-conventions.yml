@@ -1,0 +1,68 @@
+generated: '2026-06-20'
+method: searched
+source: https://kubernetes.io/docs/reference/using-api/api-concepts/
+description: >-
+  Cross-cutting request/response semantics of the Kubernetes API, captured from
+  the API Concepts reference and derived from the OpenAPI. Kubernetes defines its
+  own resource-oriented conventions (group/version/resource, resourceVersion,
+  watch, server-side apply) rather than the typical web-API cross-cutting patterns.
+authentication:
+  style: bearer-token-or-mtls
+  detail: >-
+    Bearer service-account/user JWT (Authorization: Bearer) or client-certificate
+    mutual TLS; real clusters also support OIDC and webhook token auth.
+  ref: authentication/kubernetes-authentication.yml
+authorization:
+  model: rbac
+  detail: Verb/resource/namespace checked against Role/ClusterRole bindings before admission.
+resource_model:
+  addressing: /apis/{group}/{version}/namespaces/{namespace}/{resource}/{name}
+  core_group_path: /api/v1/...
+  kinds: every object carries apiVersion + kind + metadata + spec + status
+pagination:
+  style: chunked
+  request_params: [limit, continue]
+  response_fields: [metadata.continue, metadata.remainingItemCount]
+  detail: >-
+    List calls return a bounded chunk plus an opaque continue token to fetch the
+    next chunk; the token encodes the resourceVersion of the consistent snapshot.
+concurrency:
+  mechanism: optimistic
+  field: metadata.resourceVersion
+  detail: >-
+    Updates must send the current resourceVersion; a stale value yields 409 Conflict.
+watch:
+  param: watch=true
+  detail: >-
+    Streams add/modify/delete events over a long-lived connection starting from a
+    given resourceVersion; also exposed as the AsyncAPI watch channels.
+  ref: asyncapi/kubernetes-watch-asyncapi.yml
+patch:
+  strategies:
+    - {media_type: application/json-patch+json, spec: RFC 6902}
+    - {media_type: application/merge-patch+json, spec: RFC 7386}
+    - {media_type: application/strategic-merge-patch+json, spec: Kubernetes strategic merge}
+    - {media_type: application/apply-patch+yaml, spec: server-side apply (field ownership)}
+selectors:
+  label_selector: labelSelector query param (set-based and equality)
+  field_selector: fieldSelector query param
+dry_run:
+  param: dryRun=All
+  detail: Validates and runs admission without persisting.
+field_management:
+  server_side_apply: true
+  detail: metadata.managedFields tracks per-field ownership for apply.
+versioning:
+  style: group-version (alpha/beta/stable)
+  ref: lifecycle/kubernetes-lifecycle.yml
+error_envelope:
+  shape: "Kubernetes Status object (kind: Status, status: Failure, code, reason, message)"
+  ref: errors/kubernetes-problem-types.yml
+rate_limiting:
+  client_side: >-
+    API Priority and Fairness (APF) governs server-side concurrency; clients see
+    429 Too Many Requests with a Retry-After header when flow-controlled.
+  ref: rate-limits/kubernetes-rate-limits.yml
+content_negotiation:
+  formats: [application/json, application/yaml, application/vnd.kubernetes.protobuf]
+  detail: The API server can serialize responses as JSON, YAML, or protobuf via Accept.

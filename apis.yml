@@ -52,6 +52,30 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: Packages
+    url: packages/kubernetes-packages.yml
+  - type: WellKnown
+    url: well-known/kubernetes-well-known.yml
+  - type: MCPServer
+    url: mcp/kubernetes-mcp.yml
+  - type: LLMsTxt
+    url: llms/kubernetes-llms.txt
+  - type: Overlay
+    url: overlays/kubernetes-api-overlay.yaml
+  - type: Conformance
+    url: conformance/kubernetes-conformance.yml
+  - type: ErrorCatalog
+    url: errors/kubernetes-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/kubernetes-lifecycle.yml
+  - type: Conventions
+    url: conventions/kubernetes-conventions.yml
+  - type: ChangeLog
+    url: changelog/kubernetes-changelog.yml
+  - type: CLI
+    url: cli/kubernetes-cli.yml
+  - type: DataModel
+    url: data-model/kubernetes-data-model.yml
   - type: AgenticAccess
     url: agentic-access/kubernetes-agentic-access.yml
   - type: VulnerabilityDisclosure
@@ -181,7 +205,7 @@ common:
   - type: JSONLD
     url: json-ld/kubernetes-context.jsonld
 created: '2025-06-05'
-modified: '2026-05-19'
+modified: '2026-06-20'
 position: Consuming
 description: >-
   Kubernetes, also known as K8s, is an open source system for automating deployment, scaling, and management of

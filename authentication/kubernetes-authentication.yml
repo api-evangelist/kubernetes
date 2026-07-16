@@ -1,10 +1,18 @@
-generated: '2026-07-11'
-method: derived
+generated: '2026-06-20'
+method: searched
 source: openapi/kubernetes-api-openapi.yml
+docs: https://kubernetes.io/docs/reference/access-authn-authz/authentication/
 summary:
   types:
   - http
   - mutualTLS
+  strategies_documented:
+  - client-certificates
+  - bearer-tokens (service-account JWTs, static tokens)
+  - openid-connect (OIDC)
+  - webhook-token-authentication
+  - authenticating-proxy
+  authorization: RBAC (in addition to authentication)
 schemes:
 - name: bearerAuth
   type: http

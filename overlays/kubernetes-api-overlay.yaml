@@ -1,0 +1,35 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Kubernetes API
+  version: 1.0.0
+extends: openapi/kubernetes-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: kubernetes
+      x-apievangelist-tags:
+        - Cloud Native
+        - CNCF
+        - Orchestration
+        - Containers
+      x-apievangelist-artifacts:
+        packages: packages/kubernetes-packages.yml
+        authentication: authentication/kubernetes-authentication.yml
+        conventions: conventions/kubernetes-conventions.yml
+        errors: errors/kubernetes-problem-types.yml
+        lifecycle: lifecycle/kubernetes-lifecycle.yml
+        data-model: data-model/kubernetes-data-model.yml
+        cli: cli/kubernetes-cli.yml
+        changelog: changelog/kubernetes-changelog.yml
+  - target: $.info
+    update:
+      x-apievangelist-error-model: >-
+        Errors are returned as a Kubernetes Status object (kind: Status,
+        status: Failure) carrying an HTTP code, a machine-readable reason,
+        and a human-readable message — not RFC 9457 problem+json.
+  - target: $.components.securitySchemes
+    update:
+      x-apievangelist-auth-note: >-
+        Bearer tokens are service-account or user JWTs issued by the cluster;
+        client-certificate auth is mutual TLS against the cluster CA. Real
+        clusters also support OIDC and webhook token authentication.
