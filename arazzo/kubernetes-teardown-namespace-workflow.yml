@@ -1,0 +1,115 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Inventory and Tear Down a Namespace
+  summary: Record what a namespace contains, delete the namespace, and confirm it entered Terminating.
+  description: >-
+    Deleting a namespace cascades to everything inside it, so the destructive
+    call is worth an inventory first. The workflow lists the namespace's
+    deployments, services, and pods to produce a record of what is about to be
+    destroyed, deletes the namespace, and reads it back to confirm the API
+    server accepted the delete and moved it to the Terminating phase. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: teardown-namespace
+  summary: Inventory a namespace's workloads, then delete the namespace and confirm termination.
+  description: >-
+    Captures the deployments, services, and pods a namespace holds, deletes the
+    namespace so the cascade removes them all, and reads the namespace back to
+    observe the Terminating phase and its finalizers.
+  inputs:
+    type: object
+    required:
+    - namespace
+    properties:
+      namespace:
+        type: string
+        description: The namespace to inventory and delete.
+  steps:
+  - stepId: inventoryDeployments
+    description: >-
+      List the deployments about to be destroyed by the namespace cascade, so
+      the teardown leaves a record of the workloads that existed.
+    operationId: listNamespacedDeployments
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: limit
+      in: query
+      value: 500
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deployments: $response.body#/items
+  - stepId: inventoryServices
+    description: >-
+      List the services in the namespace. LoadBalancer services deprovision
+      their cloud load balancers as part of the cascade.
+    operationId: listNamespacedServices
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: limit
+      in: query
+      value: 500
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      services: $response.body#/items
+  - stepId: inventoryPods
+    description: >-
+      List the running pods so the record shows the live workload the teardown
+      is about to terminate.
+    operationId: listNamespacedPods
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: limit
+      in: query
+      value: 500
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      pods: $response.body#/items
+  - stepId: deleteNamespace
+    description: >-
+      Delete the namespace. Every resource it scopes is deleted with it; the
+      namespace stays in Terminating until the cascade completes.
+    operationId: deleteNamespace
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.namespace
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deletionTimestamp: $response.body#/metadata/deletionTimestamp
+      deletedNamespace: $response.body#/metadata/name
+  - stepId: confirmTerminating
+    description: >-
+      Read the namespace back to confirm it is Terminating. A namespace stuck
+      in this phase usually has a finalizer that has not been cleared.
+    operationId: getNamespace
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.namespace
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      phase: $response.body#/status/phase
+      finalizers: $response.body#/spec/finalizers
+  outputs:
+    deployments: $steps.inventoryDeployments.outputs.deployments
+    services: $steps.inventoryServices.outputs.services
+    pods: $steps.inventoryPods.outputs.pods
+    deletionTimestamp: $steps.deleteNamespace.outputs.deletionTimestamp
+    phase: $steps.confirmTerminating.outputs.phase

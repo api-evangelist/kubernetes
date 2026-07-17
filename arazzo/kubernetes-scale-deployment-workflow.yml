@@ -1,0 +1,131 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Scale a Deployment and Verify Replicas
+  summary: Read the current scale of a deployment, set a new replica count, and confirm the pods landed.
+  description: >-
+    Scaling through the scale subresource rather than replacing the whole
+    deployment avoids clobbering concurrent template changes. The workflow
+    confirms the deployment exists, reads the current scale, writes the new
+    desired replica count, and then lists the deployment's pods to observe the
+    result. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: scale-deployment
+  summary: Change a deployment's replica count via the scale subresource and verify.
+  description: >-
+    Resolves the deployment, reads its current scale for a before value,
+    replaces the scale with the desired replica count, and lists the pods
+    matching the deployment's label to confirm the change took effect.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - deploymentName
+    - replicas
+    properties:
+      namespace:
+        type: string
+        description: The namespace containing the deployment.
+      deploymentName:
+        type: string
+        description: The name of the deployment to scale.
+      replicas:
+        type: integer
+        description: The desired number of replicas to scale to.
+      labelSelector:
+        type: string
+        description: Label selector matching the deployment's pods (e.g. app=nginx).
+  steps:
+  - stepId: resolveDeployment
+    description: >-
+      Confirm the deployment exists and capture its current status before
+      changing the replica count.
+    operationId: getNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deploymentName: $response.body#/metadata/name
+      resourceVersion: $response.body#/metadata/resourceVersion
+      currentReplicas: $response.body#/status/replicas
+  - stepId: readScale
+    description: >-
+      Read the scale subresource to record the replica count the cluster
+      currently considers desired, before this workflow changes it.
+    operationId: getNamespacedDeploymentScale
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.resolveDeployment.outputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      previousDesiredReplicas: $response.body#/spec/replicas
+      previousActualReplicas: $response.body#/status/replicas
+      scaleResourceVersion: $response.body#/metadata/resourceVersion
+  - stepId: applyScale
+    description: >-
+      Replace the scale subresource with the new desired replica count. The
+      deployment controller adds or removes pods to converge on the new value.
+    operationId: replaceNamespacedDeploymentScale
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.resolveDeployment.outputs.deploymentName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: autoscaling/v1
+        kind: Scale
+        metadata:
+          name: $inputs.deploymentName
+          namespace: $inputs.namespace
+          resourceVersion: $steps.readScale.outputs.scaleResourceVersion
+        spec:
+          replicas: $inputs.replicas
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      desiredReplicas: $response.body#/spec/replicas
+      actualReplicas: $response.body#/status/replicas
+  - stepId: verifyPods
+    description: >-
+      List the pods carrying the deployment's label to observe the scaling
+      result. Pods may still be Pending immediately after scaling up.
+    operationId: listNamespacedPods
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: labelSelector
+      in: query
+      value: $inputs.labelSelector
+    - name: limit
+      in: query
+      value: 500
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      pods: $response.body#/items
+      firstPodPhase: $response.body#/items/0/status/phase
+  outputs:
+    previousDesiredReplicas: $steps.readScale.outputs.previousDesiredReplicas
+    desiredReplicas: $steps.applyScale.outputs.desiredReplicas
+    pods: $steps.verifyPods.outputs.pods

@@ -1,0 +1,165 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Roll Out a New Container Image
+  summary: Read a deployment, replace it with an updated image, then watch the rollout and its events.
+  description: >-
+    A rolling image update is the most frequent write an integrator makes
+    against a cluster. The workflow reads the current deployment to capture its
+    resourceVersion for optimistic concurrency, replaces it with the same spec
+    carrying the new image, reads it back to observe the rollout, and pulls the
+    namespace's events so a stalled rollout surfaces a reason rather than a
+    silent hang. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: rolling-update-deployment
+  summary: Update a deployment's container image and observe the resulting rollout.
+  description: >-
+    Fetches the deployment, replaces it with an updated pod template that
+    carries the new image, re-reads the deployment for rollout progress, and
+    lists namespace events to explain a rollout that has not converged.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - deploymentName
+    - appName
+    - image
+    - replicas
+    - containerPort
+    properties:
+      namespace:
+        type: string
+        description: The namespace containing the deployment.
+      deploymentName:
+        type: string
+        description: The name of the deployment to update.
+      appName:
+        type: string
+        description: The app label value used by the deployment's selector and pod template.
+      image:
+        type: string
+        description: The new container image to roll out.
+      replicas:
+        type: integer
+        description: Replica count to preserve on the replaced deployment.
+      containerPort:
+        type: integer
+        description: Container port to preserve on the replaced pod template.
+  steps:
+  - stepId: readDeployment
+    description: >-
+      Read the deployment to confirm it exists and capture its resourceVersion
+      so the replace can be rejected if another writer changed it first.
+    operationId: getNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deploymentName: $response.body#/metadata/name
+      resourceVersion: $response.body#/metadata/resourceVersion
+      generation: $response.body#/metadata/generation
+      previousReadyReplicas: $response.body#/status/readyReplicas
+  - stepId: applyNewImage
+    description: >-
+      Replace the deployment with the new image. Changing the pod template spec
+      triggers a rolling update governed by the deployment's update strategy.
+    operationId: replaceNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.readDeployment.outputs.deploymentName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: $inputs.deploymentName
+          namespace: $inputs.namespace
+          resourceVersion: $steps.readDeployment.outputs.resourceVersion
+          labels:
+            app: $inputs.appName
+        spec:
+          replicas: $inputs.replicas
+          selector:
+            matchLabels:
+              app: $inputs.appName
+          strategy:
+            type: RollingUpdate
+            rollingUpdate:
+              maxUnavailable: 0
+              maxSurge: 1
+          minReadySeconds: 10
+          revisionHistoryLimit: 10
+          template:
+            metadata:
+              labels:
+                app: $inputs.appName
+            spec:
+              containers:
+              - name: $inputs.appName
+                image: $inputs.image
+                imagePullPolicy: IfNotPresent
+                ports:
+                - name: http
+                  containerPort: $inputs.containerPort
+                  protocol: TCP
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedGeneration: $response.body#/metadata/generation
+      updatedResourceVersion: $response.body#/metadata/resourceVersion
+  - stepId: observeRollout
+    description: >-
+      Read the deployment back to compare observedGeneration against the new
+      generation and to report updated, ready, and available replica counts.
+    operationId: getNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.readDeployment.outputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      observedGeneration: $response.body#/status/observedGeneration
+      updatedReplicas: $response.body#/status/updatedReplicas
+      readyReplicas: $response.body#/status/readyReplicas
+      availableReplicas: $response.body#/status/availableReplicas
+  - stepId: readRolloutEvents
+    description: >-
+      List namespace events so a rollout that has not converged reports a cause
+      such as an image pull failure or insufficient node capacity.
+    operationId: listNamespacedEvents
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      events: $response.body#/items
+  outputs:
+    updatedGeneration: $steps.applyNewImage.outputs.updatedGeneration
+    observedGeneration: $steps.observeRollout.outputs.observedGeneration
+    readyReplicas: $steps.observeRollout.outputs.readyReplicas
+    events: $steps.readRolloutEvents.outputs.events

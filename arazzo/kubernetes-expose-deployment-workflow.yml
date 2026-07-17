@@ -1,0 +1,213 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Expose a Deployment Behind a Service
+  summary: Resolve a deployment, then create a fronting service or replace the existing one to match.
+  description: >-
+    Putting a stable address in front of a workload, written to be safe on a
+    re-run. The workflow reads the deployment to confirm the selector it should
+    target, lists the namespace's services to see whether one already fronts the
+    app, and branches: an absent service is created, and an existing one is
+    replaced so its selector and ports converge on the intended state. It reads
+    the service back for the assigned cluster IP. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: expose-deployment
+  summary: Create or reconcile the service that fronts a deployment's pods.
+  description: >-
+    Reads the deployment, looks for a service already selecting its pods, and
+    either creates the service or replaces it to match the desired ports and
+    type, then reads back the resulting cluster IP.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - deploymentName
+    - appName
+    - servicePort
+    - targetPort
+    properties:
+      namespace:
+        type: string
+        description: The namespace holding the deployment and the service.
+      deploymentName:
+        type: string
+        description: The deployment whose pods the service will route to.
+      serviceName:
+        type: string
+        description: Name for the service. Defaults to the app name by convention.
+      appName:
+        type: string
+        description: The app label value the service selector matches on.
+      servicePort:
+        type: integer
+        description: Port the service listens on.
+      targetPort:
+        type: integer
+        description: Port on the pod that traffic is forwarded to.
+      serviceType:
+        type: string
+        description: Service type — ClusterIP, NodePort, LoadBalancer, or ExternalName.
+      labelSelector:
+        type: string
+        description: Label selector used to find an existing service (e.g. app=nginx).
+  steps:
+  - stepId: resolveDeployment
+    description: >-
+      Read the deployment to confirm it exists and to capture the pod template
+      labels the service selector must match for traffic to reach any pod.
+    operationId: getNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deploymentName: $response.body#/metadata/name
+      selector: $response.body#/spec/selector/matchLabels
+      templateLabels: $response.body#/spec/template/metadata/labels
+  - stepId: findExistingService
+    description: >-
+      List services carrying the app label to determine whether the deployment
+      is already fronted, so the flow creates or reconciles accordingly.
+    operationId: listNamespacedServices
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: labelSelector
+      in: query
+      value: $inputs.labelSelector
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      services: $response.body#/items
+      existingServiceName: $response.body#/items/0/metadata/name
+      existingResourceVersion: $response.body#/items/0/metadata/resourceVersion
+      existingClusterIP: $response.body#/items/0/spec/clusterIP
+    onSuccess:
+    - name: serviceExists
+      type: goto
+      stepId: reconcileService
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+    - name: serviceMissing
+      type: goto
+      stepId: createService
+      criteria:
+      - context: $response.body
+        condition: $.items.length == 0
+        type: jsonpath
+  - stepId: reconcileService
+    description: >-
+      Replace the existing service so its type, selector, and ports match the
+      intent. The assigned clusterIP must be carried over, as it is immutable.
+    operationId: replaceNamespacedService
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.findExistingService.outputs.existingServiceName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: $steps.findExistingService.outputs.existingServiceName
+          namespace: $inputs.namespace
+          resourceVersion: $steps.findExistingService.outputs.existingResourceVersion
+          labels:
+            app: $inputs.appName
+        spec:
+          type: $inputs.serviceType
+          clusterIP: $steps.findExistingService.outputs.existingClusterIP
+          selector:
+            app: $inputs.appName
+          ports:
+          - name: http
+            protocol: TCP
+            port: $inputs.servicePort
+            targetPort: $inputs.targetPort
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      serviceName: $response.body#/metadata/name
+      clusterIP: $response.body#/spec/clusterIP
+    onSuccess:
+    - name: reconciled
+      type: goto
+      stepId: verifyService
+  - stepId: createService
+    description: >-
+      Create the service fronting the deployment's pods when none exists. The
+      API server assigns the cluster IP unless one is specified.
+    operationId: createNamespacedService
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: $inputs.serviceName
+          namespace: $inputs.namespace
+          labels:
+            app: $inputs.appName
+        spec:
+          type: $inputs.serviceType
+          selector:
+            app: $inputs.appName
+          ports:
+          - name: http
+            protocol: TCP
+            port: $inputs.servicePort
+            targetPort: $inputs.targetPort
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      serviceName: $response.body#/metadata/name
+      clusterIP: $response.body#/spec/clusterIP
+  - stepId: verifyService
+    description: >-
+      Read the service back to report the cluster IP, resolved ports, and the
+      selector traffic is routed by.
+    operationId: getNamespacedService
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.serviceName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      serviceName: $response.body#/metadata/name
+      clusterIP: $response.body#/spec/clusterIP
+      ports: $response.body#/spec/ports
+      selector: $response.body#/spec/selector
+  outputs:
+    deploymentName: $steps.resolveDeployment.outputs.deploymentName
+    serviceName: $steps.verifyService.outputs.serviceName
+    clusterIP: $steps.verifyService.outputs.clusterIP
+    ports: $steps.verifyService.outputs.ports

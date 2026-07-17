@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Apply Governance Labels to a Namespace
+  summary: Read a namespace, replace it carrying governance labels, and confirm the labels stuck.
+  description: >-
+    Namespace labels are how Pod Security Admission, network policy, and
+    cost-attribution tooling find their scope, which makes labelling a
+    governance write rather than cosmetic metadata. The workflow reads the
+    namespace to capture its resourceVersion, replaces it with the governance
+    labels applied, and re-reads it to confirm. Because replace overwrites the
+    whole object, the read-then-replace ordering is what keeps the write safe.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: namespace-labeling
+  summary: Apply a set of governance labels and annotations to an existing namespace.
+  description: >-
+    Reads the namespace for its current labels and resourceVersion, replaces the
+    namespace with the supplied governance labels and annotations, and reads it
+    back to confirm the labels were persisted and the namespace is still Active.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - labels
+    properties:
+      namespace:
+        type: string
+        description: The namespace to label.
+      labels:
+        type: object
+        description: >-
+          Governance labels to apply, such as
+          pod-security.kubernetes.io/enforce, team, or cost-center.
+      annotations:
+        type: object
+        description: Annotations to apply alongside the labels, such as an owner contact.
+  steps:
+  - stepId: readNamespace
+    description: >-
+      Read the namespace to confirm it exists, capture the labels already in
+      place, and take the resourceVersion for an optimistic-concurrency replace.
+    operationId: getNamespace
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.namespace
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      namespaceName: $response.body#/metadata/name
+      resourceVersion: $response.body#/metadata/resourceVersion
+      previousLabels: $response.body#/metadata/labels
+      phase: $response.body#/status/phase
+  - stepId: applyLabels
+    description: >-
+      Replace the namespace with the governance labels applied. The
+      resourceVersion from the read makes the API server reject this write if
+      another client changed the namespace in the meantime.
+    operationId: replaceNamespace
+    parameters:
+    - name: name
+      in: path
+      value: $steps.readNamespace.outputs.namespaceName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: $inputs.namespace
+          resourceVersion: $steps.readNamespace.outputs.resourceVersion
+          labels: $inputs.labels
+          annotations: $inputs.annotations
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      appliedLabels: $response.body#/metadata/labels
+      updatedResourceVersion: $response.body#/metadata/resourceVersion
+  - stepId: confirmLabels
+    description: >-
+      Read the namespace back to confirm the governance labels persisted and
+      that the namespace remains Active rather than Terminating.
+    operationId: getNamespace
+    parameters:
+    - name: name
+      in: path
+      value: $steps.readNamespace.outputs.namespaceName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      labels: $response.body#/metadata/labels
+      annotations: $response.body#/metadata/annotations
+      phase: $response.body#/status/phase
+  outputs:
+    namespaceName: $steps.readNamespace.outputs.namespaceName
+    previousLabels: $steps.readNamespace.outputs.previousLabels
+    labels: $steps.confirmLabels.outputs.labels
+    phase: $steps.confirmLabels.outputs.phase

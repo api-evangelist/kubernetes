@@ -1,0 +1,238 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Deploy an Application into a New Namespace
+  summary: Create a namespace, seed its config and secrets, deploy the workload, and expose it behind a service.
+  description: >-
+    The canonical first-run Kubernetes integration. The workflow provisions an
+    isolated namespace, writes the application's non-confidential configuration
+    as a ConfigMap and its credentials as a Secret, creates the Deployment that
+    references both, exposes the pods behind a Service, and reads the Deployment
+    back to confirm the controller accepted the desired replica count. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: deploy-application
+  summary: Stand up a namespaced application with its config, secret, deployment, and service.
+  description: >-
+    Provisions a namespace and then creates, in dependency order, the ConfigMap
+    and Secret the workload consumes, the Deployment that runs it, and the
+    Service that fronts it. Finishes by reading the Deployment status back.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - appName
+    - image
+    - replicas
+    - containerPort
+    properties:
+      namespace:
+        type: string
+        description: The namespace to create and deploy the application into.
+      appName:
+        type: string
+        description: Name applied to the ConfigMap, Secret, Deployment, and Service.
+      image:
+        type: string
+        description: Container image in [registry/]repository[:tag] form.
+      replicas:
+        type: integer
+        description: Desired number of pod replicas for the deployment.
+      containerPort:
+        type: integer
+        description: Port the container listens on.
+      configData:
+        type: object
+        description: Map of UTF-8 key/value pairs to store in the ConfigMap.
+      secretStringData:
+        type: object
+        description: Map of plain-text key/value pairs to store in the Secret.
+      serviceType:
+        type: string
+        description: Service type — ClusterIP, NodePort, LoadBalancer, or ExternalName.
+  steps:
+  - stepId: createNamespace
+    description: >-
+      Create the namespace that will scope every resource this workflow
+      provisions, giving the application an isolated name and RBAC boundary.
+    operationId: createNamespace
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: $inputs.namespace
+          labels:
+            app: $inputs.appName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      namespaceName: $response.body#/metadata/name
+      namespaceUid: $response.body#/metadata/uid
+  - stepId: createConfigMap
+    description: >-
+      Write the application's non-confidential configuration into a ConfigMap
+      so the pod template can consume it without baking values into the image.
+    operationId: createNamespacedConfigMap
+    parameters:
+    - name: namespace
+      in: path
+      value: $steps.createNamespace.outputs.namespaceName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: $inputs.appName
+          namespace: $inputs.namespace
+          labels:
+            app: $inputs.appName
+        data: $inputs.configData
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      configMapName: $response.body#/metadata/name
+  - stepId: createSecret
+    description: >-
+      Store the application's credentials as an Opaque Secret using stringData,
+      which the API server base64-encodes on write.
+    operationId: createNamespacedSecret
+    parameters:
+    - name: namespace
+      in: path
+      value: $steps.createNamespace.outputs.namespaceName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: Secret
+        metadata:
+          name: $inputs.appName
+          namespace: $inputs.namespace
+          labels:
+            app: $inputs.appName
+        type: Opaque
+        stringData: $inputs.secretStringData
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      secretName: $response.body#/metadata/name
+  - stepId: createDeployment
+    description: >-
+      Create the Deployment that runs the workload. The pod template selector
+      matches the app label so the controller owns the pods it creates.
+    operationId: createNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $steps.createNamespace.outputs.namespaceName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: $inputs.appName
+          namespace: $inputs.namespace
+          labels:
+            app: $inputs.appName
+        spec:
+          replicas: $inputs.replicas
+          selector:
+            matchLabels:
+              app: $inputs.appName
+          strategy:
+            type: RollingUpdate
+            rollingUpdate:
+              maxUnavailable: 0
+              maxSurge: 1
+          template:
+            metadata:
+              labels:
+                app: $inputs.appName
+            spec:
+              containers:
+              - name: $inputs.appName
+                image: $inputs.image
+                imagePullPolicy: IfNotPresent
+                ports:
+                - name: http
+                  containerPort: $inputs.containerPort
+                  protocol: TCP
+                resources:
+                  requests:
+                    cpu: 100m
+                    memory: 128Mi
+                  limits:
+                    cpu: 500m
+                    memory: 512Mi
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      deploymentName: $response.body#/metadata/name
+      deploymentGeneration: $response.body#/metadata/generation
+  - stepId: createService
+    description: >-
+      Expose the deployment's pods behind a stable virtual IP and DNS name by
+      selecting on the same app label the deployment applies to its pods.
+    operationId: createNamespacedService
+    parameters:
+    - name: namespace
+      in: path
+      value: $steps.createNamespace.outputs.namespaceName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: $inputs.appName
+          namespace: $inputs.namespace
+          labels:
+            app: $inputs.appName
+        spec:
+          type: $inputs.serviceType
+          selector:
+            app: $inputs.appName
+          ports:
+          - name: http
+            protocol: TCP
+            port: 80
+            targetPort: $inputs.containerPort
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      serviceName: $response.body#/metadata/name
+      clusterIP: $response.body#/spec/clusterIP
+  - stepId: verifyRollout
+    description: >-
+      Read the deployment back to confirm the controller observed the spec and
+      report how many replicas are ready and available.
+    operationId: getNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $steps.createNamespace.outputs.namespaceName
+    - name: name
+      in: path
+      value: $steps.createDeployment.outputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      desiredReplicas: $response.body#/spec/replicas
+      readyReplicas: $response.body#/status/readyReplicas
+      availableReplicas: $response.body#/status/availableReplicas
+      observedGeneration: $response.body#/status/observedGeneration
+  outputs:
+    namespaceName: $steps.createNamespace.outputs.namespaceName
+    deploymentName: $steps.createDeployment.outputs.deploymentName
+    serviceName: $steps.createService.outputs.serviceName
+    clusterIP: $steps.createService.outputs.clusterIP
+    readyReplicas: $steps.verifyRollout.outputs.readyReplicas

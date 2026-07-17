@@ -204,6 +204,54 @@ common:
     url: json-schema/kubernetes-resource-schema.json
   - type: JSONLD
     url: json-ld/kubernetes-context.jsonld
+  - type: Arazzo
+    url: arazzo/kubernetes-deploy-application-workflow.yml
+    name: Kubernetes Deploy an Application into a New Namespace
+  - type: Arazzo
+    url: arazzo/kubernetes-scale-deployment-workflow.yml
+    name: Kubernetes Scale a Deployment and Verify Replicas
+  - type: Arazzo
+    url: arazzo/kubernetes-rolling-update-workflow.yml
+    name: Kubernetes Roll Out a New Container Image
+  - type: Arazzo
+    url: arazzo/kubernetes-troubleshoot-pod-workflow.yml
+    name: Kubernetes Troubleshoot a Failing Pod
+  - type: Arazzo
+    url: arazzo/kubernetes-restart-pod-workflow.yml
+    name: Kubernetes Restart a Pod by Deleting It
+  - type: Arazzo
+    url: arazzo/kubernetes-run-one-off-pod-workflow.yml
+    name: Kubernetes Run a One-Off Task Pod and Collect Its Output
+  - type: Arazzo
+    url: arazzo/kubernetes-teardown-namespace-workflow.yml
+    name: Kubernetes Inventory and Tear Down a Namespace
+  - type: Arazzo
+    url: arazzo/kubernetes-autoscale-deployment-workflow.yml
+    name: Kubernetes Attach a HorizontalPodAutoscaler to a Deployment
+  - type: Arazzo
+    url: arazzo/kubernetes-cluster-capacity-audit-workflow.yml
+    name: Kubernetes Audit Cluster Node Capacity
+  - type: Arazzo
+    url: arazzo/kubernetes-provision-cluster-role-workflow.yml
+    name: Kubernetes Provision a ClusterRole If Missing
+  - type: Arazzo
+    url: arazzo/kubernetes-expose-deployment-workflow.yml
+    name: Kubernetes Expose a Deployment Behind a Service
+  - type: Arazzo
+    url: arazzo/kubernetes-rotate-secret-workflow.yml
+    name: Kubernetes Rotate a Secret and Restart Its Consumers
+  - type: Arazzo
+    url: arazzo/kubernetes-config-rollout-workflow.yml
+    name: Kubernetes Publish a ConfigMap and Roll Out Its Consumers
+  - type: Arazzo
+    url: arazzo/kubernetes-namespace-labeling-workflow.yml
+    name: Kubernetes Apply Governance Labels to a Namespace
+  - type: Arazzo
+    url: arazzo/kubernetes-quarantine-pod-workflow.yml
+    name: Kubernetes Quarantine a Failing Pod for Inspection
+  - type: Arazzo
+    url: arazzo/kubernetes-retire-application-workflow.yml
+    name: Kubernetes Retire an Application from a Namespace
 created: '2025-06-05'
 modified: '2026-06-20'
 position: Consuming

@@ -1,0 +1,181 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Publish a ConfigMap and Roll Out Its Consumers
+  summary: Inventory existing ConfigMaps, publish the new configuration, then roll the deployment that reads it.
+  description: >-
+    A ConfigMap change does not restart anything on its own — pods that mounted
+    it as environment variables keep the old values indefinitely. The workflow
+    lists the namespace's ConfigMaps to record the current state, publishes the
+    new configuration, reads the consuming deployment, and replaces it with a
+    changed pod-template annotation so the controller performs a rolling restart
+    against the new config. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: config-rollout
+  summary: Publish a ConfigMap and force the consuming deployment to restart against it.
+  description: >-
+    Inventories the namespace's ConfigMaps, creates the new one, reads the
+    consuming deployment, and replaces it with a changed annotation so the
+    rolling restart picks up the published configuration.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - configMapName
+    - configData
+    - deploymentName
+    - appName
+    - image
+    - replicas
+    - configStamp
+    properties:
+      namespace:
+        type: string
+        description: The namespace holding the ConfigMap and its consuming deployment.
+      configMapName:
+        type: string
+        description: Name of the ConfigMap to publish.
+      configData:
+        type: object
+        description: Map of UTF-8 key/value pairs forming the configuration.
+      deploymentName:
+        type: string
+        description: The deployment whose pods consume the ConfigMap.
+      appName:
+        type: string
+        description: The app label value used by the deployment selector and pod template.
+      image:
+        type: string
+        description: Container image to preserve on the replaced deployment.
+      replicas:
+        type: integer
+        description: Replica count to preserve on the replaced deployment.
+      configStamp:
+        type: string
+        description: >-
+          Value written to the rollout annotation to force a restart. Any value
+          that changes per publish works, such as a config hash or timestamp.
+  steps:
+  - stepId: inventoryConfigMaps
+    description: >-
+      List the namespace's ConfigMaps to record the configuration in place
+      before this publish, giving the run an auditable before state.
+    operationId: listNamespacedConfigMaps
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      configMaps: $response.body#/items
+  - stepId: publishConfigMap
+    description: >-
+      Publish the ConfigMap holding the application's non-confidential
+      configuration as UTF-8 key/value pairs.
+    operationId: createNamespacedConfigMap
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: $inputs.configMapName
+          namespace: $inputs.namespace
+          labels:
+            app: $inputs.appName
+          annotations:
+            published-at: $inputs.configStamp
+        data: $inputs.configData
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      configMapName: $response.body#/metadata/name
+      configMapResourceVersion: $response.body#/metadata/resourceVersion
+  - stepId: readConsumer
+    description: >-
+      Read the deployment that consumes the ConfigMap and capture its
+      resourceVersion so the restart write is concurrency-safe.
+    operationId: getNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deploymentName: $response.body#/metadata/name
+      resourceVersion: $response.body#/metadata/resourceVersion
+      currentReplicas: $response.body#/status/readyReplicas
+  - stepId: rollConsumer
+    description: >-
+      Replace the deployment with a changed pod-template annotation so the
+      controller rolls the pods and they read the published configuration.
+    operationId: replaceNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.readConsumer.outputs.deploymentName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: $inputs.deploymentName
+          namespace: $inputs.namespace
+          resourceVersion: $steps.readConsumer.outputs.resourceVersion
+          labels:
+            app: $inputs.appName
+        spec:
+          replicas: $inputs.replicas
+          selector:
+            matchLabels:
+              app: $inputs.appName
+          strategy:
+            type: RollingUpdate
+            rollingUpdate:
+              maxUnavailable: 0
+              maxSurge: 1
+          template:
+            metadata:
+              labels:
+                app: $inputs.appName
+              annotations:
+                config-published-at: $inputs.configStamp
+            spec:
+              containers:
+              - name: $inputs.appName
+                image: $inputs.image
+                imagePullPolicy: IfNotPresent
+                env:
+                - name: CONFIG_PUBLISHED_AT
+                  value: $inputs.configStamp
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rolledGeneration: $response.body#/metadata/generation
+      rolledResourceVersion: $response.body#/metadata/resourceVersion
+  outputs:
+    previousConfigMaps: $steps.inventoryConfigMaps.outputs.configMaps
+    configMapName: $steps.publishConfigMap.outputs.configMapName
+    deploymentName: $steps.readConsumer.outputs.deploymentName
+    rolledGeneration: $steps.rollConsumer.outputs.rolledGeneration

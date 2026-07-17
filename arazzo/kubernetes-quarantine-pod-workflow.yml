@@ -1,0 +1,170 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Quarantine a Failing Pod for Inspection
+  summary: Relabel a misbehaving pod out of its service and ReplicaSet, then capture its logs while it stays alive.
+  description: >-
+    The alternative to deleting a broken pod and losing the evidence with it.
+    Changing a pod's labels so they no longer match its controller's selector
+    makes the ReplicaSet count it as gone and schedule a healthy replacement,
+    while the service stops routing traffic to it — yet the pod itself keeps
+    running and can be inspected at leisure. The workflow reads the pod,
+    replaces it with quarantine labels, confirms the replacement was scheduled,
+    and captures the quarantined pod's log. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: quarantine-pod
+  summary: Relabel a pod out of its controller's selector so it survives for debugging.
+  description: >-
+    Reads the failing pod and its spec, replaces it with labels that no longer
+    match the controller selector, lists the app's pods to confirm a replacement
+    was scheduled, and reads the quarantined pod's log for diagnosis.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - podName
+    - appName
+    - image
+    - quarantineReason
+    properties:
+      namespace:
+        type: string
+        description: The namespace containing the pod.
+      podName:
+        type: string
+        description: The name of the pod to quarantine.
+      appName:
+        type: string
+        description: The app label value the pod currently carries and will be moved off.
+      image:
+        type: string
+        description: Container image to preserve on the replaced pod object.
+      containerName:
+        type: string
+        description: Container to preserve and to read logs from.
+      quarantineReason:
+        type: string
+        description: Reason recorded as an annotation on the quarantined pod.
+      labelSelector:
+        type: string
+        description: Label selector matching the app's healthy pods (e.g. app=nginx).
+      tailLines:
+        type: integer
+        description: Number of log lines to capture from the quarantined pod.
+  steps:
+  - stepId: readFailingPod
+    description: >-
+      Read the pod to capture its node, phase, and resourceVersion before the
+      relabel, and to record the labels that currently bind it to its owner.
+    operationId: getNamespacedPod
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.podName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      podName: $response.body#/metadata/name
+      resourceVersion: $response.body#/metadata/resourceVersion
+      previousLabels: $response.body#/metadata/labels
+      nodeName: $response.body#/spec/nodeName
+      phase: $response.body#/status/phase
+  - stepId: applyQuarantineLabels
+    description: >-
+      Replace the pod with labels that no longer match the controller's
+      selector. The ReplicaSet treats the pod as gone and creates a replacement,
+      while this pod keeps running for inspection. The node assignment is
+      preserved so the pod is not rescheduled.
+    operationId: replaceNamespacedPod
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.readFailingPod.outputs.podName
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: $inputs.podName
+          namespace: $inputs.namespace
+          resourceVersion: $steps.readFailingPod.outputs.resourceVersion
+          labels:
+            app: quarantined
+            quarantined-from: $inputs.appName
+          annotations:
+            quarantine-reason: $inputs.quarantineReason
+        spec:
+          nodeName: $steps.readFailingPod.outputs.nodeName
+          restartPolicy: Never
+          containers:
+          - name: $inputs.containerName
+            image: $inputs.image
+            imagePullPolicy: IfNotPresent
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      quarantinedPodName: $response.body#/metadata/name
+      quarantineLabels: $response.body#/metadata/labels
+  - stepId: confirmReplacement
+    description: >-
+      List the pods still matching the app selector to confirm the controller
+      scheduled a healthy replacement for the pod that was labelled away.
+    operationId: listNamespacedPods
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: labelSelector
+      in: query
+      value: $inputs.labelSelector
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      healthyPods: $response.body#/items
+      replacementPodName: $response.body#/items/0/metadata/name
+  - stepId: captureQuarantineLog
+    description: >-
+      Read the quarantined pod's log now that it is out of rotation and no
+      longer under time pressure from the controller.
+    operationId: readNamespacedPodLog
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.applyQuarantineLabels.outputs.quarantinedPodName
+    - name: container
+      in: query
+      value: $inputs.containerName
+    - name: follow
+      in: query
+      value: false
+    - name: tailLines
+      in: query
+      value: $inputs.tailLines
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      logOutput: $response.body
+  outputs:
+    quarantinedPodName: $steps.applyQuarantineLabels.outputs.quarantinedPodName
+    previousLabels: $steps.readFailingPod.outputs.previousLabels
+    replacementPodName: $steps.confirmReplacement.outputs.replacementPodName
+    logOutput: $steps.captureQuarantineLog.outputs.logOutput

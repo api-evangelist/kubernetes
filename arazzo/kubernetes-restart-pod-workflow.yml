@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Restart a Pod by Deleting It
+  summary: Confirm a pod is controller-owned, delete it gracefully, and watch the replacement appear.
+  description: >-
+    Kubernetes has no restart verb — the idiomatic restart is to delete the pod
+    and let its owning controller recreate it. The workflow reads the pod first
+    to confirm it carries an ownerReference, because deleting an unowned pod
+    destroys it permanently rather than restarting it, then deletes it with an
+    explicit grace period and lists the pods to observe the replacement. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: restart-pod
+  summary: Delete a controller-owned pod so its controller recreates it.
+  description: >-
+    Reads the target pod and captures its ownerReferences, deletes it with a
+    graceful termination period, and lists the namespace's matching pods so the
+    freshly scheduled replacement can be observed.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - podName
+    properties:
+      namespace:
+        type: string
+        description: The namespace containing the pod.
+      podName:
+        type: string
+        description: The name of the pod to restart.
+      gracePeriodSeconds:
+        type: integer
+        description: Seconds to wait before forcefully terminating the pod.
+      labelSelector:
+        type: string
+        description: Label selector matching the pod's siblings (e.g. app=nginx).
+  steps:
+  - stepId: readPod
+    description: >-
+      Read the pod and capture its ownerReferences. A pod with no owner will
+      not be recreated after deletion, so this read is the safety check.
+    operationId: getNamespacedPod
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.podName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      podName: $response.body#/metadata/name
+      podUid: $response.body#/metadata/uid
+      ownerReferences: $response.body#/metadata/ownerReferences
+      previousPhase: $response.body#/status/phase
+      nodeName: $response.body#/spec/nodeName
+  - stepId: deletePod
+    description: >-
+      Delete the pod. The kubelet sends SIGTERM and waits the grace period
+      before forcing termination; the owning controller schedules a replacement.
+    operationId: deleteNamespacedPod
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.readPod.outputs.podName
+    - name: gracePeriodSeconds
+      in: query
+      value: $inputs.gracePeriodSeconds
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deletionTimestamp: $response.body#/metadata/deletionTimestamp
+      deletedPodName: $response.body#/metadata/name
+  - stepId: observeReplacement
+    description: >-
+      List the pods matching the same label selector to observe the replacement
+      pod. A new uid distinguishes the replacement from the deleted pod.
+    operationId: listNamespacedPods
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: labelSelector
+      in: query
+      value: $inputs.labelSelector
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      pods: $response.body#/items
+      replacementPodName: $response.body#/items/0/metadata/name
+      replacementPhase: $response.body#/items/0/status/phase
+  outputs:
+    deletedPodName: $steps.deletePod.outputs.deletedPodName
+    deletionTimestamp: $steps.deletePod.outputs.deletionTimestamp
+    replacementPodName: $steps.observeReplacement.outputs.replacementPodName
+    pods: $steps.observeReplacement.outputs.pods

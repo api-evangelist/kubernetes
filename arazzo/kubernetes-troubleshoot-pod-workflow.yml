@@ -1,0 +1,150 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Troubleshoot a Failing Pod
+  summary: Find pods that are not Running, read the failing pod's detail, tail its logs, and pull namespace events.
+  description: >-
+    The triage loop every operator runs by hand, expressed as a workflow. It
+    filters the namespace for pods that are not in the Running phase, reads the
+    first offender for its container statuses and conditions, tails its log for
+    an application-level cause, and lists namespace events for the
+    cluster-level cause such as a failed image pull or a scheduling constraint.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: troubleshoot-pod
+  summary: Locate a non-Running pod and gather its detail, logs, and related events.
+  description: >-
+    Lists pods filtered by a field selector on status.phase, and when a match is
+    found reads the pod, tails its log, and lists namespace events to explain
+    the failure. Ends early when every pod is healthy.
+  inputs:
+    type: object
+    required:
+    - namespace
+    properties:
+      namespace:
+        type: string
+        description: The namespace to triage.
+      phaseSelector:
+        type: string
+        description: Field selector isolating unhealthy pods (e.g. status.phase!=Running).
+      labelSelector:
+        type: string
+        description: Optional label selector narrowing triage to one application.
+      container:
+        type: string
+        description: Container to read logs from in a multi-container pod.
+      tailLines:
+        type: integer
+        description: Number of log lines to retrieve from the end of the log.
+  steps:
+  - stepId: findUnhealthyPods
+    description: >-
+      List pods in the namespace filtered to those not in the Running phase.
+      When nothing matches, the namespace is healthy and the flow ends.
+    operationId: listNamespacedPods
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: fieldSelector
+      in: query
+      value: $inputs.phaseSelector
+    - name: labelSelector
+      in: query
+      value: $inputs.labelSelector
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      unhealthyPods: $response.body#/items
+      firstPodName: $response.body#/items/0/metadata/name
+    onSuccess:
+    - name: foundUnhealthyPod
+      type: goto
+      stepId: readPodDetail
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+    - name: allPodsHealthy
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.items.length == 0
+        type: jsonpath
+  - stepId: readPodDetail
+    description: >-
+      Read the failing pod for its phase, node assignment, IPs, and conditions,
+      which distinguish a scheduling failure from a container-level failure.
+    operationId: getNamespacedPod
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.findUnhealthyPods.outputs.firstPodName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      podName: $response.body#/metadata/name
+      phase: $response.body#/status/phase
+      hostIP: $response.body#/status/hostIP
+      podIP: $response.body#/status/podIP
+      startTime: $response.body#/status/startTime
+      conditions: $response.body#/status/conditions
+  - stepId: tailPodLog
+    description: >-
+      Tail the container log for an application-level cause such as a crash on
+      startup or a failed dependency check.
+    operationId: readNamespacedPodLog
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.readPodDetail.outputs.podName
+    - name: container
+      in: query
+      value: $inputs.container
+    - name: follow
+      in: query
+      value: false
+    - name: tailLines
+      in: query
+      value: $inputs.tailLines
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      logOutput: $response.body
+  - stepId: readNamespaceEvents
+    description: >-
+      List namespace events to surface the cluster-level cause the pod object
+      alone does not carry, such as ImagePullBackOff or FailedScheduling.
+    operationId: listNamespacedEvents
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      events: $response.body#/items
+  outputs:
+    podName: $steps.readPodDetail.outputs.podName
+    phase: $steps.readPodDetail.outputs.phase
+    conditions: $steps.readPodDetail.outputs.conditions
+    logOutput: $steps.tailPodLog.outputs.logOutput
+    events: $steps.readNamespaceEvents.outputs.events

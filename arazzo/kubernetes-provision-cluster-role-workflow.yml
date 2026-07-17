@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Provision a ClusterRole If Missing
+  summary: Check whether a ClusterRole already exists and create it only when it does not.
+  description: >-
+    The idempotent RBAC bootstrap an installer runs before granting an operator
+    or controller its permissions. The workflow lists ClusterRoles, branches on
+    whether the target role is already present, and creates it with explicit
+    policy rules only when it is missing — so re-running the install does not
+    fail on a 409 conflict. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-cluster-role
+  summary: Create a ClusterRole with the supplied policy rules unless it already exists.
+  description: >-
+    Looks for an existing ClusterRole by name and branches: when it is already
+    present the flow ends without writing, and when it is absent the role is
+    created with the supplied rules.
+  inputs:
+    type: object
+    required:
+    - clusterRoleName
+    - rules
+    properties:
+      clusterRoleName:
+        type: string
+        description: Name of the ClusterRole to provision.
+      rules:
+        type: array
+        description: >-
+          Policy rules granting verbs on resources within API groups. Each rule
+          carries verbs, apiGroups, and resources arrays.
+        items:
+          type: object
+      labels:
+        type: object
+        description: Labels to apply to the ClusterRole, such as an installer or owner tag.
+      labelSelector:
+        type: string
+        description: >-
+          Optional label selector narrowing the listing to an installer's own
+          roles. ClusterRole listing supports label selection only, so the
+          branch below matches the target by name within the returned set.
+  steps:
+  - stepId: findClusterRole
+    description: >-
+      List ClusterRoles so the flow can tell an existing role from a missing
+      one by name, rather than provoking a 409 conflict on create.
+    operationId: listClusterRoles
+    parameters:
+    - name: labelSelector
+      in: query
+      value: $inputs.labelSelector
+    - name: limit
+      in: query
+      value: 500
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      clusterRoles: $response.body#/items
+    onSuccess:
+    - name: clusterRoleMissing
+      type: goto
+      stepId: createClusterRole
+      criteria:
+      - context: $response.body
+        condition: $.items[?(@.metadata.name == '$inputs.clusterRoleName')].length == 0
+        type: jsonpath
+    - name: clusterRoleExists
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.items[?(@.metadata.name == '$inputs.clusterRoleName')].length > 0
+        type: jsonpath
+  - stepId: createClusterRole
+    description: >-
+      Create the ClusterRole with the supplied policy rules. ClusterRoles are
+      cluster-scoped and take effect once bound via a ClusterRoleBinding.
+    operationId: createClusterRole
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: ClusterRole
+        metadata:
+          name: $inputs.clusterRoleName
+          labels: $inputs.labels
+        rules: $inputs.rules
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      clusterRoleName: $response.body#/metadata/name
+      clusterRoleUid: $response.body#/metadata/uid
+      createdRules: $response.body#/rules
+  outputs:
+    existingClusterRoles: $steps.findClusterRole.outputs.clusterRoles
+    clusterRoleName: $steps.createClusterRole.outputs.clusterRoleName
+    createdRules: $steps.createClusterRole.outputs.createdRules

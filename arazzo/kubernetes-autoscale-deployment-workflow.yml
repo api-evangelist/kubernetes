@@ -1,0 +1,120 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Attach a HorizontalPodAutoscaler to a Deployment
+  summary: Confirm a deployment exists, create an HPA targeting it, and list the namespace's autoscalers.
+  description: >-
+    Handing replica control to the autoscaler is the step that turns a fixed
+    deployment into an elastic one. The workflow resolves the target deployment
+    first, because an HPA whose scaleTargetRef points at a missing resource is
+    accepted by the API server and then silently fails to scale, creates the
+    autoscaler with explicit min and max replica bounds, and lists the
+    namespace's HPAs to confirm registration. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: autoscale-deployment
+  summary: Create a HorizontalPodAutoscaler bound to an existing deployment.
+  description: >-
+    Reads the deployment to validate the scale target, creates an HPA
+    referencing it by kind and name with min/max replica bounds, and lists the
+    namespace's autoscalers to confirm the new HPA is registered.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - deploymentName
+    - minReplicas
+    - maxReplicas
+    properties:
+      namespace:
+        type: string
+        description: The namespace containing the deployment and the new HPA.
+      deploymentName:
+        type: string
+        description: The deployment the autoscaler will scale.
+      hpaName:
+        type: string
+        description: Name for the HorizontalPodAutoscaler resource.
+      minReplicas:
+        type: integer
+        description: Minimum replica count the autoscaler may scale down to.
+      maxReplicas:
+        type: integer
+        description: Maximum replica count the autoscaler may scale up to.
+  steps:
+  - stepId: resolveScaleTarget
+    description: >-
+      Read the deployment the HPA will target. An HPA pointing at a
+      non-existent target is created successfully but never scales anything.
+    operationId: getNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deploymentName: $response.body#/metadata/name
+      currentReplicas: $response.body#/spec/replicas
+  - stepId: createAutoscaler
+    description: >-
+      Create the HorizontalPodAutoscaler bound to the deployment by
+      scaleTargetRef, with the supplied replica floor and ceiling.
+    operationId: createNamespacedHorizontalPodAutoscaler
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: autoscaling/v2
+        kind: HorizontalPodAutoscaler
+        metadata:
+          name: $inputs.hpaName
+          namespace: $inputs.namespace
+        spec:
+          scaleTargetRef:
+            apiVersion: apps/v1
+            kind: Deployment
+            name: $steps.resolveScaleTarget.outputs.deploymentName
+          minReplicas: $inputs.minReplicas
+          maxReplicas: $inputs.maxReplicas
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      hpaName: $response.body#/metadata/name
+      hpaUid: $response.body#/metadata/uid
+      configuredMinReplicas: $response.body#/spec/minReplicas
+      configuredMaxReplicas: $response.body#/spec/maxReplicas
+  - stepId: verifyAutoscaler
+    description: >-
+      List the namespace's autoscalers to confirm the HPA is registered and to
+      report the replica counts the controller has computed so far.
+    operationId: listNamespacedHorizontalPodAutoscalers
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      autoscalers: $response.body#/items
+      firstCurrentReplicas: $response.body#/items/0/status/currentReplicas
+      firstDesiredReplicas: $response.body#/items/0/status/desiredReplicas
+  outputs:
+    hpaName: $steps.createAutoscaler.outputs.hpaName
+    configuredMinReplicas: $steps.createAutoscaler.outputs.configuredMinReplicas
+    configuredMaxReplicas: $steps.createAutoscaler.outputs.configuredMaxReplicas
+    autoscalers: $steps.verifyAutoscaler.outputs.autoscalers

@@ -1,0 +1,154 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Retire an Application from a Namespace
+  summary: Find an application's deployment, remove its service and deployment, and confirm the pods are gone.
+  description: >-
+    Removing one application from a shared namespace, where deleting the whole
+    namespace is not an option because other workloads live there. The workflow
+    locates the deployment, deletes the fronting service first so traffic stops
+    arriving before the backends disappear, deletes the deployment so its
+    ReplicaSet and pods are garbage-collected, and lists the pods to confirm
+    termination. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: retire-application
+  summary: Delete an application's service and deployment from a shared namespace.
+  description: >-
+    Lists the namespace's deployments to locate the target, reads it for a
+    record of what is being retired, deletes the service and then the
+    deployment, and lists the remaining pods to confirm the cascade.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - deploymentName
+    - serviceName
+    properties:
+      namespace:
+        type: string
+        description: The shared namespace the application lives in.
+      deploymentName:
+        type: string
+        description: The deployment to retire.
+      serviceName:
+        type: string
+        description: The service fronting the deployment, deleted before the backends.
+      labelSelector:
+        type: string
+        description: Label selector matching the application's resources (e.g. app=nginx).
+  steps:
+  - stepId: findDeployment
+    description: >-
+      List the namespace's deployments narrowed to the application's label so
+      the retirement targets only the intended workload.
+    operationId: listNamespacedDeployments
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: labelSelector
+      in: query
+      value: $inputs.labelSelector
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deployments: $response.body#/items
+    onSuccess:
+    - name: deploymentFound
+      type: goto
+      stepId: readDeployment
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+    - name: nothingToRetire
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.items.length == 0
+        type: jsonpath
+  - stepId: readDeployment
+    description: >-
+      Read the deployment for a record of the image and replica count being
+      retired, which is what a rollback would need to recreate it.
+    operationId: getNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deploymentName: $response.body#/metadata/name
+      retiredReplicas: $response.body#/spec/replicas
+      retiredImage: $response.body#/spec/template/spec/containers/0/image
+  - stepId: deleteService
+    description: >-
+      Delete the fronting service first so traffic stops being routed before
+      the backends go away. A LoadBalancer service also deprovisions its
+      cloud load balancer here.
+    operationId: deleteNamespacedService
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $inputs.serviceName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deletedServiceName: $response.body#/metadata/name
+  - stepId: deleteDeployment
+    description: >-
+      Delete the deployment. Its ReplicaSet and pods are garbage-collected via
+      their ownerReferences and terminate gracefully.
+    operationId: deleteNamespacedDeployment
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.readDeployment.outputs.deploymentName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deletedDeploymentName: $response.body#/metadata/name
+      deletionTimestamp: $response.body#/metadata/deletionTimestamp
+  - stepId: confirmPodsGone
+    description: >-
+      List the pods still carrying the application's label to confirm the
+      cascade removed them. Pods may briefly remain while terminating.
+    operationId: listNamespacedPods
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: labelSelector
+      in: query
+      value: $inputs.labelSelector
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      remainingPods: $response.body#/items
+  outputs:
+    retiredImage: $steps.readDeployment.outputs.retiredImage
+    retiredReplicas: $steps.readDeployment.outputs.retiredReplicas
+    deletedServiceName: $steps.deleteService.outputs.deletedServiceName
+    deletedDeploymentName: $steps.deleteDeployment.outputs.deletedDeploymentName
+    remainingPods: $steps.confirmPodsGone.outputs.remainingPods

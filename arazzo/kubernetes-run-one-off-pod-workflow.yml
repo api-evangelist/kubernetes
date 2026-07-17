@@ -1,0 +1,174 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Run a One-Off Task Pod and Collect Its Output
+  summary: Create a run-to-completion pod, poll it until it finishes, read its log, then clean it up.
+  description: >-
+    The batch primitive behind migrations, backfills, and smoke tests. The
+    workflow creates a pod with restartPolicy Never so it runs to completion,
+    reads it back until the phase leaves Pending, collects the container log as
+    the task's output, and deletes the pod so completed task pods do not
+    accumulate in the namespace. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: run-one-off-pod
+  summary: Create a run-to-completion pod, read its output, and delete it.
+  description: >-
+    Creates a pod that runs a command to completion, polls the pod until it
+    reaches a terminal phase, reads the log as the task result, and removes the
+    pod.
+  inputs:
+    type: object
+    required:
+    - namespace
+    - taskName
+    - image
+    properties:
+      namespace:
+        type: string
+        description: The namespace to run the task pod in.
+      taskName:
+        type: string
+        description: Name for the one-off pod and its container.
+      image:
+        type: string
+        description: Container image that carries the task.
+      command:
+        type: array
+        description: Entrypoint command array, replacing the image ENTRYPOINT.
+        items:
+          type: string
+      args:
+        type: array
+        description: Arguments to the entrypoint, replacing the image CMD.
+        items:
+          type: string
+      env:
+        type: array
+        description: Environment variables to set in the task container.
+        items:
+          type: object
+      serviceAccountName:
+        type: string
+        description: Service account granting the task pod its API permissions.
+      tailLines:
+        type: integer
+        description: Number of log lines to collect from the end of the log.
+  steps:
+  - stepId: createTaskPod
+    description: >-
+      Create the task pod with restartPolicy Never so a failed command is left
+      in the Failed phase for inspection rather than being restarted forever.
+    operationId: createNamespacedPod
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    requestBody:
+      contentType: application/json
+      payload:
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: $inputs.taskName
+          namespace: $inputs.namespace
+          labels:
+            app: $inputs.taskName
+            role: one-off-task
+        spec:
+          restartPolicy: Never
+          serviceAccountName: $inputs.serviceAccountName
+          terminationGracePeriodSeconds: 30
+          containers:
+          - name: $inputs.taskName
+            image: $inputs.image
+            imagePullPolicy: IfNotPresent
+            command: $inputs.command
+            args: $inputs.args
+            env: $inputs.env
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: '1'
+                memory: 1Gi
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      podName: $response.body#/metadata/name
+      podUid: $response.body#/metadata/uid
+  - stepId: pollTaskPod
+    description: >-
+      Read the pod until it leaves the Pending phase. Succeeded means the
+      command exited zero; Failed means it exited non-zero.
+    operationId: getNamespacedPod
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.createTaskPod.outputs.podName
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status.phase != 'Pending'
+      type: jsonpath
+    outputs:
+      phase: $response.body#/status/phase
+      startTime: $response.body#/status/startTime
+      nodeName: $response.body#/spec/nodeName
+  - stepId: collectTaskLog
+    description: >-
+      Read the container log as the task's output. This is the only place the
+      command's stdout is retained once the pod is deleted.
+    operationId: readNamespacedPodLog
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.createTaskPod.outputs.podName
+    - name: container
+      in: query
+      value: $inputs.taskName
+    - name: follow
+      in: query
+      value: false
+    - name: tailLines
+      in: query
+      value: $inputs.tailLines
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      logOutput: $response.body
+  - stepId: cleanupTaskPod
+    description: >-
+      Delete the completed task pod so finished one-off runs do not accumulate.
+      The log has already been collected by the previous step.
+    operationId: deleteNamespacedPod
+    parameters:
+    - name: namespace
+      in: path
+      value: $inputs.namespace
+    - name: name
+      in: path
+      value: $steps.createTaskPod.outputs.podName
+    - name: gracePeriodSeconds
+      in: query
+      value: 0
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deletionTimestamp: $response.body#/metadata/deletionTimestamp
+  outputs:
+    podName: $steps.createTaskPod.outputs.podName
+    phase: $steps.pollTaskPod.outputs.phase
+    logOutput: $steps.collectTaskLog.outputs.logOutput

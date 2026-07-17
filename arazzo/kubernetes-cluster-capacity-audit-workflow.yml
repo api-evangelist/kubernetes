@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Kubernetes Audit Cluster Node Capacity
+  summary: List the cluster's nodes, read one node's capacity and conditions in full, and enumerate namespaces.
+  description: >-
+    A read-only sweep for capacity planning and cluster health reporting. The
+    workflow lists nodes filtered by a label selector, reads a single node in
+    full for its capacity, allocatable resources, and conditions — the Ready,
+    MemoryPressure, and DiskPressure signals that a list response summarizes —
+    and enumerates the cluster's namespaces to frame the tenancy the nodes
+    carry. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: kubernetesApi
+  url: ../openapi/kubernetes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cluster-capacity-audit
+  summary: Enumerate nodes and namespaces and inspect a node's capacity and conditions.
+  description: >-
+    Lists the cluster's nodes, drills into the first matching node for capacity,
+    allocatable resources, taints and conditions, then lists namespaces to
+    complete the cluster-level picture. Makes no writes.
+  inputs:
+    type: object
+    properties:
+      nodeLabelSelector:
+        type: string
+        description: Label selector narrowing the audit to a node pool (e.g. node-role.kubernetes.io/worker=).
+      nodeFieldSelector:
+        type: string
+        description: Field selector for node fields (e.g. spec.unschedulable=false).
+      namespaceLabelSelector:
+        type: string
+        description: Optional label selector narrowing the namespace enumeration.
+  steps:
+  - stepId: listClusterNodes
+    description: >-
+      List the cluster's nodes, optionally narrowed to a single pool, to
+      establish the fleet the audit covers.
+    operationId: listNodes
+    parameters:
+    - name: labelSelector
+      in: query
+      value: $inputs.nodeLabelSelector
+    - name: fieldSelector
+      in: query
+      value: $inputs.nodeFieldSelector
+    - name: limit
+      in: query
+      value: 500
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      nodes: $response.body#/items
+      firstNodeName: $response.body#/items/0/metadata/name
+  - stepId: readNodeDetail
+    description: >-
+      Read one node in full for its capacity, allocatable resources, taints,
+      and conditions, which report memory and disk pressure.
+    operationId: getNode
+    parameters:
+    - name: name
+      in: path
+      value: $steps.listClusterNodes.outputs.firstNodeName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      nodeName: $response.body#/metadata/name
+      capacity: $response.body#/status/capacity
+      allocatable: $response.body#/status/allocatable
+      conditions: $response.body#/status/conditions
+      taints: $response.body#/spec/taints
+      unschedulable: $response.body#/spec/unschedulable
+  - stepId: listClusterNamespaces
+    description: >-
+      Enumerate the cluster's namespaces to frame how many tenants the audited
+      nodes are carrying.
+    operationId: listNamespaces
+    parameters:
+    - name: labelSelector
+      in: query
+      value: $inputs.namespaceLabelSelector
+    - name: limit
+      in: query
+      value: 500
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      namespaces: $response.body#/items
+  outputs:
+    nodes: $steps.listClusterNodes.outputs.nodes
+    nodeName: $steps.readNodeDetail.outputs.nodeName
+    capacity: $steps.readNodeDetail.outputs.capacity
+    allocatable: $steps.readNodeDetail.outputs.allocatable
+    conditions: $steps.readNodeDetail.outputs.conditions
+    namespaces: $steps.listClusterNamespaces.outputs.namespaces
