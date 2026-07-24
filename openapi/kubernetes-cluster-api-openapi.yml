@@ -1,0 +1,525 @@
+openapi: 3.1.0
+info:
+  title: Kubernetes Autoscaling Cluster API
+  description: The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and external components all communicate with one another through the API server. The API is a resource-based (RESTful) programmatic interface provided via HTTP that supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).
+  version: v1.32.0
+  contact:
+    name: Kubernetes Community
+    url: https://kubernetes.io/community/
+  termsOfService: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://kubernetes.default.svc
+  description: In-cluster Kubernetes API Server
+security:
+- bearerAuth: []
+- clientCertificate: []
+tags:
+- name: Cluster
+  description: Cluster-level resources including Namespaces, Nodes, ServiceAccounts, and RBAC resources for cluster administration.
+paths:
+  /api/v1/namespaces:
+    get:
+      operationId: listNamespaces
+      summary: Kubernetes List namespaces
+      description: Returns a list of all namespaces in the cluster. Namespaces provide a mechanism for isolating groups of resources within a single cluster.
+      tags:
+      - Cluster
+      parameters:
+      - $ref: '#/components/parameters/LabelSelector'
+      - $ref: '#/components/parameters/FieldSelector'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Continue'
+      - $ref: '#/components/parameters/ResourceVersion'
+      - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of namespaces
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNamespace
+      summary: Kubernetes Create a namespace
+      description: Creates a new namespace in the cluster. Namespaces provide a scope for names and allow cluster resources to be divided among multiple users.
+      tags:
+      - Cluster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Namespace'
+      responses:
+        '201':
+          description: Namespace created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Namespace'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /api/v1/namespaces/{name}:
+    get:
+      operationId: getNamespace
+      summary: Kubernetes Get a namespace
+      description: Returns the specified namespace object including its current status, labels, annotations, and resource quotas.
+      tags:
+      - Cluster
+      parameters:
+      - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Namespace details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Namespace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: replaceNamespace
+      summary: Kubernetes Replace a namespace
+      description: Replaces the specified namespace object. The entire resource is replaced with the provided body; use PATCH for partial updates.
+      tags:
+      - Cluster
+      parameters:
+      - $ref: '#/components/parameters/NameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Namespace'
+      responses:
+        '200':
+          description: Namespace updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Namespace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteNamespace
+      summary: Kubernetes Delete a namespace
+      description: Deletes the specified namespace and all resources contained within it. The namespace enters a Terminating state while resources are being removed, and is fully deleted once all contained resources are gone.
+      tags:
+      - Cluster
+      parameters:
+      - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Namespace deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Namespace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/nodes:
+    get:
+      operationId: listNodes
+      summary: Kubernetes List nodes
+      description: Returns a list of all nodes in the cluster. Nodes are the worker machines in Kubernetes that run containerized applications. Each node contains the services necessary to run pods and is managed by the control plane.
+      tags:
+      - Cluster
+      parameters:
+      - $ref: '#/components/parameters/LabelSelector'
+      - $ref: '#/components/parameters/FieldSelector'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of nodes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/nodes/{name}:
+    get:
+      operationId: getNode
+      summary: Kubernetes Get a node
+      description: Returns the specified node including its capacity, allocatable resources, conditions (Ready, MemoryPressure, DiskPressure), and system information.
+      tags:
+      - Cluster
+      parameters:
+      - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Node details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+    ResourceVersion:
+      name: resourceVersion
+      in: query
+      description: When specified with a watch call, shows changes that occur after the specified resourceVersion. When specified in a list request, returns results at least as new as the specified resourceVersion.
+      schema:
+        type: string
+    Watch:
+      name: watch
+      in: query
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+      schema:
+        type: boolean
+    Continue:
+      name: continue
+      in: query
+      description: Pagination token returned in a previous response's metadata.continue field. Use to retrieve the next page of results.
+      schema:
+        type: string
+    NameParam:
+      name: name
+      in: path
+      required: true
+      description: The name of the resource to operate on.
+      schema:
+        type: string
+    LabelSelector:
+      name: labelSelector
+      in: query
+      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
+      schema:
+        type: string
+    FieldSelector:
+      name: fieldSelector
+      in: query
+      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
+      schema:
+        type: string
+  schemas:
+    NodeList:
+      type: object
+      description: A list of nodes returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: NodeList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Node'
+    Namespace:
+      type: object
+      description: A Namespace provides a mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. Namespace-based scoping is applicable only for namespaced objects.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Namespace
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          type: object
+          properties:
+            finalizers:
+              type: array
+              items:
+                type: string
+              description: List of finalizers that must all be empty before the namespace is fully deleted.
+        status:
+          type: object
+          properties:
+            phase:
+              type: string
+              enum:
+              - Active
+              - Terminating
+              description: Current lifecycle phase of the namespace.
+    Status:
+      type: object
+      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Status
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable description of the status.
+        reason:
+          type: string
+          description: Machine-readable description of why the operation is in this status.
+        status:
+          type: string
+          enum:
+          - Success
+          - Failure
+          description: Outcome of the operation.
+    ListMeta:
+      type: object
+      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: Token used to retrieve the next page of results in a paginated list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
+    Taint:
+      type: object
+      description: A taint applied to a node that repels pods without a matching toleration. Used for dedicated nodes, nodes with special hardware, or node evictions.
+      required:
+      - key
+      - effect
+      properties:
+        key:
+          type: string
+          description: Taint key applied to the node.
+        value:
+          type: string
+          description: Taint value associated with the key.
+        effect:
+          type: string
+          enum:
+          - NoSchedule
+          - PreferNoSchedule
+          - NoExecute
+          description: Effect of the taint on pods without a matching toleration.
+    NodeCondition:
+      type: object
+      description: Condition describing the current state of a node component.
+      required:
+      - type
+      - status
+      properties:
+        type:
+          type: string
+          enum:
+          - Ready
+          - MemoryPressure
+          - DiskPressure
+          - PIDPressure
+          - NetworkUnavailable
+          description: Type of node condition.
+        status:
+          type: string
+          enum:
+          - 'True'
+          - 'False'
+          - Unknown
+          description: Status of the condition.
+        message:
+          type: string
+          description: Human-readable message indicating details about the condition.
+        reason:
+          type: string
+          description: Machine-readable reason for the condition's last transition.
+    ObjectMeta:
+      type: object
+      description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
+      properties:
+        name:
+          type: string
+          description: Unique name of the object within a namespace or cluster scope.
+        namespace:
+          type: string
+          description: Namespace that scopes the resource name. Not all resource types are namespaced.
+        uid:
+          type: string
+          description: Unique identifier generated by the server for this object. Remains constant for the lifetime of the object.
+        resourceVersion:
+          type: string
+          description: Opaque string that identifies an internal server version of the object. Used for optimistic concurrency control and watch operations.
+        generation:
+          type: integer
+          description: Sequence number representing the generation of the desired state. Incremented by the server on spec changes.
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the object was created.
+        deletionTimestamp:
+          type: string
+          format: date-time
+          description: Time at which the object will be deleted. Set by the server when a delete is requested.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of string keys and values to organize and select resources. Labels are queryable via label selectors.
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of non-identifying metadata. Annotations may contain arbitrary data and are not queryable by the API.
+        ownerReferences:
+          type: array
+          description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
+          items:
+            $ref: '#/components/schemas/OwnerReference'
+    Node:
+      type: object
+      description: A Node is a worker machine in Kubernetes. Each node contains the services necessary to run pods and is managed by the control plane. Nodes have resources including CPU, memory, and storage that pods consume.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Node
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/NodeSpec'
+        status:
+          $ref: '#/components/schemas/NodeStatus'
+    NamespaceList:
+      type: object
+      description: A list of namespaces returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: NamespaceList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Namespace'
+    NodeStatus:
+      type: object
+      description: Most recently observed status of the node including capacity, allocatable resources, conditions, and system info.
+      properties:
+        capacity:
+          type: object
+          additionalProperties:
+            type: string
+          description: Total resources available on the node including CPU and memory.
+        allocatable:
+          type: object
+          additionalProperties:
+            type: string
+          description: Resources available for pods on the node after system overhead.
+        conditions:
+          type: array
+          description: Current conditions of the node such as Ready, MemoryPressure, DiskPressure.
+          items:
+            $ref: '#/components/schemas/NodeCondition'
+    NodeSpec:
+      type: object
+      description: Specification of a node, including taints and configuration sources.
+      properties:
+        podCIDR:
+          type: string
+          description: Pod IP range assigned to the node.
+        providerID:
+          type: string
+          description: Provider-specific node identifier, as recognized by the cloud controller manager.
+        taints:
+          type: array
+          description: List of taints applied to the node. Pods must tolerate taints to be scheduled on the node.
+          items:
+            $ref: '#/components/schemas/Taint'
+        unschedulable:
+          type: boolean
+          description: When true, prevents new pods from being scheduled on the node.
+    OwnerReference:
+      type: object
+      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
+      required:
+      - apiVersion
+      - kind
+      - name
+      - uid
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the owner resource.
+        kind:
+          type: string
+          description: Kind of the owner resource.
+        name:
+          type: string
+          description: Name of the owner resource.
+        uid:
+          type: string
+          description: UID of the owner resource.
+        controller:
+          type: boolean
+          description: Whether this reference points to the managing controller.
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    NotFound:
+      description: Not found — the specified resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    Conflict:
+      description: Conflict — a resource with that name already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    BadRequest:
+      description: Bad request — invalid resource specification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Kubernetes service account token or user token issued by the cluster's authentication provider. Include in the Authorization header as 'Bearer <token>'.
+    clientCertificate:
+      type: mutualTLS
+      description: Client certificate authentication using a TLS certificate issued by the cluster's certificate authority.
+externalDocs:
+  description: Kubernetes API Reference Documentation
+  url: https://kubernetes.io/docs/reference/kubernetes-api/

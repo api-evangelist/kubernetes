@@ -1,0 +1,395 @@
+openapi: 3.1.0
+info:
+  title: Kubernetes Autoscaling Namespaces API
+  description: The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and external components all communicate with one another through the API server. The API is a resource-based (RESTful) programmatic interface provided via HTTP that supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).
+  version: v1.32.0
+  contact:
+    name: Kubernetes Community
+    url: https://kubernetes.io/community/
+  termsOfService: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://kubernetes.default.svc
+  description: In-cluster Kubernetes API Server
+security:
+- bearerAuth: []
+- clientCertificate: []
+tags:
+- name: Namespaces
+paths:
+  /api/v1/namespaces/{namespace}/services:
+    get:
+      operationId: listNamespacedServices
+      summary: Kubernetes List services in a namespace
+      description: Returns a list of all services in the specified namespace. Services provide stable network identities and load balancing for pods, abstracting away individual pod IP addresses.
+      tags:
+      - Namespaces
+      parameters:
+      - $ref: '#/components/parameters/NamespaceParam'
+      - $ref: '#/components/parameters/LabelSelector'
+      - $ref: '#/components/parameters/FieldSelector'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Watch'
+      responses:
+        '200':
+          description: List of services
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNamespacedService
+      summary: Kubernetes Create a service
+      description: Creates a new service in the specified namespace. Services can be of type ClusterIP, NodePort, LoadBalancer, or ExternalName, each providing different mechanisms for exposing pods to traffic.
+      tags:
+      - Namespaces
+      parameters:
+      - $ref: '#/components/parameters/NamespaceParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '201':
+          description: Service created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/namespaces/{namespace}/services/{name}:
+    get:
+      operationId: getNamespacedService
+      summary: Kubernetes Get a service
+      description: Returns the specified service including its cluster IP, selector, ports, and current endpoint assignments.
+      tags:
+      - Namespaces
+      parameters:
+      - $ref: '#/components/parameters/NamespaceParam'
+      - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Service details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: replaceNamespacedService
+      summary: Kubernetes Replace a service
+      description: Replaces the specified service configuration. Updates to the selector immediately affect which pods the service routes traffic to.
+      tags:
+      - Namespaces
+      parameters:
+      - $ref: '#/components/parameters/NamespaceParam'
+      - $ref: '#/components/parameters/NameParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Service'
+      responses:
+        '200':
+          description: Service updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteNamespacedService
+      summary: Kubernetes Delete a service
+      description: Deletes the specified service. Any external load balancers provisioned for a LoadBalancer-type service will also be deprovisioned.
+      tags:
+      - Namespaces
+      parameters:
+      - $ref: '#/components/parameters/NamespaceParam'
+      - $ref: '#/components/parameters/NameParam'
+      responses:
+        '200':
+          description: Service deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    ObjectMeta:
+      type: object
+      description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
+      properties:
+        name:
+          type: string
+          description: Unique name of the object within a namespace or cluster scope.
+        namespace:
+          type: string
+          description: Namespace that scopes the resource name. Not all resource types are namespaced.
+        uid:
+          type: string
+          description: Unique identifier generated by the server for this object. Remains constant for the lifetime of the object.
+        resourceVersion:
+          type: string
+          description: Opaque string that identifies an internal server version of the object. Used for optimistic concurrency control and watch operations.
+        generation:
+          type: integer
+          description: Sequence number representing the generation of the desired state. Incremented by the server on spec changes.
+        creationTimestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the object was created.
+        deletionTimestamp:
+          type: string
+          format: date-time
+          description: Time at which the object will be deleted. Set by the server when a delete is requested.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of string keys and values to organize and select resources. Labels are queryable via label selectors.
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of non-identifying metadata. Annotations may contain arbitrary data and are not queryable by the API.
+        ownerReferences:
+          type: array
+          description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
+          items:
+            $ref: '#/components/schemas/OwnerReference'
+    OwnerReference:
+      type: object
+      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
+      required:
+      - apiVersion
+      - kind
+      - name
+      - uid
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the owner resource.
+        kind:
+          type: string
+          description: Kind of the owner resource.
+        name:
+          type: string
+          description: Name of the owner resource.
+        uid:
+          type: string
+          description: UID of the owner resource.
+        controller:
+          type: boolean
+          description: Whether this reference points to the managing controller.
+    ServiceList:
+      type: object
+      description: A list of services returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: ServiceList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+    Status:
+      type: object
+      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Status
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable description of the status.
+        reason:
+          type: string
+          description: Machine-readable description of why the operation is in this status.
+        status:
+          type: string
+          enum:
+          - Success
+          - Failure
+          description: Outcome of the operation.
+    ServiceSpec:
+      type: object
+      description: Specification for the desired behavior of a service, including the port mappings, pod selector, and service type.
+      properties:
+        type:
+          type: string
+          enum:
+          - ClusterIP
+          - NodePort
+          - LoadBalancer
+          - ExternalName
+          description: How the service is exposed. ClusterIP (default) exposes within the cluster only; NodePort adds a node-level port; LoadBalancer provisions a cloud load balancer; ExternalName maps to a DNS name.
+        selector:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of key-value pairs that identify the pods this service routes traffic to.
+        ports:
+          type: array
+          description: List of ports the service exposes.
+          items:
+            $ref: '#/components/schemas/ServicePort'
+        clusterIP:
+          type: string
+          description: IP address of the service within the cluster. Assigned automatically unless None (headless service) is specified.
+        externalName:
+          type: string
+          description: External DNS name that the service maps to. Only used when type is ExternalName.
+    ListMeta:
+      type: object
+      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: Token used to retrieve the next page of results in a paginated list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
+    ServicePort:
+      type: object
+      description: A port that a service exposes, mapping from a service port to a target port.
+      required:
+      - port
+      properties:
+        name:
+          type: string
+          description: Name of the port within the service. Required for multi-port services.
+        protocol:
+          type: string
+          enum:
+          - TCP
+          - UDP
+          - SCTP
+          description: IP protocol for the port. Defaults to TCP.
+        port:
+          type: integer
+          description: Port number that the service listens on.
+        targetPort:
+          description: Port on the pod that traffic is forwarded to.
+          oneOf:
+          - type: integer
+          - type: string
+        nodePort:
+          type: integer
+          description: Port on each node on which the service is exposed when type is NodePort or LoadBalancer.
+    Service:
+      type: object
+      description: A Service is an abstraction that defines a logical set of pods and a policy for accessing them. Services enable decoupling between consumer and producer pods through stable virtual IPs and DNS names.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Service
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/ServiceSpec'
+  responses:
+    NotFound:
+      description: Not found — the specified resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    BadRequest:
+      description: Bad request — invalid resource specification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+  parameters:
+    LabelSelector:
+      name: labelSelector
+      in: query
+      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
+      schema:
+        type: string
+    Watch:
+      name: watch
+      in: query
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+      schema:
+        type: boolean
+    NamespaceParam:
+      name: namespace
+      in: path
+      required: true
+      description: The namespace name to scope the request to.
+      schema:
+        type: string
+    FieldSelector:
+      name: fieldSelector
+      in: query
+      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+    NameParam:
+      name: name
+      in: path
+      required: true
+      description: The name of the resource to operate on.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Kubernetes service account token or user token issued by the cluster's authentication provider. Include in the Authorization header as 'Bearer <token>'.
+    clientCertificate:
+      type: mutualTLS
+      description: Client certificate authentication using a TLS certificate issued by the cluster's certificate authority.
+externalDocs:
+  description: Kubernetes API Reference Documentation
+  url: https://kubernetes.io/docs/reference/kubernetes-api/
