@@ -1,43 +1,199 @@
 aid: kubernetes
 url: https://raw.githubusercontent.com/api-evangelist/kubernetes/refs/heads/main/apis.yml
 apis:
-  - aid: kubernetes:kubernetes
-    name: Kubernetes API
-    tags:
-      - Automation
-      - Cloud Native
-      - CNCF
-      - Containers
-      - Deployment
-      - Orchestration
-      - Scaling
-    humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
-    baseURL: https://kubernetes.default.svc
-    properties:
-      - url: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
-        type: Documentation
-      - url: https://kubernetes.io/docs/reference/kubernetes-api/
-        type: APIReference
-      - url: https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json
-        type: OpenAPI
-      - url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
-        type: OpenAPIRepository
-      - url: https://kubernetes.io/docs/reference/access-authn-authz/
-        type: Authentication
-      - url: https://kubernetes.io/docs/reference/using-api/client-libraries/
-        type: Client Libraries
-      - url: https://kubernetes.io/docs/reference/using-api/deprecation-guide/
-        type: Migration Guide
-      - type: OpenAPI
-        url: openapi/kubernetes-api-openapi.yml
-      - type: AsyncAPI
-        url: asyncapi/kubernetes-watch-asyncapi.yml
-      - type: JSONSchema
-        url: json-schema/kubernetes-resource-schema.json
-    description: >-
-      The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes
-      control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and
-      external components all communicate with one another through the API server.
+- aid: kubernetes:kubernetes-autoscaling-api
+  name: Kubernetes Autoscaling API
+  description: >-
+    Autoscaling resources including HorizontalPodAutoscalers for automatically scaling workloads based
+    on observed metrics.
+  humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  baseURL: https://kubernetes.default.svc
+  tags:
+  - Autoscaling
+  properties:
+  - type: OpenAPI
+    url: openapi/kubernetes-autoscaling-api-openapi.yml
+  - type: Documentation
+    url: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  - type: APIReference
+    url: https://kubernetes.io/docs/reference/kubernetes-api/
+  - type: OpenAPIRepository
+    url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
+  - type: Authentication
+    url: https://kubernetes.io/docs/reference/access-authn-authz/
+  - type: Client Libraries
+    url: https://kubernetes.io/docs/reference/using-api/client-libraries/
+  - type: Migration Guide
+    url: https://kubernetes.io/docs/reference/using-api/deprecation-guide/
+  - type: AsyncAPI
+    url: asyncapi/kubernetes-watch-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/kubernetes-resource-schema.json
+- aid: kubernetes:kubernetes-cluster-api
+  name: Kubernetes Cluster API
+  description: >-
+    Cluster-level resources including Namespaces, Nodes, ServiceAccounts, and RBAC resources for cluster
+    administration.
+  humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  baseURL: https://kubernetes.default.svc
+  tags:
+  - Cluster
+  properties:
+  - type: OpenAPI
+    url: openapi/kubernetes-cluster-api-openapi.yml
+  - type: Documentation
+    url: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  - type: APIReference
+    url: https://kubernetes.io/docs/reference/kubernetes-api/
+  - type: OpenAPIRepository
+    url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
+  - type: Authentication
+    url: https://kubernetes.io/docs/reference/access-authn-authz/
+  - type: Client Libraries
+    url: https://kubernetes.io/docs/reference/using-api/client-libraries/
+  - type: Migration Guide
+    url: https://kubernetes.io/docs/reference/using-api/deprecation-guide/
+  - type: AsyncAPI
+    url: asyncapi/kubernetes-watch-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/kubernetes-resource-schema.json
+- aid: kubernetes:kubernetes-config-api
+  name: Kubernetes Config API
+  description: >-
+    Configuration and storage resources including ConfigMaps, Secrets, PersistentVolumes, and PersistentVolumeClaims.
+  humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  baseURL: https://kubernetes.default.svc
+  tags:
+  - Config
+  properties:
+  - type: OpenAPI
+    url: openapi/kubernetes-config-api-openapi.yml
+  - type: Documentation
+    url: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  - type: APIReference
+    url: https://kubernetes.io/docs/reference/kubernetes-api/
+  - type: OpenAPIRepository
+    url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
+  - type: Authentication
+    url: https://kubernetes.io/docs/reference/access-authn-authz/
+  - type: Client Libraries
+    url: https://kubernetes.io/docs/reference/using-api/client-libraries/
+  - type: Migration Guide
+    url: https://kubernetes.io/docs/reference/using-api/deprecation-guide/
+  - type: AsyncAPI
+    url: asyncapi/kubernetes-watch-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/kubernetes-resource-schema.json
+- aid: kubernetes:kubernetes-events-api
+  name: Kubernetes Events API
+  description: >-
+    Event resources capturing occurrences within the cluster such as pod scheduling, container restarts,
+    and resource state changes.
+  humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  baseURL: https://kubernetes.default.svc
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/kubernetes-events-api-openapi.yml
+  - type: Documentation
+    url: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  - type: APIReference
+    url: https://kubernetes.io/docs/reference/kubernetes-api/
+  - type: OpenAPIRepository
+    url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
+  - type: Authentication
+    url: https://kubernetes.io/docs/reference/access-authn-authz/
+  - type: Client Libraries
+    url: https://kubernetes.io/docs/reference/using-api/client-libraries/
+  - type: Migration Guide
+    url: https://kubernetes.io/docs/reference/using-api/deprecation-guide/
+  - type: AsyncAPI
+    url: asyncapi/kubernetes-watch-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/kubernetes-resource-schema.json
+- aid: kubernetes:kubernetes-namespaces-api
+  name: Kubernetes Namespaces API
+  description: The Namespaces API from Kubernetes — 2 operation(s) for namespaces.
+  humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  baseURL: https://kubernetes.default.svc
+  tags:
+  - Namespaces
+  properties:
+  - type: OpenAPI
+    url: openapi/kubernetes-namespaces-api-openapi.yml
+  - type: Documentation
+    url: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  - type: APIReference
+    url: https://kubernetes.io/docs/reference/kubernetes-api/
+  - type: OpenAPIRepository
+    url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
+  - type: Authentication
+    url: https://kubernetes.io/docs/reference/access-authn-authz/
+  - type: Client Libraries
+    url: https://kubernetes.io/docs/reference/using-api/client-libraries/
+  - type: Migration Guide
+    url: https://kubernetes.io/docs/reference/using-api/deprecation-guide/
+  - type: AsyncAPI
+    url: asyncapi/kubernetes-watch-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/kubernetes-resource-schema.json
+- aid: kubernetes:kubernetes-rbac-api
+  name: Kubernetes RBAC API
+  description: >-
+    Role-based access control resources including Roles, RoleBindings, ClusterRoles, and ClusterRoleBindings
+    for managing authorization.
+  humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  baseURL: https://kubernetes.default.svc
+  tags:
+  - RBAC
+  properties:
+  - type: OpenAPI
+    url: openapi/kubernetes-rbac-api-openapi.yml
+  - type: Documentation
+    url: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  - type: APIReference
+    url: https://kubernetes.io/docs/reference/kubernetes-api/
+  - type: OpenAPIRepository
+    url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
+  - type: Authentication
+    url: https://kubernetes.io/docs/reference/access-authn-authz/
+  - type: Client Libraries
+    url: https://kubernetes.io/docs/reference/using-api/client-libraries/
+  - type: Migration Guide
+    url: https://kubernetes.io/docs/reference/using-api/deprecation-guide/
+  - type: AsyncAPI
+    url: asyncapi/kubernetes-watch-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/kubernetes-resource-schema.json
+- aid: kubernetes:kubernetes-workloads-api
+  name: Kubernetes Workloads API
+  description: >-
+    Workload resources including Pods, Deployments, StatefulSets, DaemonSets, ReplicaSets, Jobs, and CronJobs
+    for managing containerized applications.
+  humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  baseURL: https://kubernetes.default.svc
+  tags:
+  - Workloads
+  properties:
+  - type: OpenAPI
+    url: openapi/kubernetes-workloads-api-openapi.yml
+  - type: Documentation
+    url: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+  - type: APIReference
+    url: https://kubernetes.io/docs/reference/kubernetes-api/
+  - type: OpenAPIRepository
+    url: https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec
+  - type: Authentication
+    url: https://kubernetes.io/docs/reference/access-authn-authz/
+  - type: Client Libraries
+    url: https://kubernetes.io/docs/reference/using-api/client-libraries/
+  - type: Migration Guide
+    url: https://kubernetes.io/docs/reference/using-api/deprecation-guide/
+  - type: AsyncAPI
+    url: asyncapi/kubernetes-watch-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/kubernetes-resource-schema.json
 name: Kubernetes
 tags:
   - Automation
@@ -49,9 +205,24 @@ tags:
   - Orchestration
   - Scaling
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kubernetes.png
 access: 3rd-Party
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/kubernetes/overview
   - type: Packages
     url: packages/kubernetes-packages.yml
   - type: WellKnown
