@@ -1,0 +1,1248 @@
+{
+  "info": {
+    "_postman_id": "b190f565-86c6-4d0a-a6a7-3377d04789f4",
+    "name": "Kubernetes Autoscaling Namespaces API",
+    "description": "The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and external components all communicate with one another through the API server. The API is a resource-based (RESTful) programmatic interface provided via HTTP that supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).\n\nContact Support:\n Name: Kubernetes Community",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:04:35.000Z",
+    "updatedAt": "2026-07-28T02:04:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b190f565-86c6-4d0a-a6a7-3377d04789f4"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "namespaces",
+              "item": [
+                {
+                  "name": "{namespace}",
+                  "item": [
+                    {
+                      "name": "services",
+                      "item": [
+                        {
+                          "name": "{name}",
+                          "item": [
+                            {
+                              "name": "Kubernetes Get a service",
+                              "id": "a9a09cd7-447b-4b1a-a2db-b785537663c3",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "services",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "4ebfb4a4-a2d3-411d-bf87-62f8bcaf7e96",
+                                      "key": "namespace",
+                                      "value": "<string>",
+                                      "description": "(Required) The namespace name to scope the request to."
+                                    },
+                                    {
+                                      "id": "4f4f04f2-b4f7-41eb-96e7-828db4904ffb",
+                                      "key": "name",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the resource to operate on."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns the specified service including its cluster IP, selector, ports, and current endpoint assignments."
+                              },
+                              "response": [
+                                {
+                                  "id": "6a783d44-fa8b-44ed-a49f-75b7e1dd34b4",
+                                  "name": "Service details",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "services",
+                                        ":name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        },
+                                        {
+                                          "key": "name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:04:35.000Z",
+                                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                                  "uid": "35240-6a783d44-fa8b-44ed-a49f-75b7e1dd34b4"
+                                },
+                                {
+                                  "id": "c8a1ff7c-87e0-4d5f-bf7b-309a72981091",
+                                  "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "services",
+                                        ":name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        },
+                                        {
+                                          "key": "name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                                  "createdAt": "2026-07-28T02:04:35.000Z",
+                                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                                  "uid": "35240-c8a1ff7c-87e0-4d5f-bf7b-309a72981091"
+                                },
+                                {
+                                  "id": "61a3aca0-fadd-47f8-92ca-ad1c0e892e1e",
+                                  "name": "Not found \u2014 the specified resource does not exist",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "services",
+                                        ":name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        },
+                                        {
+                                          "key": "name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                                  "createdAt": "2026-07-28T02:04:35.000Z",
+                                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                                  "uid": "35240-61a3aca0-fadd-47f8-92ca-ad1c0e892e1e"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:04:35.000Z",
+                              "updatedAt": "2026-07-28T02:04:35.000Z",
+                              "uid": "35240-a9a09cd7-447b-4b1a-a2db-b785537663c3"
+                            },
+                            {
+                              "name": "Kubernetes Replace a service",
+                              "id": "d0afbfb6-302b-4383-9f02-7613f97ce066",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "services",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "094e3226-7ca7-4301-bf3c-627c3077aab3",
+                                      "key": "namespace",
+                                      "value": "<string>",
+                                      "description": "(Required) The namespace name to scope the request to."
+                                    },
+                                    {
+                                      "id": "326b8d42-ae48-45c9-8ae2-de69c5e46672",
+                                      "key": "name",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the resource to operate on."
+                                    }
+                                  ]
+                                },
+                                "description": "Replaces the specified service configuration. Updates to the selector immediately affect which pods the service routes traffic to."
+                              },
+                              "response": [
+                                {
+                                  "id": "13eb384a-167d-490c-8394-9961a0b7fbbf",
+                                  "name": "Service updated",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "services",
+                                        ":name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        },
+                                        {
+                                          "key": "name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:04:35.000Z",
+                                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                                  "uid": "35240-13eb384a-167d-490c-8394-9961a0b7fbbf"
+                                },
+                                {
+                                  "id": "79838ba7-e1d0-46e0-a7fe-32bc1863a76e",
+                                  "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "services",
+                                        ":name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        },
+                                        {
+                                          "key": "name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                                  "createdAt": "2026-07-28T02:04:35.000Z",
+                                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                                  "uid": "35240-79838ba7-e1d0-46e0-a7fe-32bc1863a76e"
+                                },
+                                {
+                                  "id": "df226ad9-993d-4ed3-b68d-647f60e4d208",
+                                  "name": "Not found \u2014 the specified resource does not exist",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "services",
+                                        ":name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        },
+                                        {
+                                          "key": "name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                                  "createdAt": "2026-07-28T02:04:35.000Z",
+                                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                                  "uid": "35240-df226ad9-993d-4ed3-b68d-647f60e4d208"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:04:35.000Z",
+                              "updatedAt": "2026-07-28T02:04:35.000Z",
+                              "uid": "35240-d0afbfb6-302b-4383-9f02-7613f97ce066"
+                            },
+                            {
+                              "name": "Kubernetes Delete a service",
+                              "id": "b69c4ca6-5a5b-4260-8676-19c6a8d41246",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "services",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c38f2d2c-1022-441a-8e71-ad47559888bd",
+                                      "key": "namespace",
+                                      "value": "<string>",
+                                      "description": "(Required) The namespace name to scope the request to."
+                                    },
+                                    {
+                                      "id": "28c65152-a75f-496b-993e-959356daac5b",
+                                      "key": "name",
+                                      "value": "<string>",
+                                      "description": "(Required) The name of the resource to operate on."
+                                    }
+                                  ]
+                                },
+                                "description": "Deletes the specified service. Any external load balancers provisioned for a LoadBalancer-type service will also be deprovisioned."
+                              },
+                              "response": [
+                                {
+                                  "id": "e1c59a0a-547b-4cd3-b86d-94a6d8f7f1fa",
+                                  "name": "Service deleted",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "services",
+                                        ":name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        },
+                                        {
+                                          "key": "name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:04:35.000Z",
+                                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                                  "uid": "35240-e1c59a0a-547b-4cd3-b86d-94a6d8f7f1fa"
+                                },
+                                {
+                                  "id": "e89e798b-850c-420d-812d-a2837f5ef01d",
+                                  "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "services",
+                                        ":name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        },
+                                        {
+                                          "key": "name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                                  "createdAt": "2026-07-28T02:04:35.000Z",
+                                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                                  "uid": "35240-e89e798b-850c-420d-812d-a2837f5ef01d"
+                                },
+                                {
+                                  "id": "0993aaf2-2824-4e72-9a4b-3c32b8b5e3aa",
+                                  "name": "Not found \u2014 the specified resource does not exist",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services/:name",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "services",
+                                        ":name"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        },
+                                        {
+                                          "key": "name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                                  "createdAt": "2026-07-28T02:04:35.000Z",
+                                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                                  "uid": "35240-0993aaf2-2824-4e72-9a4b-3c32b8b5e3aa"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:04:35.000Z",
+                              "updatedAt": "2026-07-28T02:04:35.000Z",
+                              "uid": "35240-b69c4ca6-5a5b-4260-8676-19c6a8d41246"
+                            }
+                          ],
+                          "id": "0437d4dd-e0f9-4686-a9cd-80f414f63db2",
+                          "createdAt": "2026-07-28T02:04:35.000Z",
+                          "updatedAt": "2026-07-28T02:04:35.000Z",
+                          "uid": "35240-0437d4dd-e0f9-4686-a9cd-80f414f63db2"
+                        },
+                        {
+                          "name": "Kubernetes List services in a namespace",
+                          "id": "4bb4de33-486d-4207-b5b0-e6c1669fb167",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services?labelSelector=<string>&fieldSelector=<string>&limit=<integer>&watch=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "namespaces",
+                                ":namespace",
+                                "services"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                  "key": "labelSelector",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1",
+                                  "key": "fieldSelector",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                  "key": "watch",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e2bf2a90-5b09-435b-ae8d-0f73f0a439f3",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The namespace name to scope the request to."
+                                }
+                              ]
+                            },
+                            "description": "Returns a list of all services in the specified namespace. Services provide stable network identities and load balancing for pods, abstracting away individual pod IP addresses."
+                          },
+                          "response": [
+                            {
+                              "id": "80d14ab0-0f9e-4ee3-87b5-3f67626982ce",
+                              "name": "List of services",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services?labelSelector=<string>&fieldSelector=<string>&limit=<integer>&watch=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "services"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                      "key": "labelSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1",
+                                      "key": "fieldSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                      "key": "watch",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"reprehenderit_9\": \"<string>\"\n        },\n        \"annotations\": {\n          \"nond\": \"<string>\",\n          \"fugiat_c\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"spec\": {\n        \"type\": \"ClusterIP\",\n        \"selector\": {\n          \"Excepteurb8\": \"<string>\",\n          \"culpa6\": \"<string>\"\n        },\n        \"ports\": [\n          {\n            \"port\": \"<integer>\",\n            \"name\": \"<string>\",\n            \"protocol\": \"TCP\",\n            \"targetPort\": \"<integer>\",\n            \"nodePort\": \"<integer>\"\n          },\n          {\n            \"port\": \"<integer>\",\n            \"name\": \"<string>\",\n            \"protocol\": \"SCTP\",\n            \"targetPort\": \"<integer>\",\n            \"nodePort\": \"<integer>\"\n          }\n        ],\n        \"clusterIP\": \"<string>\",\n        \"externalName\": \"<string>\"\n      }\n    },\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"dolore7bd\": \"<string>\",\n          \"veniam1bb\": \"<string>\",\n          \"non5\": \"<string>\",\n          \"Duis_65\": \"<string>\"\n        },\n        \"annotations\": {\n          \"sint_4b3\": \"<string>\",\n          \"dolore4\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"spec\": {\n        \"type\": \"NodePort\",\n        \"selector\": {\n          \"velita03\": \"<string>\",\n          \"deserunt_7\": \"<string>\"\n        },\n        \"ports\": [\n          {\n            \"port\": \"<integer>\",\n            \"name\": \"<string>\",\n            \"protocol\": \"UDP\",\n            \"targetPort\": \"<integer>\",\n            \"nodePort\": \"<integer>\"\n          },\n          {\n            \"port\": \"<integer>\",\n            \"name\": \"<string>\",\n            \"protocol\": \"TCP\",\n            \"targetPort\": \"<integer>\",\n            \"nodePort\": \"<integer>\"\n          }\n        ],\n        \"clusterIP\": \"<string>\",\n        \"externalName\": \"<string>\"\n      }\n    }\n  ],\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"resourceVersion\": \"<string>\",\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:04:35.000Z",
+                              "updatedAt": "2026-07-28T02:04:35.000Z",
+                              "uid": "35240-80d14ab0-0f9e-4ee3-87b5-3f67626982ce"
+                            },
+                            {
+                              "id": "572ce8f2-c198-4a56-bd45-5b09b44b1fe6",
+                              "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services?labelSelector=<string>&fieldSelector=<string>&limit=<integer>&watch=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "services"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                      "key": "labelSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1",
+                                      "key": "fieldSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                      "key": "watch",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                              "createdAt": "2026-07-28T02:04:35.000Z",
+                              "updatedAt": "2026-07-28T02:04:35.000Z",
+                              "uid": "35240-572ce8f2-c198-4a56-bd45-5b09b44b1fe6"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:04:35.000Z",
+                          "updatedAt": "2026-07-28T02:04:35.000Z",
+                          "uid": "35240-4bb4de33-486d-4207-b5b0-e6c1669fb167"
+                        },
+                        {
+                          "name": "Kubernetes Create a service",
+                          "id": "10f883d6-c171-4fb2-ab65-881b8013042f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "namespaces",
+                                ":namespace",
+                                "services"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "325c52c0-c939-48a1-8ceb-ff15a3fc57e3",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The namespace name to scope the request to."
+                                }
+                              ]
+                            },
+                            "description": "Creates a new service in the specified namespace. Services can be of type ClusterIP, NodePort, LoadBalancer, or ExternalName, each providing different mechanisms for exposing pods to traffic."
+                          },
+                          "response": [
+                            {
+                              "id": "a1571df3-4d56-46b6-80af-4ce98033b3c8",
+                              "name": "Service created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "services"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:04:35.000Z",
+                              "updatedAt": "2026-07-28T02:04:35.000Z",
+                              "uid": "35240-a1571df3-4d56-46b6-80af-4ce98033b3c8"
+                            },
+                            {
+                              "id": "fd9a2aa7-85ce-465f-976b-1199d61ae4ac",
+                              "name": "Bad request \u2014 invalid resource specification",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "services"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                              "createdAt": "2026-07-28T02:04:35.000Z",
+                              "updatedAt": "2026-07-28T02:04:35.000Z",
+                              "uid": "35240-fd9a2aa7-85ce-465f-976b-1199d61ae4ac"
+                            },
+                            {
+                              "id": "0dca0fb4-d911-4628-a3c0-7242042290fd",
+                              "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"aliquip856\": \"<string>\",\n      \"pariatur_21\": \"<string>\",\n      \"pariatur_89\": \"<string>\",\n      \"qui3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"proidentc2\": \"<string>\",\n      \"ut4fd\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"type\": \"LoadBalancer\",\n    \"selector\": {\n      \"aliqua_1a\": \"<string>\",\n      \"dolore23\": \"<string>\",\n      \"adipisicing_e\": \"<string>\"\n    },\n    \"ports\": [\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"TCP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      },\n      {\n        \"port\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"protocol\": \"SCTP\",\n        \"targetPort\": \"<integer>\",\n        \"nodePort\": \"<integer>\"\n      }\n    ],\n    \"clusterIP\": \"<string>\",\n    \"externalName\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/services",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "services"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                              "createdAt": "2026-07-28T02:04:35.000Z",
+                              "updatedAt": "2026-07-28T02:04:35.000Z",
+                              "uid": "35240-0dca0fb4-d911-4628-a3c0-7242042290fd"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:04:35.000Z",
+                          "updatedAt": "2026-07-28T02:04:35.000Z",
+                          "uid": "35240-10f883d6-c171-4fb2-ab65-881b8013042f"
+                        }
+                      ],
+                      "id": "6ed2c4c1-f7eb-4815-a18f-31d81d70917a",
+                      "createdAt": "2026-07-28T02:04:35.000Z",
+                      "updatedAt": "2026-07-28T02:04:35.000Z",
+                      "uid": "35240-6ed2c4c1-f7eb-4815-a18f-31d81d70917a"
+                    }
+                  ],
+                  "id": "d03fefd3-1773-40eb-92e5-cd9f0568e3b9",
+                  "createdAt": "2026-07-28T02:04:35.000Z",
+                  "updatedAt": "2026-07-28T02:04:35.000Z",
+                  "uid": "35240-d03fefd3-1773-40eb-92e5-cd9f0568e3b9"
+                }
+              ],
+              "id": "353c3e3a-628e-46b7-8994-99eb65f671d1",
+              "createdAt": "2026-07-28T02:04:35.000Z",
+              "updatedAt": "2026-07-28T02:04:35.000Z",
+              "uid": "35240-353c3e3a-628e-46b7-8994-99eb65f671d1"
+            }
+          ],
+          "id": "e5995708-a592-4d56-835e-47d9bfb09b7a",
+          "createdAt": "2026-07-28T02:04:35.000Z",
+          "updatedAt": "2026-07-28T02:04:35.000Z",
+          "uid": "35240-e5995708-a592-4d56-835e-47d9bfb09b7a"
+        }
+      ],
+      "id": "e731945d-42d9-43bf-bad5-47f8c6fd6174",
+      "createdAt": "2026-07-28T02:04:35.000Z",
+      "updatedAt": "2026-07-28T02:04:35.000Z",
+      "uid": "35240-e731945d-42d9-43bf-bad5-47f8c6fd6174"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://kubernetes.default.svc"
+    }
+  ]
+}

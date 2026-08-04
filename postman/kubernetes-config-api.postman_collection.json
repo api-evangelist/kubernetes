@@ -1,0 +1,980 @@
+{
+  "info": {
+    "_postman_id": "2af06d30-91ec-4092-8b2b-113500d32946",
+    "name": "Kubernetes Autoscaling Config API",
+    "description": "The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and external components all communicate with one another through the API server. The API is a resource-based (RESTful) programmatic interface provided via HTTP that supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).\n\nContact Support:\n Name: Kubernetes Community",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:04:32.000Z",
+    "updatedAt": "2026-07-28T02:04:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2af06d30-91ec-4092-8b2b-113500d32946"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "namespaces",
+              "item": [
+                {
+                  "name": "{namespace}",
+                  "item": [
+                    {
+                      "name": "configmaps",
+                      "item": [
+                        {
+                          "name": "Kubernetes List ConfigMaps in a namespace",
+                          "id": "82d69eda-0303-4dd1-af24-636f52fd0fcb",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/configmaps?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "namespaces",
+                                ":namespace",
+                                "configmaps"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                  "key": "labelSelector",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                  "key": "watch",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5c37682e-75db-4023-9293-4008c699018c",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The namespace name to scope the request to."
+                                }
+                              ]
+                            },
+                            "description": "Returns a list of all ConfigMaps in the specified namespace. ConfigMaps allow you to decouple configuration from pod images so that containerized applications can be made portable."
+                          },
+                          "response": [
+                            {
+                              "id": "ce91d82d-7005-41f4-b7ab-bbacd76ab093",
+                              "name": "List of ConfigMaps",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/configmaps?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "configmaps"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                      "key": "labelSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                      "key": "watch",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"ut_ff_\": \"<string>\",\n          \"officia10e\": \"<string>\"\n        },\n        \"annotations\": {\n          \"enim_b\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"data\": {\n        \"dolore_86\": \"<string>\"\n      },\n      \"binaryData\": {\n        \"elitb\": \"<string>\",\n        \"Excepteur_c5c\": \"<string>\",\n        \"culpa_df\": \"<string>\"\n      }\n    },\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"deserunt_4\": \"<string>\",\n          \"cillum_ff\": \"<string>\",\n          \"reprehenderit6fd\": \"<string>\",\n          \"mollitc\": \"<string>\"\n        },\n        \"annotations\": {\n          \"sed_1\": \"<string>\",\n          \"laborisa\": \"<string>\",\n          \"veniam4\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"data\": {\n        \"Duis1\": \"<string>\"\n      },\n      \"binaryData\": {\n        \"ullamcoc_\": \"<string>\",\n        \"reprehenderit__e1\": \"<string>\",\n        \"fugiat_6\": \"<string>\",\n        \"dolor_a2\": \"<string>\",\n        \"laboris__\": \"<string>\"\n      }\n    }\n  ],\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"resourceVersion\": \"<string>\",\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-ce91d82d-7005-41f4-b7ab-bbacd76ab093"
+                            },
+                            {
+                              "id": "b29345f7-d72f-440c-a103-8390ab8fcea9",
+                              "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/configmaps?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "configmaps"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                      "key": "labelSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                      "key": "watch",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-b29345f7-d72f-440c-a103-8390ab8fcea9"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:04:33.000Z",
+                          "updatedAt": "2026-07-28T02:04:33.000Z",
+                          "uid": "35240-82d69eda-0303-4dd1-af24-636f52fd0fcb"
+                        },
+                        {
+                          "name": "Kubernetes Create a ConfigMap",
+                          "id": "4f17df9b-f39b-4085-9a11-3606439a8eb3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"laboris_dc8\": \"<string>\",\n      \"cillum_cef\": \"<string>\",\n      \"ad4\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur58\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"data\": {\n    \"ipsum_e\": \"<string>\"\n  },\n  \"binaryData\": {\n    \"laborumca4\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/configmaps",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "namespaces",
+                                ":namespace",
+                                "configmaps"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "27410748-5343-44d9-9ed6-227c3bfe9561",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The namespace name to scope the request to."
+                                }
+                              ]
+                            },
+                            "description": "Creates a new ConfigMap in the specified namespace. ConfigMaps store non-confidential data as key-value pairs that can be consumed as environment variables, command-line arguments, or configuration files."
+                          },
+                          "response": [
+                            {
+                              "id": "dd6eacad-c2af-4411-b151-5546008d05a8",
+                              "name": "ConfigMap created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"laboris_dc8\": \"<string>\",\n      \"cillum_cef\": \"<string>\",\n      \"ad4\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur58\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"data\": {\n    \"ipsum_e\": \"<string>\"\n  },\n  \"binaryData\": {\n    \"laborumca4\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/configmaps",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "configmaps"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"laboris_dc8\": \"<string>\",\n      \"cillum_cef\": \"<string>\",\n      \"ad4\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur58\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"data\": {\n    \"ipsum_e\": \"<string>\"\n  },\n  \"binaryData\": {\n    \"laborumca4\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-dd6eacad-c2af-4411-b151-5546008d05a8"
+                            },
+                            {
+                              "id": "f0225366-b66e-4bef-a6b1-dbea070340f9",
+                              "name": "Bad request \u2014 invalid resource specification",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"laboris_dc8\": \"<string>\",\n      \"cillum_cef\": \"<string>\",\n      \"ad4\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur58\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"data\": {\n    \"ipsum_e\": \"<string>\"\n  },\n  \"binaryData\": {\n    \"laborumca4\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/configmaps",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "configmaps"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-f0225366-b66e-4bef-a6b1-dbea070340f9"
+                            },
+                            {
+                              "id": "fb3b1f7a-9816-4928-92c2-41559069ac9a",
+                              "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"laboris_dc8\": \"<string>\",\n      \"cillum_cef\": \"<string>\",\n      \"ad4\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur58\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"data\": {\n    \"ipsum_e\": \"<string>\"\n  },\n  \"binaryData\": {\n    \"laborumca4\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/configmaps",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "configmaps"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-fb3b1f7a-9816-4928-92c2-41559069ac9a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:04:33.000Z",
+                          "updatedAt": "2026-07-28T02:04:33.000Z",
+                          "uid": "35240-4f17df9b-f39b-4085-9a11-3606439a8eb3"
+                        }
+                      ],
+                      "id": "97cf53ce-4af9-4a40-a001-4448990b02ab",
+                      "createdAt": "2026-07-28T02:04:33.000Z",
+                      "updatedAt": "2026-07-28T02:04:33.000Z",
+                      "uid": "35240-97cf53ce-4af9-4a40-a001-4448990b02ab"
+                    },
+                    {
+                      "name": "secrets",
+                      "item": [
+                        {
+                          "name": "Kubernetes List Secrets in a namespace",
+                          "id": "d0a6469d-9b84-4917-9c37-2e34f02f0ef9",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/secrets?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "namespaces",
+                                ":namespace",
+                                "secrets"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                  "key": "labelSelector",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                  "key": "watch",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9906b739-f5a2-4e27-a434-177fdbf8f3a1",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The namespace name to scope the request to."
+                                }
+                              ]
+                            },
+                            "description": "Returns a list of Secrets in the specified namespace. Secrets store sensitive information such as passwords, OAuth tokens, and SSH keys, with access controlled via RBAC."
+                          },
+                          "response": [
+                            {
+                              "id": "d091565e-c7d6-44bd-926c-0af753e53fa1",
+                              "name": "List of Secrets",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/secrets?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "secrets"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                      "key": "labelSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                      "key": "watch",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"qui_3f\": \"<string>\"\n        },\n        \"annotations\": {\n          \"reprehenderit0b5\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"type\": \"Opaque\",\n      \"data\": {\n        \"aliqua_94\": \"<string>\",\n        \"Excepteur_9\": \"<string>\",\n        \"id_d0\": \"<string>\"\n      },\n      \"stringData\": {\n        \"deserunt_c5\": \"<string>\",\n        \"elit_2a\": \"<string>\"\n      }\n    },\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"culpa_6\": \"<string>\",\n          \"eadd\": \"<string>\"\n        },\n        \"annotations\": {\n          \"esse_2_\": \"<string>\",\n          \"mollit_a9\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"type\": \"Opaque\",\n      \"data\": {\n        \"occaecatd42\": \"<string>\"\n      },\n      \"stringData\": {\n        \"ad_0c\": \"<string>\"\n      }\n    }\n  ],\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"resourceVersion\": \"<string>\",\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-d091565e-c7d6-44bd-926c-0af753e53fa1"
+                            },
+                            {
+                              "id": "5972e1aa-208a-4c3f-a886-6dd64ea131cf",
+                              "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/secrets?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "secrets"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                      "key": "labelSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                      "key": "watch",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-5972e1aa-208a-4c3f-a886-6dd64ea131cf"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:04:33.000Z",
+                          "updatedAt": "2026-07-28T02:04:33.000Z",
+                          "uid": "35240-d0a6469d-9b84-4917-9c37-2e34f02f0ef9"
+                        },
+                        {
+                          "name": "Kubernetes Create a Secret",
+                          "id": "2df12f63-0300-49f5-8a65-4848639fae80",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"exercitatione\": \"<string>\",\n      \"occaecat1\": \"<string>\",\n      \"aliquip_e8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur_9_9\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"type\": \"Opaque\",\n  \"data\": {\n    \"ad_a\": \"<string>\"\n  },\n  \"stringData\": {\n    \"pariaturbee\": \"<string>\",\n    \"incididuntc\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/secrets",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "namespaces",
+                                ":namespace",
+                                "secrets"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "dd0ee557-0fd8-4654-a68b-76ec2b151bf0",
+                                  "key": "namespace",
+                                  "value": "<string>",
+                                  "description": "(Required) The namespace name to scope the request to."
+                                }
+                              ]
+                            },
+                            "description": "Creates a new Secret in the specified namespace. Secret data is stored base64-encoded and can be mounted as files or exposed as environment variables in pods."
+                          },
+                          "response": [
+                            {
+                              "id": "7acd3f47-4312-4ac8-991f-b2515d66b82d",
+                              "name": "Secret created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"exercitatione\": \"<string>\",\n      \"occaecat1\": \"<string>\",\n      \"aliquip_e8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur_9_9\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"type\": \"Opaque\",\n  \"data\": {\n    \"ad_a\": \"<string>\"\n  },\n  \"stringData\": {\n    \"pariaturbee\": \"<string>\",\n    \"incididuntc\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/secrets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "secrets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"exercitatione\": \"<string>\",\n      \"occaecat1\": \"<string>\",\n      \"aliquip_e8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur_9_9\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"type\": \"Opaque\",\n  \"data\": {\n    \"ad_a\": \"<string>\"\n  },\n  \"stringData\": {\n    \"pariaturbee\": \"<string>\",\n    \"incididuntc\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-7acd3f47-4312-4ac8-991f-b2515d66b82d"
+                            },
+                            {
+                              "id": "1baa436e-b29a-4710-96d1-8d0254bccab5",
+                              "name": "Bad request \u2014 invalid resource specification",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"exercitatione\": \"<string>\",\n      \"occaecat1\": \"<string>\",\n      \"aliquip_e8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur_9_9\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"type\": \"Opaque\",\n  \"data\": {\n    \"ad_a\": \"<string>\"\n  },\n  \"stringData\": {\n    \"pariaturbee\": \"<string>\",\n    \"incididuntc\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/secrets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "secrets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-1baa436e-b29a-4710-96d1-8d0254bccab5"
+                            },
+                            {
+                              "id": "51a87ebe-ad2f-4394-8cbc-a1369046b783",
+                              "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"exercitatione\": \"<string>\",\n      \"occaecat1\": \"<string>\",\n      \"aliquip_e8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"consectetur_9_9\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"type\": \"Opaque\",\n  \"data\": {\n    \"ad_a\": \"<string>\"\n  },\n  \"stringData\": {\n    \"pariaturbee\": \"<string>\",\n    \"incididuntc\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/namespaces/:namespace/secrets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "secrets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "namespace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                              "createdAt": "2026-07-28T02:04:33.000Z",
+                              "updatedAt": "2026-07-28T02:04:33.000Z",
+                              "uid": "35240-51a87ebe-ad2f-4394-8cbc-a1369046b783"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:04:33.000Z",
+                          "updatedAt": "2026-07-28T02:04:33.000Z",
+                          "uid": "35240-2df12f63-0300-49f5-8a65-4848639fae80"
+                        }
+                      ],
+                      "id": "0eb25d5c-6f9b-40a9-a14e-c9864a465e71",
+                      "createdAt": "2026-07-28T02:04:33.000Z",
+                      "updatedAt": "2026-07-28T02:04:33.000Z",
+                      "uid": "35240-0eb25d5c-6f9b-40a9-a14e-c9864a465e71"
+                    }
+                  ],
+                  "id": "34a03cd6-855c-40fd-b594-7a9737f7862c",
+                  "createdAt": "2026-07-28T02:04:33.000Z",
+                  "updatedAt": "2026-07-28T02:04:33.000Z",
+                  "uid": "35240-34a03cd6-855c-40fd-b594-7a9737f7862c"
+                }
+              ],
+              "id": "18d8c0a9-9d6c-4463-a7d6-a8cf416a26ee",
+              "createdAt": "2026-07-28T02:04:33.000Z",
+              "updatedAt": "2026-07-28T02:04:33.000Z",
+              "uid": "35240-18d8c0a9-9d6c-4463-a7d6-a8cf416a26ee"
+            }
+          ],
+          "id": "71a61500-bea6-48f6-a087-f85bf92400d5",
+          "createdAt": "2026-07-28T02:04:33.000Z",
+          "updatedAt": "2026-07-28T02:04:33.000Z",
+          "uid": "35240-71a61500-bea6-48f6-a087-f85bf92400d5"
+        }
+      ],
+      "id": "55ca942d-f876-448b-bdf4-467b4324337c",
+      "createdAt": "2026-07-28T02:04:33.000Z",
+      "updatedAt": "2026-07-28T02:04:33.000Z",
+      "uid": "35240-55ca942d-f876-448b-bdf4-467b4324337c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://kubernetes.default.svc"
+    }
+  ]
+}

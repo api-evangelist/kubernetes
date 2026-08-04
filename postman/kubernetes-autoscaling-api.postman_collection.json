@@ -1,0 +1,539 @@
+{
+  "info": {
+    "_postman_id": "211636d8-dfcd-4012-9074-7903af0adb1a",
+    "name": "Kubernetes Autoscaling API",
+    "description": "The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and external components all communicate with one another through the API server. The API is a resource-based (RESTful) programmatic interface provided via HTTP that supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).\n\nContact Support:\n Name: Kubernetes Community",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:04:23.000Z",
+    "updatedAt": "2026-07-28T02:04:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-211636d8-dfcd-4012-9074-7903af0adb1a"
+  },
+  "item": [
+    {
+      "name": "apis",
+      "item": [
+        {
+          "name": "autoscaling",
+          "item": [
+            {
+              "name": "v2",
+              "item": [
+                {
+                  "name": "namespaces",
+                  "item": [
+                    {
+                      "name": "{namespace}",
+                      "item": [
+                        {
+                          "name": "horizontalpodautoscalers",
+                          "item": [
+                            {
+                              "name": "Kubernetes List HorizontalPodAutoscalers in a namespace",
+                              "id": "75acb196-d0eb-4bf8-a85f-37d75ea2eb7f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "apis",
+                                    "autoscaling",
+                                    "v2",
+                                    "namespaces",
+                                    ":namespace",
+                                    "horizontalpodautoscalers"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                      "key": "labelSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                      "key": "watch",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "a195f71b-add8-4b86-894b-8eb87a8c0e48",
+                                      "key": "namespace",
+                                      "value": "<string>",
+                                      "description": "(Required) The namespace name to scope the request to."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a list of all HorizontalPodAutoscalers (HPAs) in the specified namespace. HPAs automatically scale the number of pod replicas based on observed CPU utilization, memory usage, or custom metrics."
+                              },
+                              "response": [
+                                {
+                                  "id": "86966148-8f24-4060-bdca-47ec06aee649",
+                                  "name": "List of HPAs",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "apis",
+                                        "autoscaling",
+                                        "v2",
+                                        "namespaces",
+                                        ":namespace",
+                                        "horizontalpodautoscalers"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                          "key": "labelSelector",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                          "key": "limit",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                          "key": "watch",
+                                          "value": "<boolean>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"magna658\": \"<string>\"\n        },\n        \"annotations\": {\n          \"laboris5b\": \"<string>\",\n          \"ipsum_b\": \"<string>\",\n          \"sunt_ab7\": \"<string>\",\n          \"officia_7\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"spec\": {\n        \"scaleTargetRef\": {\n          \"kind\": \"<string>\",\n          \"name\": \"<string>\",\n          \"apiVersion\": \"<string>\"\n        },\n        \"minReplicas\": \"<integer>\",\n        \"maxReplicas\": \"<integer>\"\n      },\n      \"status\": {\n        \"currentReplicas\": \"<integer>\",\n        \"desiredReplicas\": \"<integer>\",\n        \"lastScaleTime\": \"<dateTime>\"\n      }\n    },\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"aliqua_527\": \"<string>\",\n          \"labore_c\": \"<string>\",\n          \"tempor_9_d\": \"<string>\",\n          \"laborise\": \"<string>\"\n        },\n        \"annotations\": {\n          \"elit1e\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"spec\": {\n        \"scaleTargetRef\": {\n          \"kind\": \"<string>\",\n          \"name\": \"<string>\",\n          \"apiVersion\": \"<string>\"\n        },\n        \"minReplicas\": \"<integer>\",\n        \"maxReplicas\": \"<integer>\"\n      },\n      \"status\": {\n        \"currentReplicas\": \"<integer>\",\n        \"desiredReplicas\": \"<integer>\",\n        \"lastScaleTime\": \"<dateTime>\"\n      }\n    }\n  ],\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"resourceVersion\": \"<string>\",\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:04:24.000Z",
+                                  "updatedAt": "2026-07-28T02:04:24.000Z",
+                                  "uid": "35240-86966148-8f24-4060-bdca-47ec06aee649"
+                                },
+                                {
+                                  "id": "7a574349-c565-4b2b-96a9-3f30c1d3bbfe",
+                                  "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "apis",
+                                        "autoscaling",
+                                        "v2",
+                                        "namespaces",
+                                        ":namespace",
+                                        "horizontalpodautoscalers"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                          "key": "labelSelector",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                          "key": "limit",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                          "key": "watch",
+                                          "value": "<boolean>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                                  "createdAt": "2026-07-28T02:04:24.000Z",
+                                  "updatedAt": "2026-07-28T02:04:24.000Z",
+                                  "uid": "35240-7a574349-c565-4b2b-96a9-3f30c1d3bbfe"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:04:24.000Z",
+                              "updatedAt": "2026-07-28T02:04:24.000Z",
+                              "uid": "35240-75acb196-d0eb-4bf8-a85f-37d75ea2eb7f"
+                            },
+                            {
+                              "name": "Kubernetes Create a HorizontalPodAutoscaler",
+                              "id": "6fc9d21f-334a-452f-a687-b61f436da81b",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"veniam8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"do_7c1\": \"<string>\",\n      \"cillum_1b1\": \"<string>\",\n      \"veniam_6_\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"scaleTargetRef\": {\n      \"kind\": \"<string>\",\n      \"name\": \"<string>\",\n      \"apiVersion\": \"<string>\"\n    },\n    \"minReplicas\": \"<integer>\",\n    \"maxReplicas\": \"<integer>\"\n  },\n  \"status\": {\n    \"currentReplicas\": \"<integer>\",\n    \"desiredReplicas\": \"<integer>\",\n    \"lastScaleTime\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "apis",
+                                    "autoscaling",
+                                    "v2",
+                                    "namespaces",
+                                    ":namespace",
+                                    "horizontalpodautoscalers"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "3566cc2b-b781-4702-b4ec-cc0aee21ebca",
+                                      "key": "namespace",
+                                      "value": "<string>",
+                                      "description": "(Required) The namespace name to scope the request to."
+                                    }
+                                  ]
+                                },
+                                "description": "Creates a new HorizontalPodAutoscaler in the specified namespace. Configure target resource utilization thresholds and min/max replica bounds to enable automatic workload scaling."
+                              },
+                              "response": [
+                                {
+                                  "id": "ac0640c0-d75a-4621-b913-8a5c0b8c0e7a",
+                                  "name": "HPA created",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"veniam8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"do_7c1\": \"<string>\",\n      \"cillum_1b1\": \"<string>\",\n      \"veniam_6_\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"scaleTargetRef\": {\n      \"kind\": \"<string>\",\n      \"name\": \"<string>\",\n      \"apiVersion\": \"<string>\"\n    },\n    \"minReplicas\": \"<integer>\",\n    \"maxReplicas\": \"<integer>\"\n  },\n  \"status\": {\n    \"currentReplicas\": \"<integer>\",\n    \"desiredReplicas\": \"<integer>\",\n    \"lastScaleTime\": \"<dateTime>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "apis",
+                                        "autoscaling",
+                                        "v2",
+                                        "namespaces",
+                                        ":namespace",
+                                        "horizontalpodautoscalers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"veniam8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"do_7c1\": \"<string>\",\n      \"cillum_1b1\": \"<string>\",\n      \"veniam_6_\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"scaleTargetRef\": {\n      \"kind\": \"<string>\",\n      \"name\": \"<string>\",\n      \"apiVersion\": \"<string>\"\n    },\n    \"minReplicas\": \"<integer>\",\n    \"maxReplicas\": \"<integer>\"\n  },\n  \"status\": {\n    \"currentReplicas\": \"<integer>\",\n    \"desiredReplicas\": \"<integer>\",\n    \"lastScaleTime\": \"<dateTime>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:04:24.000Z",
+                                  "updatedAt": "2026-07-28T02:04:24.000Z",
+                                  "uid": "35240-ac0640c0-d75a-4621-b913-8a5c0b8c0e7a"
+                                },
+                                {
+                                  "id": "b29f6a7b-1c00-41a6-9cad-4779ef208980",
+                                  "name": "Bad request \u2014 invalid resource specification",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"veniam8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"do_7c1\": \"<string>\",\n      \"cillum_1b1\": \"<string>\",\n      \"veniam_6_\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"scaleTargetRef\": {\n      \"kind\": \"<string>\",\n      \"name\": \"<string>\",\n      \"apiVersion\": \"<string>\"\n    },\n    \"minReplicas\": \"<integer>\",\n    \"maxReplicas\": \"<integer>\"\n  },\n  \"status\": {\n    \"currentReplicas\": \"<integer>\",\n    \"desiredReplicas\": \"<integer>\",\n    \"lastScaleTime\": \"<dateTime>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "apis",
+                                        "autoscaling",
+                                        "v2",
+                                        "namespaces",
+                                        ":namespace",
+                                        "horizontalpodautoscalers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                                  "createdAt": "2026-07-28T02:04:24.000Z",
+                                  "updatedAt": "2026-07-28T02:04:24.000Z",
+                                  "uid": "35240-b29f6a7b-1c00-41a6-9cad-4779ef208980"
+                                },
+                                {
+                                  "id": "298541dd-eb07-45ca-ba36-f823db5fdf35",
+                                  "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"veniam8\": \"<string>\"\n    },\n    \"annotations\": {\n      \"do_7c1\": \"<string>\",\n      \"cillum_1b1\": \"<string>\",\n      \"veniam_6_\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"scaleTargetRef\": {\n      \"kind\": \"<string>\",\n      \"name\": \"<string>\",\n      \"apiVersion\": \"<string>\"\n    },\n    \"minReplicas\": \"<integer>\",\n    \"maxReplicas\": \"<integer>\"\n  },\n  \"status\": {\n    \"currentReplicas\": \"<integer>\",\n    \"desiredReplicas\": \"<integer>\",\n    \"lastScaleTime\": \"<dateTime>\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "apis",
+                                        "autoscaling",
+                                        "v2",
+                                        "namespaces",
+                                        ":namespace",
+                                        "horizontalpodautoscalers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                                  "createdAt": "2026-07-28T02:04:24.000Z",
+                                  "updatedAt": "2026-07-28T02:04:24.000Z",
+                                  "uid": "35240-298541dd-eb07-45ca-ba36-f823db5fdf35"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:04:24.000Z",
+                              "updatedAt": "2026-07-28T02:04:24.000Z",
+                              "uid": "35240-6fc9d21f-334a-452f-a687-b61f436da81b"
+                            }
+                          ],
+                          "id": "894f633a-be33-4f40-9cea-499d914fc2ac",
+                          "createdAt": "2026-07-28T02:04:24.000Z",
+                          "updatedAt": "2026-07-28T02:04:24.000Z",
+                          "uid": "35240-894f633a-be33-4f40-9cea-499d914fc2ac"
+                        }
+                      ],
+                      "id": "1a06a079-9a29-4d57-8522-3f4f1c060f26",
+                      "createdAt": "2026-07-28T02:04:24.000Z",
+                      "updatedAt": "2026-07-28T02:04:24.000Z",
+                      "uid": "35240-1a06a079-9a29-4d57-8522-3f4f1c060f26"
+                    }
+                  ],
+                  "id": "13cd6b8c-14ae-4ca4-883a-2ed6148a72f9",
+                  "createdAt": "2026-07-28T02:04:24.000Z",
+                  "updatedAt": "2026-07-28T02:04:24.000Z",
+                  "uid": "35240-13cd6b8c-14ae-4ca4-883a-2ed6148a72f9"
+                }
+              ],
+              "id": "b96c018f-4fcb-4c48-8b8a-f7c754c4bc38",
+              "createdAt": "2026-07-28T02:04:24.000Z",
+              "updatedAt": "2026-07-28T02:04:24.000Z",
+              "uid": "35240-b96c018f-4fcb-4c48-8b8a-f7c754c4bc38"
+            }
+          ],
+          "id": "efe07006-8390-4e9d-ab11-478d5bdab552",
+          "createdAt": "2026-07-28T02:04:24.000Z",
+          "updatedAt": "2026-07-28T02:04:24.000Z",
+          "uid": "35240-efe07006-8390-4e9d-ab11-478d5bdab552"
+        }
+      ],
+      "id": "69cf8067-0f52-4bad-9458-e1452265e588",
+      "createdAt": "2026-07-28T02:04:24.000Z",
+      "updatedAt": "2026-07-28T02:04:24.000Z",
+      "uid": "35240-69cf8067-0f52-4bad-9458-e1452265e588"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://kubernetes.default.svc"
+    }
+  ]
+}

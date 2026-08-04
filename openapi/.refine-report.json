@@ -1,0 +1,26 @@
+{
+  "provider": "kubernetes",
+  "sources": [
+    "kubernetes-autoscaling-api-openapi.yml",
+    "kubernetes-cluster-api-openapi.yml",
+    "kubernetes-config-api-openapi.yml",
+    "kubernetes-events-api-openapi.yml",
+    "kubernetes-namespaces-api-openapi.yml",
+    "kubernetes-rbac-api-openapi.yml",
+    "kubernetes-workloads-api-openapi.yml"
+  ],
+  "outputs": [
+    "kubernetes-autoscaling-api-openapi.yml",
+    "kubernetes-cluster-api-openapi.yml",
+    "kubernetes-config-api-openapi.yml",
+    "kubernetes-events-api-openapi.yml",
+    "kubernetes-namespaces-api-openapi.yml",
+    "kubernetes-rbac-api-openapi.yml",
+    "kubernetes-workloads-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,298 @@
+{
+  "info": {
+    "_postman_id": "a2d278d3-7019-4a55-8c5d-f426ee5d9559",
+    "name": "Kubernetes Autoscaling Events API",
+    "description": "The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and external components all communicate with one another through the API server. The API is a resource-based (RESTful) programmatic interface provided via HTTP that supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).\n\nContact Support:\n Name: Kubernetes Community",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:04:33.000Z",
+    "updatedAt": "2026-07-28T02:04:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a2d278d3-7019-4a55-8c5d-f426ee5d9559"
+  },
+  "item": [
+    {
+      "name": "apis",
+      "item": [
+        {
+          "name": "events.k8s.io",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "namespaces",
+                  "item": [
+                    {
+                      "name": "{namespace}",
+                      "item": [
+                        {
+                          "name": "events",
+                          "item": [
+                            {
+                              "name": "Kubernetes List events in a namespace",
+                              "id": "ed3f1de2-0d97-4520-8da1-3f05cd7ba295",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/apis/events.k8s.io/v1/namespaces/:namespace/events?fieldSelector=<string>&labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "apis",
+                                    "events.k8s.io",
+                                    "v1",
+                                    "namespaces",
+                                    ":namespace",
+                                    "events"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1",
+                                      "key": "fieldSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                      "key": "labelSelector",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                      "key": "watch",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "69827ef8-4ead-4dfd-b3e9-8676d8c0e54c",
+                                      "key": "namespace",
+                                      "value": "<string>",
+                                      "description": "(Required) The namespace name to scope the request to."
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a list of events in the specified namespace. Events are records of occurrences that happened in the cluster, such as pod scheduling decisions, container restarts, resource quota violations, and node conditions changes."
+                              },
+                              "response": [
+                                {
+                                  "id": "6193a2bd-24b3-423f-81f2-45bfd630a944",
+                                  "name": "List of events",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/apis/events.k8s.io/v1/namespaces/:namespace/events?fieldSelector=<string>&labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "apis",
+                                        "events.k8s.io",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "events"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1",
+                                          "key": "fieldSelector",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                          "key": "labelSelector",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                          "key": "limit",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                          "key": "watch",
+                                          "value": "<boolean>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"esse_8\": \"<string>\"\n        },\n        \"annotations\": {\n          \"est_2_9\": \"<string>\",\n          \"consequat_5a\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"eventTime\": \"<dateTime>\",\n      \"action\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"note\": \"<string>\",\n      \"type\": \"Warning\",\n      \"regarding\": {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\"\n      },\n      \"reportingComponent\": \"<string>\"\n    },\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"incididunt_003\": \"<string>\",\n          \"exercitation96\": \"<string>\",\n          \"Lorem_c28\": \"<string>\"\n        },\n        \"annotations\": {\n          \"elit_3\": \"<string>\",\n          \"dolore19\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"eventTime\": \"<dateTime>\",\n      \"action\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"note\": \"<string>\",\n      \"type\": \"Warning\",\n      \"regarding\": {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\"\n      },\n      \"reportingComponent\": \"<string>\"\n    }\n  ],\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"resourceVersion\": \"<string>\",\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:04:34.000Z",
+                                  "updatedAt": "2026-07-28T02:04:34.000Z",
+                                  "uid": "35240-6193a2bd-24b3-423f-81f2-45bfd630a944"
+                                },
+                                {
+                                  "id": "ea5d758e-2392-4c3a-9a5b-4249fa47390a",
+                                  "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/apis/events.k8s.io/v1/namespaces/:namespace/events?fieldSelector=<string>&labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "apis",
+                                        "events.k8s.io",
+                                        "v1",
+                                        "namespaces",
+                                        ":namespace",
+                                        "events"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1",
+                                          "key": "fieldSelector",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                          "key": "labelSelector",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                          "key": "limit",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                          "key": "watch",
+                                          "value": "<boolean>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "namespace"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Success\"\n}",
+                                  "createdAt": "2026-07-28T02:04:34.000Z",
+                                  "updatedAt": "2026-07-28T02:04:34.000Z",
+                                  "uid": "35240-ea5d758e-2392-4c3a-9a5b-4249fa47390a"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:04:34.000Z",
+                              "updatedAt": "2026-07-28T02:04:34.000Z",
+                              "uid": "35240-ed3f1de2-0d97-4520-8da1-3f05cd7ba295"
+                            }
+                          ],
+                          "id": "0daf3888-297a-4bb3-8da0-c0eeb8495df2",
+                          "createdAt": "2026-07-28T02:04:34.000Z",
+                          "updatedAt": "2026-07-28T02:04:34.000Z",
+                          "uid": "35240-0daf3888-297a-4bb3-8da0-c0eeb8495df2"
+                        }
+                      ],
+                      "id": "1e269e61-72b2-46fd-8385-e216efc7438c",
+                      "createdAt": "2026-07-28T02:04:34.000Z",
+                      "updatedAt": "2026-07-28T02:04:34.000Z",
+                      "uid": "35240-1e269e61-72b2-46fd-8385-e216efc7438c"
+                    }
+                  ],
+                  "id": "947a415f-f834-494a-8261-378a3acee162",
+                  "createdAt": "2026-07-28T02:04:34.000Z",
+                  "updatedAt": "2026-07-28T02:04:34.000Z",
+                  "uid": "35240-947a415f-f834-494a-8261-378a3acee162"
+                }
+              ],
+              "id": "abe4b32f-f183-4dc7-af51-6643d1f25a54",
+              "createdAt": "2026-07-28T02:04:34.000Z",
+              "updatedAt": "2026-07-28T02:04:34.000Z",
+              "uid": "35240-abe4b32f-f183-4dc7-af51-6643d1f25a54"
+            }
+          ],
+          "id": "cee3019e-0bdc-4526-9d7c-6a83cc37f270",
+          "createdAt": "2026-07-28T02:04:34.000Z",
+          "updatedAt": "2026-07-28T02:04:34.000Z",
+          "uid": "35240-cee3019e-0bdc-4526-9d7c-6a83cc37f270"
+        }
+      ],
+      "id": "6db79458-9d67-42b0-b113-b376cacb1ae5",
+      "createdAt": "2026-07-28T02:04:34.000Z",
+      "updatedAt": "2026-07-28T02:04:34.000Z",
+      "uid": "35240-6db79458-9d67-42b0-b113-b376cacb1ae5"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://kubernetes.default.svc"
+    }
+  ]
+}

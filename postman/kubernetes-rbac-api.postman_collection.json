@@ -1,0 +1,466 @@
+{
+  "info": {
+    "_postman_id": "c6e09d62-7c0d-4b02-8c01-063b02d74e3d",
+    "name": "Kubernetes Autoscaling RBAC API",
+    "description": "The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and external components all communicate with one another through the API server. The API is a resource-based (RESTful) programmatic interface provided via HTTP that supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).\n\nContact Support:\n Name: Kubernetes Community",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:04:43.000Z",
+    "updatedAt": "2026-07-28T02:04:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c6e09d62-7c0d-4b02-8c01-063b02d74e3d"
+  },
+  "item": [
+    {
+      "name": "apis",
+      "item": [
+        {
+          "name": "rbac.authorization.k8s.io",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "clusterroles",
+                  "item": [
+                    {
+                      "name": "Kubernetes List ClusterRoles",
+                      "id": "fce6303a-cba4-416c-bb39-a4f3980d4eaa",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/apis/rbac.authorization.k8s.io/v1/clusterroles?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "apis",
+                            "rbac.authorization.k8s.io",
+                            "v1",
+                            "clusterroles"
+                          ],
+                          "query": [
+                            {
+                              "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                              "key": "labelSelector",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                              "key": "watch",
+                              "value": "<boolean>"
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of all ClusterRoles in the cluster. ClusterRoles define a set of permissions applicable across the entire cluster, unlike namespace-scoped Roles."
+                      },
+                      "response": [
+                        {
+                          "id": "c5d05788-7dfc-4613-8df9-1cccc8010bb5",
+                          "name": "List of ClusterRoles",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/apis/rbac.authorization.k8s.io/v1/clusterroles?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "apis",
+                                "rbac.authorization.k8s.io",
+                                "v1",
+                                "clusterroles"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                  "key": "labelSelector",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                  "key": "watch",
+                                  "value": "<boolean>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"amet_5b9\": \"<string>\",\n          \"nonf_\": \"<string>\",\n          \"adipisicing1\": \"<string>\"\n        },\n        \"annotations\": {\n          \"veniamd7\": \"<string>\",\n          \"Duis_e\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"rules\": [\n        {\n          \"verbs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"apiGroups\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"resources\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"resourceNames\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"verbs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"apiGroups\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"resources\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"resourceNames\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    },\n    {\n      \"apiVersion\": \"<string>\",\n      \"kind\": \"<string>\",\n      \"metadata\": {\n        \"name\": \"<string>\",\n        \"namespace\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"resourceVersion\": \"<string>\",\n        \"generation\": \"<integer>\",\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"nostrud__7\": \"<string>\"\n        },\n        \"annotations\": {\n          \"ea_02\": \"<string>\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          },\n          {\n            \"apiVersion\": \"<string>\",\n            \"kind\": \"<string>\",\n            \"name\": \"<string>\",\n            \"uid\": \"<string>\",\n            \"controller\": \"<boolean>\"\n          }\n        ]\n      },\n      \"rules\": [\n        {\n          \"verbs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"apiGroups\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"resources\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"resourceNames\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"verbs\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"apiGroups\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"resources\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"resourceNames\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"resourceVersion\": \"<string>\",\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:04:43.000Z",
+                          "updatedAt": "2026-07-28T02:04:43.000Z",
+                          "uid": "35240-c5d05788-7dfc-4613-8df9-1cccc8010bb5"
+                        },
+                        {
+                          "id": "f0a049ae-a159-4185-abad-993da9874467",
+                          "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/apis/rbac.authorization.k8s.io/v1/clusterroles?labelSelector=<string>&limit=<integer>&watch=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "apis",
+                                "rbac.authorization.k8s.io",
+                                "v1",
+                                "clusterroles"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend",
+                                  "key": "labelSelector",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.",
+                                  "key": "watch",
+                                  "value": "<boolean>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                          "createdAt": "2026-07-28T02:04:43.000Z",
+                          "updatedAt": "2026-07-28T02:04:43.000Z",
+                          "uid": "35240-f0a049ae-a159-4185-abad-993da9874467"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:04:43.000Z",
+                      "updatedAt": "2026-07-28T02:04:43.000Z",
+                      "uid": "35240-fce6303a-cba4-416c-bb39-a4f3980d4eaa"
+                    },
+                    {
+                      "name": "Kubernetes Create a ClusterRole",
+                      "id": "093a5f3a-99e6-408b-8d9d-b5380dc4a67b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"sed_f\": \"<string>\",\n      \"dolore89\": \"<string>\"\n    },\n    \"annotations\": {\n      \"anim_0ca\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"rules\": [\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/apis/rbac.authorization.k8s.io/v1/clusterroles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "apis",
+                            "rbac.authorization.k8s.io",
+                            "v1",
+                            "clusterroles"
+                          ]
+                        },
+                        "description": "Creates a new ClusterRole defining cluster-wide permissions. ClusterRoles are bound to subjects (users, groups, service accounts) via ClusterRoleBindings to grant cluster-wide access."
+                      },
+                      "response": [
+                        {
+                          "id": "bbb4dd23-6259-4f86-a3ea-82c64bc43423",
+                          "name": "ClusterRole created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"sed_f\": \"<string>\",\n      \"dolore89\": \"<string>\"\n    },\n    \"annotations\": {\n      \"anim_0ca\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"rules\": [\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/apis/rbac.authorization.k8s.io/v1/clusterroles",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "apis",
+                                "rbac.authorization.k8s.io",
+                                "v1",
+                                "clusterroles"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"sed_f\": \"<string>\",\n      \"dolore89\": \"<string>\"\n    },\n    \"annotations\": {\n      \"anim_0ca\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"rules\": [\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:04:43.000Z",
+                          "updatedAt": "2026-07-28T02:04:43.000Z",
+                          "uid": "35240-bbb4dd23-6259-4f86-a3ea-82c64bc43423"
+                        },
+                        {
+                          "id": "e543310a-bf1d-45ba-be46-97ec8d8bd9aa",
+                          "name": "Bad request \u2014 invalid resource specification",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"sed_f\": \"<string>\",\n      \"dolore89\": \"<string>\"\n    },\n    \"annotations\": {\n      \"anim_0ca\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"rules\": [\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/apis/rbac.authorization.k8s.io/v1/clusterroles",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "apis",
+                                "rbac.authorization.k8s.io",
+                                "v1",
+                                "clusterroles"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                          "createdAt": "2026-07-28T02:04:43.000Z",
+                          "updatedAt": "2026-07-28T02:04:43.000Z",
+                          "uid": "35240-e543310a-bf1d-45ba-be46-97ec8d8bd9aa"
+                        },
+                        {
+                          "id": "c49e96e9-aec9-4410-b190-8393e9980f9f",
+                          "name": "Unauthorized \u2014 missing or invalid authentication credentials",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"sed_f\": \"<string>\",\n      \"dolore89\": \"<string>\"\n    },\n    \"annotations\": {\n      \"anim_0ca\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"rules\": [\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"apiGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"resourceNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/apis/rbac.authorization.k8s.io/v1/clusterroles",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "apis",
+                                "rbac.authorization.k8s.io",
+                                "v1",
+                                "clusterroles"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"status\": \"Failure\"\n}",
+                          "createdAt": "2026-07-28T02:04:43.000Z",
+                          "updatedAt": "2026-07-28T02:04:43.000Z",
+                          "uid": "35240-c49e96e9-aec9-4410-b190-8393e9980f9f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:04:43.000Z",
+                      "updatedAt": "2026-07-28T02:04:43.000Z",
+                      "uid": "35240-093a5f3a-99e6-408b-8d9d-b5380dc4a67b"
+                    }
+                  ],
+                  "id": "0e459325-3c47-4ade-a4d9-370d542c18c4",
+                  "createdAt": "2026-07-28T02:04:43.000Z",
+                  "updatedAt": "2026-07-28T02:04:43.000Z",
+                  "uid": "35240-0e459325-3c47-4ade-a4d9-370d542c18c4"
+                }
+              ],
+              "id": "d0c7591b-6b6d-46a5-84b8-525569ab5840",
+              "createdAt": "2026-07-28T02:04:43.000Z",
+              "updatedAt": "2026-07-28T02:04:43.000Z",
+              "uid": "35240-d0c7591b-6b6d-46a5-84b8-525569ab5840"
+            }
+          ],
+          "id": "e45e2c64-545d-49b4-a593-47c864e2f488",
+          "createdAt": "2026-07-28T02:04:43.000Z",
+          "updatedAt": "2026-07-28T02:04:43.000Z",
+          "uid": "35240-e45e2c64-545d-49b4-a593-47c864e2f488"
+        }
+      ],
+      "id": "672f347e-4480-4e42-82fe-108616f848e3",
+      "createdAt": "2026-07-28T02:04:43.000Z",
+      "updatedAt": "2026-07-28T02:04:43.000Z",
+      "uid": "35240-672f347e-4480-4e42-82fe-108616f848e3"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://kubernetes.default.svc"
+    }
+  ]
+}
