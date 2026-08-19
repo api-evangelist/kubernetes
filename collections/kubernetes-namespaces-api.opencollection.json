@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubernetes Autoscaling Namespaces API",
+    "version": "v1.32.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Namespaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List services in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all services in the specified namespace. Services provide stable network identities and load balancing for pods, abstracting away individual pod IP addresses."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new service in the specified namespace. Services can be of type ClusterIP, NodePort, LoadBalancer, or ExternalName, each providing different mechanisms for exposing pods to traffic."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Get a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Returns the specified service including its cluster IP, selector, ports, and current endpoint assignments."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Replace a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the specified service configuration. Updates to the selector immediately affect which pods the service routes traffic to."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Delete a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/services/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource to operate on."
+              }
+            ]
+          },
+          "docs": "Deletes the specified service. Any external load balancers provisioned for a LoadBalancer-type service will also be deprovisioned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

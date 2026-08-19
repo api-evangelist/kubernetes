@@ -1,0 +1,1572 @@
+{
+  "item": [
+    {
+      "id": "a98bbff4-7458-4a50-9452-dfa733259af2",
+      "name": "Cluster",
+      "description": {
+        "content": "Cluster-level resources including Namespaces, Nodes, ServiceAccounts, and RBAC resources for cluster administration.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "15f6eb4b-0f78-402a-a356-96ca3e0e7ce5",
+          "name": "Kubernetes List namespaces",
+          "request": {
+            "name": "Kubernetes List namespaces",
+            "description": {
+              "content": "Returns a list of all namespaces in the cluster. Namespaces provide a mechanism for isolating groups of resources within a single cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "namespaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labelSelector",
+                  "value": "<string>",
+                  "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldSelector",
+                  "value": "<string>",
+                  "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "Pagination token returned in a previous response's metadata.continue field. Use to retrieve the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "resourceVersion",
+                  "value": "<string>",
+                  "description": "When specified with a watch call, shows changes that occur after the specified resourceVersion. When specified in a list request, returns results at least as new as the specified resourceVersion."
+                },
+                {
+                  "disabled": false,
+                  "key": "watch",
+                  "value": "<boolean>",
+                  "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "570f3615-9988-4165-adc8-5059fb4053b2",
+              "name": "List of namespaces",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceVersion",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "watch",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"string\",\n      \"kind\": \"string\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"uid\": \"string\",\n        \"resourceVersion\": \"string\",\n        \"generation\": 4107,\n        \"creationTimestamp\": \"1975-01-05T23:10:19.443Z\",\n        \"deletionTimestamp\": \"2012-09-18T06:45:35.770Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\",\n            \"controller\": false\n          },\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\",\n            \"controller\": true\n          }\n        ]\n      },\n      \"spec\": {\n        \"finalizers\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"status\": {\n        \"phase\": \"Terminating\"\n      }\n    },\n    {\n      \"apiVersion\": \"string\",\n      \"kind\": \"string\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"uid\": \"string\",\n        \"resourceVersion\": \"string\",\n        \"generation\": 9348,\n        \"creationTimestamp\": \"1995-03-08T06:50:34.716Z\",\n        \"deletionTimestamp\": \"2022-11-16T07:31:26.710Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\",\n            \"controller\": false\n          },\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\",\n            \"controller\": false\n          }\n        ]\n      },\n      \"spec\": {\n        \"finalizers\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"status\": {\n        \"phase\": \"Active\"\n      }\n    }\n  ],\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"metadata\": {\n    \"resourceVersion\": \"string\",\n    \"continue\": \"string\",\n    \"remainingItemCount\": 9987\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4438d78-f8b6-4ee3-9ae8-fcbf70b07b8f",
+              "name": "Unauthorized — missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceVersion",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "watch",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "765547b2-1963-4898-a13a-eac7cf9a1ea4",
+          "name": "Kubernetes Create a namespace",
+          "request": {
+            "name": "Kubernetes Create a namespace",
+            "description": {
+              "content": "Creates a new namespace in the cluster. Namespaces provide a scope for names and allow cluster resources to be divided among multiple users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "namespaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e66f950a-aa6e-4a3e-b7e4-52ee7b98afc9",
+              "name": "Namespace created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 4599,\n    \"creationTimestamp\": \"2012-08-07T22:35:18.492Z\",\n    \"deletionTimestamp\": \"1953-04-12T17:44:27.693Z\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": true\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 3714,\n    \"creationTimestamp\": \"2021-04-11T17:28:16.126Z\",\n    \"deletionTimestamp\": \"1958-09-20T23:37:24.573Z\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"Terminating\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5201a123-6f73-4d09-ae32-0473ae19205f",
+              "name": "Bad request — invalid resource specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 4599,\n    \"creationTimestamp\": \"2012-08-07T22:35:18.492Z\",\n    \"deletionTimestamp\": \"1953-04-12T17:44:27.693Z\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": true\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13ee4e25-0d63-4b52-b379-8fa132a3842c",
+              "name": "Unauthorized — missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 4599,\n    \"creationTimestamp\": \"2012-08-07T22:35:18.492Z\",\n    \"deletionTimestamp\": \"1953-04-12T17:44:27.693Z\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": true\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1637cc7-c0be-445b-9283-5dc43c5a7498",
+              "name": "Conflict — a resource with that name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 4599,\n    \"creationTimestamp\": \"2012-08-07T22:35:18.492Z\",\n    \"deletionTimestamp\": \"1953-04-12T17:44:27.693Z\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": true\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86915ec9-88ae-490a-91a9-3e8cae17e6b2",
+          "name": "Kubernetes Get a namespace",
+          "request": {
+            "name": "Kubernetes Get a namespace",
+            "description": {
+              "content": "Returns the specified namespace object including its current status, labels, annotations, and resource quotas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "namespaces",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource to operate on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "244f0ec2-6bbf-4bde-b679-0b40cd6d852a",
+              "name": "Namespace details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 3714,\n    \"creationTimestamp\": \"2021-04-11T17:28:16.126Z\",\n    \"deletionTimestamp\": \"1958-09-20T23:37:24.573Z\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"Terminating\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b988e197-992c-47b6-8fac-a6607adad439",
+              "name": "Unauthorized — missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7bd8f8d-26d0-499a-b6ac-a1db5bd52949",
+              "name": "Not found — the specified resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5f4095f-679d-46b5-bf10-5e907ee3ece1",
+          "name": "Kubernetes Replace a namespace",
+          "request": {
+            "name": "Kubernetes Replace a namespace",
+            "description": {
+              "content": "Replaces the specified namespace object. The entire resource is replaced with the provided body; use PATCH for partial updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "namespaces",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource to operate on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<integer>\",\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      },\n      {\n        \"apiVersion\": \"<string>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\",\n        \"controller\": \"<boolean>\"\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45652eb6-112b-441e-8d60-6a7ce98cade3",
+              "name": "Namespace updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 4599,\n    \"creationTimestamp\": \"2012-08-07T22:35:18.492Z\",\n    \"deletionTimestamp\": \"1953-04-12T17:44:27.693Z\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": true\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 3714,\n    \"creationTimestamp\": \"2021-04-11T17:28:16.126Z\",\n    \"deletionTimestamp\": \"1958-09-20T23:37:24.573Z\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"Terminating\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca17ddab-e718-4738-80c0-b2d1fe65dc22",
+              "name": "Unauthorized — missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 4599,\n    \"creationTimestamp\": \"2012-08-07T22:35:18.492Z\",\n    \"deletionTimestamp\": \"1953-04-12T17:44:27.693Z\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": true\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "954bac9a-230e-475e-a4d6-e5baf4a6a905",
+              "name": "Not found — the specified resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 4599,\n    \"creationTimestamp\": \"2012-08-07T22:35:18.492Z\",\n    \"deletionTimestamp\": \"1953-04-12T17:44:27.693Z\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": true\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e10df3b2-1a64-4ed9-8b36-477602512c45",
+          "name": "Kubernetes Delete a namespace",
+          "request": {
+            "name": "Kubernetes Delete a namespace",
+            "description": {
+              "content": "Deletes the specified namespace and all resources contained within it. The namespace enters a Terminating state while resources are being removed, and is fully deleted once all contained resources are gone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "namespaces",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource to operate on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c82e63e1-90d8-4857-a89d-05df34dcd4d9",
+              "name": "Namespace deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 3714,\n    \"creationTimestamp\": \"2021-04-11T17:28:16.126Z\",\n    \"deletionTimestamp\": \"1958-09-20T23:37:24.573Z\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      }\n    ]\n  },\n  \"spec\": {\n    \"finalizers\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"status\": {\n    \"phase\": \"Terminating\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9dea116-f11f-407f-a692-4a050b65eb0e",
+              "name": "Unauthorized — missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2128beb2-28ff-4404-8911-fac5be0bc95b",
+              "name": "Not found — the specified resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "namespaces",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e9f7411-79b7-4e01-a7de-47fc63eee35b",
+          "name": "Kubernetes List nodes",
+          "request": {
+            "name": "Kubernetes List nodes",
+            "description": {
+              "content": "Returns a list of all nodes in the cluster. Nodes are the worker machines in Kubernetes that run containerized applications. Each node contains the services necessary to run pods and is managed by the control plane.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labelSelector",
+                  "value": "<string>",
+                  "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldSelector",
+                  "value": "<string>",
+                  "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+                },
+                {
+                  "disabled": false,
+                  "key": "watch",
+                  "value": "<boolean>",
+                  "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e91c071-628d-49bb-8ee1-6291159ed8d3",
+              "name": "List of nodes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "watch",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"string\",\n      \"kind\": \"string\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"uid\": \"string\",\n        \"resourceVersion\": \"string\",\n        \"generation\": 1074,\n        \"creationTimestamp\": \"1961-06-22T15:17:27.029Z\",\n        \"deletionTimestamp\": \"1956-12-10T02:11:16.350Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\",\n            \"controller\": true\n          },\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\",\n            \"controller\": true\n          }\n        ]\n      },\n      \"spec\": {\n        \"podCIDR\": \"string\",\n        \"providerID\": \"string\",\n        \"taints\": [\n          {\n            \"key\": \"string\",\n            \"effect\": \"NoSchedule\",\n            \"value\": \"string\"\n          },\n          {\n            \"key\": \"string\",\n            \"effect\": \"NoSchedule\",\n            \"value\": \"string\"\n          }\n        ],\n        \"unschedulable\": false\n      },\n      \"status\": {\n        \"capacity\": {\n          \"key_0\": \"string\"\n        },\n        \"allocatable\": {\n          \"key_0\": \"string\"\n        },\n        \"conditions\": [\n          {\n            \"type\": \"PIDPressure\",\n            \"status\": \"Unknown\",\n            \"message\": \"string\",\n            \"reason\": \"string\"\n          },\n          {\n            \"type\": \"DiskPressure\",\n            \"status\": \"Unknown\",\n            \"message\": \"string\",\n            \"reason\": \"string\"\n          }\n        ]\n      }\n    },\n    {\n      \"apiVersion\": \"string\",\n      \"kind\": \"string\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"uid\": \"string\",\n        \"resourceVersion\": \"string\",\n        \"generation\": 9890,\n        \"creationTimestamp\": \"2007-04-01T21:56:00.940Z\",\n        \"deletionTimestamp\": \"1998-07-17T23:41:41.552Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\",\n          \"key_4\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"ownerReferences\": [\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\",\n            \"controller\": false\n          },\n          {\n            \"apiVersion\": \"string\",\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\",\n            \"controller\": false\n          }\n        ]\n      },\n      \"spec\": {\n        \"podCIDR\": \"string\",\n        \"providerID\": \"string\",\n        \"taints\": [\n          {\n            \"key\": \"string\",\n            \"effect\": \"PreferNoSchedule\",\n            \"value\": \"string\"\n          },\n          {\n            \"key\": \"string\",\n            \"effect\": \"NoSchedule\",\n            \"value\": \"string\"\n          }\n        ],\n        \"unschedulable\": false\n      },\n      \"status\": {\n        \"capacity\": {\n          \"key_0\": \"string\"\n        },\n        \"allocatable\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"conditions\": [\n          {\n            \"type\": \"MemoryPressure\",\n            \"status\": \"Unknown\",\n            \"message\": \"string\",\n            \"reason\": \"string\"\n          },\n          {\n            \"type\": \"NetworkUnavailable\",\n            \"status\": \"Unknown\",\n            \"message\": \"string\",\n            \"reason\": \"string\"\n          }\n        ]\n      }\n    }\n  ],\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"metadata\": {\n    \"resourceVersion\": \"string\",\n    \"continue\": \"string\",\n    \"remainingItemCount\": 2752\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c646af69-81e0-46af-bebf-99d3eebc792c",
+              "name": "Unauthorized — missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "watch",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d443b2c9-5eeb-4451-b7e4-69d14473cf2c",
+          "name": "Kubernetes Get a node",
+          "request": {
+            "name": "Kubernetes Get a node",
+            "description": {
+              "content": "Returns the specified node including its capacity, allocatable resources, conditions (Ready, MemoryPressure, DiskPressure), and system information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "nodes",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource to operate on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff79c39c-af10-4914-94a4-67e17a38fbcf",
+              "name": "Node details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "nodes",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"uid\": \"string\",\n    \"resourceVersion\": \"string\",\n    \"generation\": 6447,\n    \"creationTimestamp\": \"2015-07-03T08:32:55.834Z\",\n    \"deletionTimestamp\": \"2020-12-09T17:49:52.020Z\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"ownerReferences\": [\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": false\n      },\n      {\n        \"apiVersion\": \"string\",\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"controller\": true\n      }\n    ]\n  },\n  \"spec\": {\n    \"podCIDR\": \"string\",\n    \"providerID\": \"string\",\n    \"taints\": [\n      {\n        \"key\": \"string\",\n        \"effect\": \"NoSchedule\",\n        \"value\": \"string\"\n      },\n      {\n        \"key\": \"string\",\n        \"effect\": \"NoExecute\",\n        \"value\": \"string\"\n      }\n    ],\n    \"unschedulable\": false\n  },\n  \"status\": {\n    \"capacity\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"allocatable\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"conditions\": [\n      {\n        \"type\": \"PIDPressure\",\n        \"status\": \"Unknown\",\n        \"message\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"type\": \"PIDPressure\",\n        \"status\": \"True\",\n        \"message\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4201de74-bfd4-46de-94fc-bf9f5a8c780a",
+              "name": "Unauthorized — missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "nodes",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7c6af26-6134-4953-8ae1-6e9308c8e36b",
+              "name": "Not found — the specified resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "nodes",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource to operate on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"string\",\n  \"code\": 7969,\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"status\": \"Success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://kubernetes.default.svc",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b5c5d746-9228-483f-8237-6f1006cde1b8",
+    "name": "Kubernetes Autoscaling Cluster API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and external components all communicate with one another through the API server. The API is a resource-based (RESTful) programmatic interface provided via HTTP that supports retrieving, creating, updating, and deleting primary resources via the standard HTTP verbs (POST, PUT, PATCH, DELETE, GET).\n\nContact Support:\n Name: Kubernetes Community",
+      "type": "text/plain"
+    }
+  }
+}

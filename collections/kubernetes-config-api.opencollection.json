@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubernetes Autoscaling Config API",
+    "version": "v1.32.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List ConfigMaps in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/configmaps",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all ConfigMaps in the specified namespace. ConfigMaps allow you to decouple configuration from pod images so that containerized applications can be made portable."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a ConfigMap",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/configmaps",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new ConfigMap in the specified namespace. ConfigMaps store non-confidential data as key-value pairs that can be consumed as environment variables, command-line arguments, or configuration files."
+        },
+        {
+          "info": {
+            "name": "Kubernetes List Secrets in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/secrets",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of Secrets in the specified namespace. Secrets store sensitive information such as passwords, OAuth tokens, and SSH keys, with access controlled via RBAC."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/api/v1/namespaces/:namespace/secrets",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Secret in the specified namespace. Secret data is stored base64-encoded and can be mounted as files or exposed as environment variables in pods."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -2,93 +2,95 @@ generated: '2026-06-20'
 method: derived
 status: candidate
 source: openapi/kubernetes-api-openapi.yml
-note: >-
-  The Kubernetes project does not publish a first-party, project-owned MCP
-  server. A mature third-party ecosystem exists (see servers[] below), most
-  notably containers/kubernetes-mcp-server (also released as openshift/openshift-mcp-server),
-  a native Go implementation that talks directly to the API server and ships as
-  a binary, npm package, Python package, and container image. The tools[] list
-  here is a CANDIDATE surface derived one-per-operation from the captured
-  OpenAPI, not an authoritative manifest.
+note: The Kubernetes project does not publish a first-party, project-owned MCP server. A mature third-party
+  ecosystem exists (see servers[] below), most notably containers/kubernetes-mcp-server (also released
+  as openshift/openshift-mcp-server), a native Go implementation that talks directly to the API server
+  and ships as a binary, npm package, Python package, and container image. The tools[] list here is a
+  CANDIDATE surface derived one-per-operation from the captured OpenAPI, not an authoritative manifest.
 servers:
-  - name: containers/kubernetes-mcp-server
-    transport: stdio
-    repository: https://github.com/containers/kubernetes-mcp-server
-    official: false
-    description: >-
-      Native Go MCP server for Kubernetes and OpenShift; generic CRUD over any
-      resource, multi-cluster, toolset-scoped. Third-party (Red Hat / containers org).
-  - name: openshift/openshift-mcp-server
-    transport: stdio
-    repository: https://github.com/openshift/openshift-mcp-server
-    official: false
+- name: containers/kubernetes-mcp-server
+  transport: stdio
+  repository: https://github.com/containers/kubernetes-mcp-server
+  official: false
+  description: Native Go MCP server for Kubernetes and OpenShift; generic CRUD over any resource, multi-cluster,
+    toolset-scoped. Third-party (Red Hat / containers org).
+- name: openshift/openshift-mcp-server
+  transport: stdio
+  repository: https://github.com/openshift/openshift-mcp-server
+  official: false
 tools:
-  - name: list_namespaces
-    description: List all namespaces in the cluster
-    source_operation: openapi/kubernetes-api-openapi.yml#listNamespaces
-  - name: create_namespace
-    description: Create a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#createNamespace
-  - name: get_namespace
-    description: Read a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#getNamespace
-  - name: delete_namespace
-    description: Delete a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#deleteNamespace
-  - name: list_namespaced_pods
-    description: List pods in a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedPods
-  - name: create_namespaced_pod
-    description: Create a pod in a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#createNamespacedPod
-  - name: get_namespaced_pod
-    description: Read a pod
-    source_operation: openapi/kubernetes-api-openapi.yml#getNamespacedPod
-  - name: delete_namespaced_pod
-    description: Delete a pod
-    source_operation: openapi/kubernetes-api-openapi.yml#deleteNamespacedPod
-  - name: read_namespaced_pod_log
-    description: Read the logs of a pod
-    source_operation: openapi/kubernetes-api-openapi.yml#readNamespacedPodLog
-  - name: list_namespaced_deployments
-    description: List deployments in a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedDeployments
-  - name: create_namespaced_deployment
-    description: Create a deployment
-    source_operation: openapi/kubernetes-api-openapi.yml#createNamespacedDeployment
-  - name: replace_namespaced_deployment
-    description: Replace a deployment
-    source_operation: openapi/kubernetes-api-openapi.yml#replaceNamespacedDeployment
-  - name: delete_namespaced_deployment
-    description: Delete a deployment
-    source_operation: openapi/kubernetes-api-openapi.yml#deleteNamespacedDeployment
-  - name: scale_namespaced_deployment
-    description: Update the scale of a deployment
-    source_operation: openapi/kubernetes-api-openapi.yml#replaceNamespacedDeploymentScale
-  - name: list_namespaced_services
-    description: List services in a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedServices
-  - name: create_namespaced_service
-    description: Create a service
-    source_operation: openapi/kubernetes-api-openapi.yml#createNamespacedService
-  - name: list_namespaced_configmaps
-    description: List configmaps in a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedConfigMaps
-  - name: list_namespaced_secrets
-    description: List secrets in a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedSecrets
-  - name: list_nodes
-    description: List cluster nodes
-    source_operation: openapi/kubernetes-api-openapi.yml#listNodes
-  - name: get_node
-    description: Read a node
-    source_operation: openapi/kubernetes-api-openapi.yml#getNode
-  - name: list_cluster_roles
-    description: List cluster roles (RBAC)
-    source_operation: openapi/kubernetes-api-openapi.yml#listClusterRoles
-  - name: list_namespaced_hpa
-    description: List horizontal pod autoscalers in a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedHorizontalPodAutoscalers
-  - name: list_namespaced_events
-    description: List events in a namespace
-    source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedEvents
+- name: list_namespaces
+  description: List all namespaces in the cluster
+  source_operation: openapi/kubernetes-api-openapi.yml#listNamespaces
+- name: create_namespace
+  description: Create a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#createNamespace
+- name: get_namespace
+  description: Read a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#getNamespace
+- name: delete_namespace
+  description: Delete a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#deleteNamespace
+- name: list_namespaced_pods
+  description: List pods in a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedPods
+- name: create_namespaced_pod
+  description: Create a pod in a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#createNamespacedPod
+- name: get_namespaced_pod
+  description: Read a pod
+  source_operation: openapi/kubernetes-api-openapi.yml#getNamespacedPod
+- name: delete_namespaced_pod
+  description: Delete a pod
+  source_operation: openapi/kubernetes-api-openapi.yml#deleteNamespacedPod
+- name: read_namespaced_pod_log
+  description: Read the logs of a pod
+  source_operation: openapi/kubernetes-api-openapi.yml#readNamespacedPodLog
+- name: list_namespaced_deployments
+  description: List deployments in a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedDeployments
+- name: create_namespaced_deployment
+  description: Create a deployment
+  source_operation: openapi/kubernetes-api-openapi.yml#createNamespacedDeployment
+- name: replace_namespaced_deployment
+  description: Replace a deployment
+  source_operation: openapi/kubernetes-api-openapi.yml#replaceNamespacedDeployment
+- name: delete_namespaced_deployment
+  description: Delete a deployment
+  source_operation: openapi/kubernetes-api-openapi.yml#deleteNamespacedDeployment
+- name: scale_namespaced_deployment
+  description: Update the scale of a deployment
+  source_operation: openapi/kubernetes-api-openapi.yml#replaceNamespacedDeploymentScale
+- name: list_namespaced_services
+  description: List services in a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedServices
+- name: create_namespaced_service
+  description: Create a service
+  source_operation: openapi/kubernetes-api-openapi.yml#createNamespacedService
+- name: list_namespaced_configmaps
+  description: List configmaps in a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedConfigMaps
+- name: list_namespaced_secrets
+  description: List secrets in a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedSecrets
+- name: list_nodes
+  description: List cluster nodes
+  source_operation: openapi/kubernetes-api-openapi.yml#listNodes
+- name: get_node
+  description: Read a node
+  source_operation: openapi/kubernetes-api-openapi.yml#getNode
+- name: list_cluster_roles
+  description: List cluster roles (RBAC)
+  source_operation: openapi/kubernetes-api-openapi.yml#listClusterRoles
+- name: list_namespaced_hpa
+  description: List horizontal pod autoscalers in a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedHorizontalPodAutoscalers
+- name: list_namespaced_events
+  description: List events in a namespace
+  source_operation: openapi/kubernetes-api-openapi.yml#listNamespacedEvents
+deployment:
+  mode: none
+  verified: derived
+  tools: 23
+  checked: '2026-08-12'
+  source: catalog MCP census

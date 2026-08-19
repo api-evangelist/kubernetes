@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubernetes Autoscaling Events API",
+    "version": "v1.32.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List events in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/apis/events.k8s.io/v1/namespaces/:namespace/events",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1"
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of events in the specified namespace. Events are records of occurrences that happened in the cluster, such as pod scheduling decisions, container restarts, resource quota violations, and node conditions changes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

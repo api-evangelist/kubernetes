@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubernetes Autoscaling RBAC API",
+    "version": "v1.32.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RBAC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List ClusterRoles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/apis/rbac.authorization.k8s.io/v1/clusterroles",
+            "params": [
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all ClusterRoles in the cluster. ClusterRoles define a set of permissions applicable across the entire cluster, unlike namespace-scoped Roles."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a ClusterRole",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/apis/rbac.authorization.k8s.io/v1/clusterroles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new ClusterRole defining cluster-wide permissions. ClusterRoles are bound to subjects (users, groups, service accounts) via ClusterRoleBindings to grant cluster-wide access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

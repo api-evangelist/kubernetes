@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kubernetes Autoscaling API",
+    "version": "v1.32.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Autoscaling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kubernetes List HorizontalPodAutoscalers in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://kubernetes.default.svc/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets."
+              },
+              {
+                "name": "watch",
+                "value": "",
+                "type": "query",
+                "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version."
+              }
+            ]
+          },
+          "docs": "Returns a list of all HorizontalPodAutoscalers (HPAs) in the specified namespace. HPAs automatically scale the number of pod replicas based on observed CPU utilization, memory usage, or custom metrics."
+        },
+        {
+          "info": {
+            "name": "Kubernetes Create a HorizontalPodAutoscaler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://kubernetes.default.svc/apis/autoscaling/v2/namespaces/:namespace/horizontalpodautoscalers",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The namespace name to scope the request to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new HorizontalPodAutoscaler in the specified namespace. Configure target resource utilization thresholds and min/max replica bounds to enable automatic workload scaling."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
