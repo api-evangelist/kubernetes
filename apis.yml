@@ -9,6 +9,8 @@ apis:
   humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
   baseURL: https://kubernetes.default.svc
   tags:
+  - Auto-Scaling
+  tags_raw:
   - Autoscaling
   properties:
   - type: OpenAPI
@@ -92,6 +94,8 @@ apis:
   humanURL: https://kubernetes.io/docs/concepts/overview/kubernetes-api/
   baseURL: https://kubernetes.default.svc
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -196,6 +200,15 @@ apis:
     url: json-schema/kubernetes-resource-schema.json
 name: Kubernetes
 tags:
+  - Automation
+  - Cloud-Native
+  - CNCF
+  - Containers
+  - Deployment
+  - Open-Source
+  - Orchestration
+  - Scaling
+tags_raw:
   - Automation
   - Cloud Native
   - CNCF
