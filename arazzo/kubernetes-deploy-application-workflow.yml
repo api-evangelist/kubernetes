@@ -12,8 +12,17 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: kubernetesApi
-  url: ../openapi/kubernetes-api-openapi.yml
+- name: clusterApi
+  url: ../openapi/kubernetes-cluster-api-openapi.yml
+  type: openapi
+- name: configApi
+  url: ../openapi/kubernetes-config-api-openapi.yml
+  type: openapi
+- name: namespacesApi
+  url: ../openapi/kubernetes-namespaces-api-openapi.yml
+  type: openapi
+- name: workloadsApi
+  url: ../openapi/kubernetes-workloads-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: deploy-application

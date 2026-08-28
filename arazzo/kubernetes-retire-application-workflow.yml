@@ -12,8 +12,11 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: kubernetesApi
-  url: ../openapi/kubernetes-api-openapi.yml
+- name: namespacesApi
+  url: ../openapi/kubernetes-namespaces-api-openapi.yml
+  type: openapi
+- name: workloadsApi
+  url: ../openapi/kubernetes-workloads-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: retire-application

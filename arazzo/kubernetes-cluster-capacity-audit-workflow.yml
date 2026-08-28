@@ -12,8 +12,8 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: kubernetesApi
-  url: ../openapi/kubernetes-api-openapi.yml
+- name: clusterApi
+  url: ../openapi/kubernetes-cluster-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: cluster-capacity-audit

@@ -13,8 +13,11 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: kubernetesApi
-  url: ../openapi/kubernetes-api-openapi.yml
+- name: autoscalingApi
+  url: ../openapi/kubernetes-autoscaling-api-openapi.yml
+  type: openapi
+- name: workloadsApi
+  url: ../openapi/kubernetes-workloads-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: autoscale-deployment

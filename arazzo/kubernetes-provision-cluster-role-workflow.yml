@@ -12,8 +12,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: kubernetesApi
-  url: ../openapi/kubernetes-api-openapi.yml
+- name: rbacApi
+  url: ../openapi/kubernetes-rbac-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-cluster-role

@@ -12,8 +12,8 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: kubernetesApi
-  url: ../openapi/kubernetes-api-openapi.yml
+- name: workloadsApi
+  url: ../openapi/kubernetes-workloads-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: restart-pod
