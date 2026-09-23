@@ -1,13 +1,7 @@
 {
   "provider": "kubernetes",
   "sources": [
-    "kubernetes-autoscaling-api-openapi.yml",
-    "kubernetes-cluster-api-openapi.yml",
-    "kubernetes-config-api-openapi.yml",
-    "kubernetes-events-api-openapi.yml",
-    "kubernetes-namespaces-api-openapi.yml",
-    "kubernetes-rbac-api-openapi.yml",
-    "kubernetes-workloads-api-openapi.yml"
+    "_original/kubernetes-api-openapi.yml"
   ],
   "outputs": [
     "kubernetes-autoscaling-api-openapi.yml",
@@ -21,6 +15,24 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "kubernetes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kubernetes-api-openapi.yml: tagged paths GET /api/v1/namespaces/{namespace}/services -> Namespaces",
+    "kubernetes-api-openapi.yml: tagged paths POST /api/v1/namespaces/{namespace}/services -> Namespaces",
+    "kubernetes-api-openapi.yml: tagged paths GET /api/v1/namespaces/{namespace}/services/{name} -> Namespaces",
+    "kubernetes-api-openapi.yml: tagged paths PUT /api/v1/namespaces/{namespace}/services/{name} -> Namespaces",
+    "kubernetes-api-openapi.yml: tagged paths DELETE /api/v1/namespaces/{namespace}/services/{name} -> Namespaces",
+    "kubernetes-api-openapi.yml: declared missing tag: Namespaces",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "kubernetes-autoscaling-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kubernetes-cluster-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kubernetes-config-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kubernetes-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kubernetes-namespaces-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kubernetes-rbac-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kubernetes-workloads-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
