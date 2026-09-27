@@ -338,217 +338,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    PodTemplateSpec:
-      type: object
-      description: Template for creating pod replicas. Contains pod metadata (labels, annotations) and a pod spec.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/PodSpec'
-    ContainerPort:
-      type: object
-      description: A network port that a container exposes. Used for documentation and for service discovery via protocol and port number.
-      required:
-      - containerPort
-      properties:
-        name:
-          type: string
-          description: Name for the port, referenced by services.
-        containerPort:
-          type: integer
-          minimum: 1
-          maximum: 65535
-          description: Port number to expose on the container's IP address.
-        protocol:
-          type: string
-          enum:
-          - TCP
-          - UDP
-          - SCTP
-          description: Protocol for the port. Defaults to TCP.
-        hostPort:
-          type: integer
-          description: Port to expose on the node. Most containers do not need this.
-    DeploymentList:
-      type: object
-      description: A list of deployments returned by list operations.
-      required:
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: DeploymentList
-        metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Deployment'
-    Container:
-      type: object
-      description: A single container to run within a pod. Defines the container image, command, environment, resource requirements, ports, and volume mounts.
-      required:
-      - name
-      - image
-      properties:
-        name:
-          type: string
-          description: Unique name of the container within the pod.
-        image:
-          type: string
-          description: Container image name in the format [registry/]repository[:tag]. The tag defaults to 'latest' if not specified.
-        command:
-          type: array
-          items:
-            type: string
-          description: Entrypoint command array. Replaces the container image's ENTRYPOINT.
-        args:
-          type: array
-          items:
-            type: string
-          description: Arguments to the entrypoint. Replaces the container image's CMD.
-        env:
-          type: array
-          description: List of environment variables to set in the container.
-          items:
-            $ref: '#/components/schemas/EnvVar'
-        ports:
-          type: array
-          description: List of ports to expose from the container.
-          items:
-            $ref: '#/components/schemas/ContainerPort'
-        resources:
-          $ref: '#/components/schemas/ResourceRequirements'
-        imagePullPolicy:
-          type: string
-          enum:
-          - Always
-          - Never
-          - IfNotPresent
-          description: Image pull policy. Defaults to Always if the tag is :latest, otherwise IfNotPresent.
-    Scale:
-      type: object
-      description: Scale represents the scaling subresource of a workload resource. Used to read and update the replica count independently of the full resource spec.
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: Scale
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        spec:
-          type: object
-          properties:
-            replicas:
-              type: integer
-              description: Desired number of replicas.
-        status:
-          type: object
-          properties:
-            replicas:
-              type: integer
-              description: Actual number of observed replicas.
-    OwnerReference:
-      type: object
-      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
-      required:
-      - apiVersion
-      - kind
-      - name
-      - uid
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the owner resource.
-        kind:
-          type: string
-          description: Kind of the owner resource.
-        name:
-          type: string
-          description: Name of the owner resource.
-        uid:
-          type: string
-          description: UID of the owner resource.
-        controller:
-          type: boolean
-          description: Whether this reference points to the managing controller.
-    EnvVar:
-      type: object
-      description: An environment variable to set in a container.
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the environment variable.
-        value:
-          type: string
-          description: Literal string value for the environment variable.
-    Status:
-      type: object
-      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: Status
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable description of the status.
-        reason:
-          type: string
-          description: Machine-readable description of why the operation is in this status.
-        status:
-          type: string
-          enum:
-          - Success
-          - Failure
-          description: Outcome of the operation.
-    ResourceRequirements:
-      type: object
-      description: Compute resource requirements for a container, specifying resource limits and requests for CPU and memory.
-      properties:
-        requests:
-          type: object
-          description: Minimum resources required. The container will not be scheduled unless these resources are available on the node.
-          additionalProperties:
-            type: string
-        limits:
-          type: object
-          description: Maximum resources the container may consume. The container is throttled (CPU) or killed (memory) if it exceeds limits.
-          additionalProperties:
-            type: string
-    LabelSelectorRequirement:
-      type: object
-      description: A requirement that uses set-based operators to match labels.
-      required:
-      - key
-      - operator
-      properties:
-        key:
-          type: string
-          description: Label key that the selector applies to.
-        operator:
-          type: string
-          enum:
-          - In
-          - NotIn
-          - Exists
-          - DoesNotExist
-          description: Represents the key's relationship to a set of values.
-        values:
-          type: array
-          items:
-            type: string
-          description: Array of string values used with In and NotIn operators.
     DeploymentStatus:
       type: object
       description: Most recently observed status of a Deployment including replica counts and rollout conditions.
@@ -568,107 +357,6 @@ components:
         observedGeneration:
           type: integer
           description: The generation observed by the deployment controller.
-    PodList:
-      type: object
-      description: A list of pods returned by list operations.
-      required:
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: PodList
-        metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Pod'
-    LabelSelector:
-      type: object
-      description: A label selector is a query over a set of resources. matchLabels specifies key-value pairs that must match, while matchExpressions supports set-based criteria.
-      properties:
-        matchLabels:
-          type: object
-          additionalProperties:
-            type: string
-          description: Map of key-value pairs that must match resource labels exactly.
-        matchExpressions:
-          type: array
-          description: List of label selector requirements using set-based operators.
-          items:
-            $ref: '#/components/schemas/LabelSelectorRequirement'
-    DeploymentStrategy:
-      type: object
-      description: Strategy for replacing existing pods with new ones during an update. Supports RollingUpdate (default) and Recreate strategies.
-      properties:
-        type:
-          type: string
-          enum:
-          - Recreate
-          - RollingUpdate
-          description: Type of deployment. Recreate kills all existing pods before creating new ones. RollingUpdate gradually replaces old pods.
-        rollingUpdate:
-          type: object
-          description: Rolling update configuration. Only valid when type is RollingUpdate.
-          properties:
-            maxUnavailable:
-              description: Maximum number of pods that can be unavailable during the update. Can be an absolute number or percentage.
-              oneOf:
-              - type: integer
-              - type: string
-            maxSurge:
-              description: Maximum number of pods that can be scheduled above the desired number during an update.
-              oneOf:
-              - type: integer
-              - type: string
-    Deployment:
-      type: object
-      description: A Deployment provides declarative updates for Pods and ReplicaSets. You describe a desired state in a Deployment and the controller changes the actual state to match the desired state at a controlled rate.
-      properties:
-        apiVersion:
-          type: string
-          const: apps/v1
-          description: API version of the resource.
-        kind:
-          type: string
-          const: Deployment
-          description: Kind identifier for the resource.
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/DeploymentSpec'
-        status:
-          $ref: '#/components/schemas/DeploymentStatus'
-    PodCondition:
-      type: object
-      description: Condition representing the current state of a pod component.
-      required:
-      - type
-      - status
-      properties:
-        type:
-          type: string
-          enum:
-          - PodScheduled
-          - ContainersReady
-          - Initialized
-          - Ready
-          description: Type of pod condition.
-        status:
-          type: string
-          enum:
-          - 'True'
-          - 'False'
-          - Unknown
-          description: Status of the condition.
-        message:
-          type: string
-          description: Human-readable message indicating details about the condition.
-        reason:
-          type: string
-          description: Brief machine-readable reason for the condition's last transition.
     PodSpec:
       type: object
       description: Specification for the desired behavior of a pod, including the containers to run, volumes to mount, scheduling constraints, and restart policy.
@@ -729,37 +417,152 @@ components:
         revisionHistoryLimit:
           type: integer
           description: Number of old ReplicaSets to retain for rollback. Defaults to 10.
-    Pod:
+    DeploymentList:
       type: object
-      description: A Pod represents the smallest deployable unit in Kubernetes, encapsulating one or more containers with shared storage and network. Pods are ephemeral by nature and managed by higher-level workload controllers.
+      description: A list of deployments returned by list operations.
+      required:
+      - items
       properties:
         apiVersion:
           type: string
-          const: v1
+        kind:
+          type: string
+          const: DeploymentList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deployment'
+    ResourceRequirements:
+      type: object
+      description: Compute resource requirements for a container, specifying resource limits and requests for CPU and memory.
+      properties:
+        requests:
+          type: object
+          description: Minimum resources required. The container will not be scheduled unless these resources are available on the node.
+          additionalProperties:
+            type: string
+        limits:
+          type: object
+          description: Maximum resources the container may consume. The container is throttled (CPU) or killed (memory) if it exceeds limits.
+          additionalProperties:
+            type: string
+    Deployment:
+      type: object
+      description: A Deployment provides declarative updates for Pods and ReplicaSets. You describe a desired state in a Deployment and the controller changes the actual state to match the desired state at a controlled rate.
+      properties:
+        apiVersion:
+          type: string
+          const: apps/v1
           description: API version of the resource.
         kind:
           type: string
-          const: Pod
+          const: Deployment
           description: Kind identifier for the resource.
         metadata:
           $ref: '#/components/schemas/ObjectMeta'
         spec:
-          $ref: '#/components/schemas/PodSpec'
+          $ref: '#/components/schemas/DeploymentSpec'
         status:
-          $ref: '#/components/schemas/PodStatus'
-    ListMeta:
+          $ref: '#/components/schemas/DeploymentStatus'
+    Scale:
       type: object
-      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      description: Scale represents the scaling subresource of a workload resource. Used to read and update the replica count independently of the full resource spec.
       properties:
-        resourceVersion:
+        apiVersion:
           type: string
-          description: Resource version of the list for use in watch operations.
-        continue:
+        kind:
           type: string
-          description: Token used to retrieve the next page of results in a paginated list request.
-        remainingItemCount:
+          const: Scale
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          type: object
+          properties:
+            replicas:
+              type: integer
+              description: Desired number of replicas.
+        status:
+          type: object
+          properties:
+            replicas:
+              type: integer
+              description: Actual number of observed replicas.
+    Container:
+      type: object
+      description: A single container to run within a pod. Defines the container image, command, environment, resource requirements, ports, and volume mounts.
+      required:
+      - name
+      - image
+      properties:
+        name:
+          type: string
+          description: Unique name of the container within the pod.
+        image:
+          type: string
+          description: Container image name in the format [registry/]repository[:tag]. The tag defaults to 'latest' if not specified.
+        command:
+          type: array
+          items:
+            type: string
+          description: Entrypoint command array. Replaces the container image's ENTRYPOINT.
+        args:
+          type: array
+          items:
+            type: string
+          description: Arguments to the entrypoint. Replaces the container image's CMD.
+        env:
+          type: array
+          description: List of environment variables to set in the container.
+          items:
+            $ref: '#/components/schemas/EnvVar'
+        ports:
+          type: array
+          description: List of ports to expose from the container.
+          items:
+            $ref: '#/components/schemas/ContainerPort'
+        resources:
+          $ref: '#/components/schemas/ResourceRequirements'
+        imagePullPolicy:
+          type: string
+          enum:
+          - Always
+          - Never
+          - IfNotPresent
+          description: Image pull policy. Defaults to Always if the tag is :latest, otherwise IfNotPresent.
+    Status:
+      type: object
+      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Status
+        code:
           type: integer
-          description: Number of items remaining in the list if pagination is in effect.
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable description of the status.
+        reason:
+          type: string
+          description: Machine-readable description of why the operation is in this status.
+        status:
+          type: string
+          enum:
+          - Success
+          - Failure
+          description: Outcome of the operation.
+    PodTemplateSpec:
+      type: object
+      description: Template for creating pod replicas. Contains pod metadata (labels, annotations) and a pod spec.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/PodSpec'
     PodStatus:
       type: object
       description: Most recently observed status of the pod. This data may not be up-to-date and is populated by the system.
@@ -788,6 +591,203 @@ components:
           description: Current service state of the pod.
           items:
             $ref: '#/components/schemas/PodCondition'
+    LabelSelector:
+      type: object
+      description: A label selector is a query over a set of resources. matchLabels specifies key-value pairs that must match, while matchExpressions supports set-based criteria.
+      properties:
+        matchLabels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of key-value pairs that must match resource labels exactly.
+        matchExpressions:
+          type: array
+          description: List of label selector requirements using set-based operators.
+          items:
+            $ref: '#/components/schemas/LabelSelectorRequirement'
+    Pod:
+      type: object
+      description: A Pod represents the smallest deployable unit in Kubernetes, encapsulating one or more containers with shared storage and network. Pods are ephemeral by nature and managed by higher-level workload controllers.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+          description: API version of the resource.
+        kind:
+          type: string
+          const: Pod
+          description: Kind identifier for the resource.
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/PodSpec'
+        status:
+          $ref: '#/components/schemas/PodStatus'
+    PodList:
+      type: object
+      description: A list of pods returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: PodList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pod'
+    LabelSelectorRequirement:
+      type: object
+      description: A requirement that uses set-based operators to match labels.
+      required:
+      - key
+      - operator
+      properties:
+        key:
+          type: string
+          description: Label key that the selector applies to.
+        operator:
+          type: string
+          enum:
+          - In
+          - NotIn
+          - Exists
+          - DoesNotExist
+          description: Represents the key's relationship to a set of values.
+        values:
+          type: array
+          items:
+            type: string
+          description: Array of string values used with In and NotIn operators.
+    PodCondition:
+      type: object
+      description: Condition representing the current state of a pod component.
+      required:
+      - type
+      - status
+      properties:
+        type:
+          type: string
+          enum:
+          - PodScheduled
+          - ContainersReady
+          - Initialized
+          - Ready
+          description: Type of pod condition.
+        status:
+          type: string
+          enum:
+          - 'True'
+          - 'False'
+          - Unknown
+          description: Status of the condition.
+        message:
+          type: string
+          description: Human-readable message indicating details about the condition.
+        reason:
+          type: string
+          description: Brief machine-readable reason for the condition's last transition.
+    OwnerReference:
+      type: object
+      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
+      required:
+      - apiVersion
+      - kind
+      - name
+      - uid
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the owner resource.
+        kind:
+          type: string
+          description: Kind of the owner resource.
+        name:
+          type: string
+          description: Name of the owner resource.
+        uid:
+          type: string
+          description: UID of the owner resource.
+        controller:
+          type: boolean
+          description: Whether this reference points to the managing controller.
+    ListMeta:
+      type: object
+      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: Token used to retrieve the next page of results in a paginated list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
+    ContainerPort:
+      type: object
+      description: A network port that a container exposes. Used for documentation and for service discovery via protocol and port number.
+      required:
+      - containerPort
+      properties:
+        name:
+          type: string
+          description: Name for the port, referenced by services.
+        containerPort:
+          type: integer
+          minimum: 1
+          maximum: 65535
+          description: Port number to expose on the container's IP address.
+        protocol:
+          type: string
+          enum:
+          - TCP
+          - UDP
+          - SCTP
+          description: Protocol for the port. Defaults to TCP.
+        hostPort:
+          type: integer
+          description: Port to expose on the node. Most containers do not need this.
+    EnvVar:
+      type: object
+      description: An environment variable to set in a container.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the environment variable.
+        value:
+          type: string
+          description: Literal string value for the environment variable.
+    DeploymentStrategy:
+      type: object
+      description: Strategy for replacing existing pods with new ones during an update. Supports RollingUpdate (default) and Recreate strategies.
+      properties:
+        type:
+          type: string
+          enum:
+          - Recreate
+          - RollingUpdate
+          description: Type of deployment. Recreate kills all existing pods before creating new ones. RollingUpdate gradually replaces old pods.
+        rollingUpdate:
+          type: object
+          description: Rolling update configuration. Only valid when type is RollingUpdate.
+          properties:
+            maxUnavailable:
+              description: Maximum number of pods that can be unavailable during the update. Can be an absolute number or percentage.
+              oneOf:
+              - type: integer
+              - type: string
+            maxSurge:
+              description: Maximum number of pods that can be scheduled above the desired number during an update.
+              oneOf:
+              - type: integer
+              - type: string
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -830,69 +830,9 @@ components:
           description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
           items:
             $ref: '#/components/schemas/OwnerReference'
-  parameters:
-    GracePeriod:
-      name: gracePeriodSeconds
-      in: query
-      description: Duration in seconds to wait before forcefully terminating the resource. Defaults to the resource's terminationGracePeriodSeconds setting.
-      schema:
-        type: integer
-        minimum: 0
-    Watch:
-      name: watch
-      in: query
-      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
-      schema:
-        type: boolean
-    Continue:
-      name: continue
-      in: query
-      description: Pagination token returned in a previous response's metadata.continue field. Use to retrieve the next page of results.
-      schema:
-        type: string
-    NamespaceParam:
-      name: namespace
-      in: path
-      required: true
-      description: The namespace name to scope the request to.
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-    ResourceVersion:
-      name: resourceVersion
-      in: query
-      description: When specified with a watch call, shows changes that occur after the specified resourceVersion. When specified in a list request, returns results at least as new as the specified resourceVersion.
-      schema:
-        type: string
-    FieldSelector:
-      name: fieldSelector
-      in: query
-      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
-      schema:
-        type: string
-    NameParam:
-      name: name
-      in: path
-      required: true
-      description: The name of the resource to operate on.
-      schema:
-        type: string
-    LabelSelector:
-      name: labelSelector
-      in: query
-      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
-      schema:
-        type: string
   responses:
-    NotFound:
-      description: Not found — the specified resource does not exist
+    BadRequest:
+      description: Bad request — invalid resource specification
       content:
         application/json:
           schema:
@@ -903,12 +843,72 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Status'
-    BadRequest:
-      description: Bad request — invalid resource specification
+    NotFound:
+      description: Not found — the specified resource does not exist
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Status'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+    Watch:
+      name: watch
+      in: query
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+      schema:
+        type: boolean
+    LabelSelector:
+      name: labelSelector
+      in: query
+      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
+      schema:
+        type: string
+    NameParam:
+      name: name
+      in: path
+      required: true
+      description: The name of the resource to operate on.
+      schema:
+        type: string
+    Continue:
+      name: continue
+      in: query
+      description: Pagination token returned in a previous response's metadata.continue field. Use to retrieve the next page of results.
+      schema:
+        type: string
+    FieldSelector:
+      name: fieldSelector
+      in: query
+      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
+      schema:
+        type: string
+    ResourceVersion:
+      name: resourceVersion
+      in: query
+      description: When specified with a watch call, shows changes that occur after the specified resourceVersion. When specified in a list request, returns results at least as new as the specified resourceVersion.
+      schema:
+        type: string
+    NamespaceParam:
+      name: namespace
+      in: path
+      required: true
+      description: The namespace name to scope the request to.
+      schema:
+        type: string
+    GracePeriod:
+      name: gracePeriodSeconds
+      in: query
+      description: Duration in seconds to wait before forcefully terminating the resource. Defaults to the resource's terminationGracePeriodSeconds setting.
+      schema:
+        type: integer
+        minimum: 0
   securitySchemes:
     bearerAuth:
       type: http

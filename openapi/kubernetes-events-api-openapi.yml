@@ -84,6 +84,36 @@ components:
           - Success
           - Failure
           description: Outcome of the operation.
+    EventList:
+      type: object
+      description: A list of events returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: EventList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    ListMeta:
+      type: object
+      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: Token used to retrieve the next page of results in a paginated list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
     Event:
       type: object
       description: An Event records an occurrence in the cluster. Events capture information about resource lifecycle changes, scheduling decisions, container restarts, and error conditions. Events have a short retention period in the cluster.
@@ -144,19 +174,6 @@ components:
         controller:
           type: boolean
           description: Whether this reference points to the managing controller.
-    ListMeta:
-      type: object
-      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
-      properties:
-        resourceVersion:
-          type: string
-          description: Resource version of the list for use in watch operations.
-        continue:
-          type: string
-          description: Token used to retrieve the next page of results in a paginated list request.
-        remainingItemCount:
-          type: integer
-          description: Number of items remaining in the list if pagination is in effect.
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -199,23 +216,6 @@ components:
           description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
           items:
             $ref: '#/components/schemas/OwnerReference'
-    EventList:
-      type: object
-      description: A list of events returned by list operations.
-      required:
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: EventList
-        metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
   parameters:
     Watch:
       name: watch
@@ -230,6 +230,18 @@ components:
       description: The namespace name to scope the request to.
       schema:
         type: string
+    LabelSelector:
+      name: labelSelector
+      in: query
+      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
+      schema:
+        type: string
+    FieldSelector:
+      name: fieldSelector
+      in: query
+      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
+      schema:
+        type: string
     Limit:
       name: limit
       in: query
@@ -238,18 +250,6 @@ components:
         type: integer
         minimum: 1
         maximum: 500
-    FieldSelector:
-      name: fieldSelector
-      in: query
-      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
-      schema:
-        type: string
-    LabelSelector:
-      name: labelSelector
-      in: query
-      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Unauthorized — missing or invalid authentication credentials

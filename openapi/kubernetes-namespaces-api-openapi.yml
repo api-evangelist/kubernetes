@@ -131,45 +131,48 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    LabelSelector:
+      name: labelSelector
+      in: query
+      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
+      schema:
+        type: string
+    Watch:
+      name: watch
+      in: query
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+      schema:
+        type: boolean
+    NamespaceParam:
+      name: namespace
+      in: path
+      required: true
+      description: The namespace name to scope the request to.
+      schema:
+        type: string
+    FieldSelector:
+      name: fieldSelector
+      in: query
+      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
+      schema:
+        type: string
+    NameParam:
+      name: name
+      in: path
+      required: true
+      description: The name of the resource to operate on.
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
   schemas:
-    Service:
-      type: object
-      description: A Service is an abstraction that defines a logical set of pods and a policy for accessing them. Services enable decoupling between consumer and producer pods through stable virtual IPs and DNS names.
-      properties:
-        apiVersion:
-          type: string
-          const: v1
-        kind:
-          type: string
-          const: Service
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/ServiceSpec'
-    Status:
-      type: object
-      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: Status
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable description of the status.
-        reason:
-          type: string
-          description: Machine-readable description of why the operation is in this status.
-        status:
-          type: string
-          enum:
-          - Success
-          - Failure
-          description: Outcome of the operation.
     ServiceSpec:
       type: object
       description: Specification for the desired behavior of a service, including the port mappings, pod selector, and service type.
@@ -198,6 +201,125 @@ components:
         externalName:
           type: string
           description: External DNS name that the service maps to. Only used when type is ExternalName.
+    Status:
+      type: object
+      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Status
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable description of the status.
+        reason:
+          type: string
+          description: Machine-readable description of why the operation is in this status.
+        status:
+          type: string
+          enum:
+          - Success
+          - Failure
+          description: Outcome of the operation.
+    OwnerReference:
+      type: object
+      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
+      required:
+      - apiVersion
+      - kind
+      - name
+      - uid
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the owner resource.
+        kind:
+          type: string
+          description: Kind of the owner resource.
+        name:
+          type: string
+          description: Name of the owner resource.
+        uid:
+          type: string
+          description: UID of the owner resource.
+        controller:
+          type: boolean
+          description: Whether this reference points to the managing controller.
+    ListMeta:
+      type: object
+      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: Token used to retrieve the next page of results in a paginated list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
+    ServiceList:
+      type: object
+      description: A list of services returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: ServiceList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+    ServicePort:
+      type: object
+      description: A port that a service exposes, mapping from a service port to a target port.
+      required:
+      - port
+      properties:
+        name:
+          type: string
+          description: Name of the port within the service. Required for multi-port services.
+        protocol:
+          type: string
+          enum:
+          - TCP
+          - UDP
+          - SCTP
+          description: IP protocol for the port. Defaults to TCP.
+        port:
+          type: integer
+          description: Port number that the service listens on.
+        targetPort:
+          description: Port on the pod that traffic is forwarded to.
+          oneOf:
+          - type: integer
+          - type: string
+        nodePort:
+          type: integer
+          description: Port on each node on which the service is exposed when type is NodePort or LoadBalancer.
+    Service:
+      type: object
+      description: A Service is an abstraction that defines a logical set of pods and a policy for accessing them. Services enable decoupling between consumer and producer pods through stable virtual IPs and DNS names.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Service
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/ServiceSpec'
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -240,131 +362,9 @@ components:
           description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
           items:
             $ref: '#/components/schemas/OwnerReference'
-    OwnerReference:
-      type: object
-      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
-      required:
-      - apiVersion
-      - kind
-      - name
-      - uid
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the owner resource.
-        kind:
-          type: string
-          description: Kind of the owner resource.
-        name:
-          type: string
-          description: Name of the owner resource.
-        uid:
-          type: string
-          description: UID of the owner resource.
-        controller:
-          type: boolean
-          description: Whether this reference points to the managing controller.
-    ListMeta:
-      type: object
-      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
-      properties:
-        resourceVersion:
-          type: string
-          description: Resource version of the list for use in watch operations.
-        continue:
-          type: string
-          description: Token used to retrieve the next page of results in a paginated list request.
-        remainingItemCount:
-          type: integer
-          description: Number of items remaining in the list if pagination is in effect.
-    ServicePort:
-      type: object
-      description: A port that a service exposes, mapping from a service port to a target port.
-      required:
-      - port
-      properties:
-        name:
-          type: string
-          description: Name of the port within the service. Required for multi-port services.
-        protocol:
-          type: string
-          enum:
-          - TCP
-          - UDP
-          - SCTP
-          description: IP protocol for the port. Defaults to TCP.
-        port:
-          type: integer
-          description: Port number that the service listens on.
-        targetPort:
-          description: Port on the pod that traffic is forwarded to.
-          oneOf:
-          - type: integer
-          - type: string
-        nodePort:
-          type: integer
-          description: Port on each node on which the service is exposed when type is NodePort or LoadBalancer.
-    ServiceList:
-      type: object
-      description: A list of services returned by list operations.
-      required:
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: ServiceList
-        metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
-  parameters:
-    Watch:
-      name: watch
-      in: query
-      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
-      schema:
-        type: boolean
-    NameParam:
-      name: name
-      in: path
-      required: true
-      description: The name of the resource to operate on.
-      schema:
-        type: string
-    NamespaceParam:
-      name: namespace
-      in: path
-      required: true
-      description: The namespace name to scope the request to.
-      schema:
-        type: string
-    LabelSelector:
-      name: labelSelector
-      in: query
-      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-    FieldSelector:
-      name: fieldSelector
-      in: query
-      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
-      schema:
-        type: string
   responses:
-    BadRequest:
-      description: Bad request — invalid resource specification
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
       content:
         application/json:
           schema:
@@ -375,8 +375,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Status'
-    Unauthorized:
-      description: Unauthorized — missing or invalid authentication credentials
+    BadRequest:
+      description: Bad request — invalid resource specification
       content:
         application/json:
           schema:
