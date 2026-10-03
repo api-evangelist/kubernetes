@@ -110,72 +110,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    Watch:
-      name: watch
-      in: query
-      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
-      schema:
-        type: boolean
-    NamespaceParam:
-      name: namespace
-      in: path
-      required: true
-      description: The namespace name to scope the request to.
-      schema:
-        type: string
-    LabelSelector:
-      name: labelSelector
-      in: query
-      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-  responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
-    BadRequest:
-      description: Bad request — invalid resource specification
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
   schemas:
-    Status:
-      type: object
-      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: Status
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable description of the status.
-        reason:
-          type: string
-          description: Machine-readable description of why the operation is in this status.
-        status:
-          type: string
-          enum:
-          - Success
-          - Failure
-          description: Outcome of the operation.
     OwnerReference:
       type: object
       description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
@@ -213,50 +148,6 @@ components:
         remainingItemCount:
           type: integer
           description: Number of items remaining in the list if pagination is in effect.
-    SecretList:
-      type: object
-      description: A list of Secrets returned by list operations.
-      required:
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: SecretList
-        metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Secret'
-    Secret:
-      type: object
-      description: A Secret stores sensitive information such as passwords, OAuth tokens, and TLS certificates. Secret data is base64-encoded and access is controlled via RBAC.
-      properties:
-        apiVersion:
-          type: string
-          const: v1
-        kind:
-          type: string
-          const: Secret
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        type:
-          type: string
-          description: 'Type of secret. Common types: Opaque (generic), kubernetes.io/tls, kubernetes.io/service-account-token, kubernetes.io/dockerconfigjson.'
-          default: Opaque
-        data:
-          type: object
-          additionalProperties:
-            type: string
-            format: byte
-          description: Map of base64-encoded secret data.
-        stringData:
-          type: object
-          additionalProperties:
-            type: string
-          description: Map of plain-text string data. Values are encoded to base64 before storage. Takes precedence over data for matching keys.
     ConfigMapList:
       type: object
       description: A list of ConfigMaps returned by list operations.
@@ -274,29 +165,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ConfigMap'
-    ConfigMap:
+    SecretList:
       type: object
-      description: A ConfigMap holds non-confidential configuration data as key-value pairs. Pods can consume ConfigMaps as environment variables, command-line arguments, or configuration files in a volume.
+      description: A list of Secrets returned by list operations.
+      required:
+      - items
       properties:
         apiVersion:
           type: string
-          const: v1
         kind:
           type: string
-          const: ConfigMap
+          const: SecretList
         metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        data:
-          type: object
-          additionalProperties:
-            type: string
-          description: Map of UTF-8 string data. Use binaryData for binary content.
-        binaryData:
-          type: object
-          additionalProperties:
-            type: string
-            format: byte
-          description: Map of binary data. Keys must not overlap with data keys.
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Secret'
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -339,6 +224,121 @@ components:
           description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
           items:
             $ref: '#/components/schemas/OwnerReference'
+    Secret:
+      type: object
+      description: A Secret stores sensitive information such as passwords, OAuth tokens, and TLS certificates. Secret data is base64-encoded and access is controlled via RBAC.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Secret
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        type:
+          type: string
+          description: 'Type of secret. Common types: Opaque (generic), kubernetes.io/tls, kubernetes.io/service-account-token, kubernetes.io/dockerconfigjson.'
+          default: Opaque
+        data:
+          type: object
+          additionalProperties:
+            type: string
+            format: byte
+          description: Map of base64-encoded secret data.
+        stringData:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of plain-text string data. Values are encoded to base64 before storage. Takes precedence over data for matching keys.
+    ConfigMap:
+      type: object
+      description: A ConfigMap holds non-confidential configuration data as key-value pairs. Pods can consume ConfigMaps as environment variables, command-line arguments, or configuration files in a volume.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: ConfigMap
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        data:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of UTF-8 string data. Use binaryData for binary content.
+        binaryData:
+          type: object
+          additionalProperties:
+            type: string
+            format: byte
+          description: Map of binary data. Keys must not overlap with data keys.
+    Status:
+      type: object
+      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Status
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable description of the status.
+        reason:
+          type: string
+          description: Machine-readable description of why the operation is in this status.
+        status:
+          type: string
+          enum:
+          - Success
+          - Failure
+          description: Outcome of the operation.
+  parameters:
+    NamespaceParam:
+      name: namespace
+      in: path
+      required: true
+      description: The namespace name to scope the request to.
+      schema:
+        type: string
+    LabelSelector:
+      name: labelSelector
+      in: query
+      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+    Watch:
+      name: watch
+      in: query
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+      schema:
+        type: boolean
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    BadRequest:
+      description: Bad request — invalid resource specification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
   securitySchemes:
     bearerAuth:
       type: http

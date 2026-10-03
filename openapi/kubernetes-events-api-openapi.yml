@@ -41,115 +41,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ObjectReference:
-      type: object
-      description: A reference to an object in the cluster, used to identify the resource that an event or other resource is associated with.
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the referenced object.
-        kind:
-          type: string
-          description: Kind of the referenced object.
-        namespace:
-          type: string
-          description: Namespace of the referenced object.
-        name:
-          type: string
-          description: Name of the referenced object.
-        uid:
-          type: string
-          description: UID of the referenced object.
-    Status:
-      type: object
-      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: Status
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable description of the status.
-        reason:
-          type: string
-          description: Machine-readable description of why the operation is in this status.
-        status:
-          type: string
-          enum:
-          - Success
-          - Failure
-          description: Outcome of the operation.
-    EventList:
-      type: object
-      description: A list of events returned by list operations.
-      required:
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: EventList
-        metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-    ListMeta:
-      type: object
-      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
-      properties:
-        resourceVersion:
-          type: string
-          description: Resource version of the list for use in watch operations.
-        continue:
-          type: string
-          description: Token used to retrieve the next page of results in a paginated list request.
-        remainingItemCount:
-          type: integer
-          description: Number of items remaining in the list if pagination is in effect.
-    Event:
-      type: object
-      description: An Event records an occurrence in the cluster. Events capture information about resource lifecycle changes, scheduling decisions, container restarts, and error conditions. Events have a short retention period in the cluster.
-      properties:
-        apiVersion:
-          type: string
-          const: events.k8s.io/v1
-        kind:
-          type: string
-          const: Event
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        eventTime:
-          type: string
-          format: date-time
-          description: Time at which the event occurred.
-        action:
-          type: string
-          description: What action was taken (e.g. Killing, Scheduling, Pulling).
-        reason:
-          type: string
-          description: Short machine-readable reason for the event (e.g. BackOff, Created).
-        note:
-          type: string
-          description: Human-readable description of the event.
-        type:
-          type: string
-          enum:
-          - Normal
-          - Warning
-          description: Type of event. Normal for informational events, Warning for issues.
-        regarding:
-          $ref: '#/components/schemas/ObjectReference'
-        reportingComponent:
-          type: string
-          description: Name of the controller that emitted this event.
     OwnerReference:
       type: object
       description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
@@ -174,6 +65,19 @@ components:
         controller:
           type: boolean
           description: Whether this reference points to the managing controller.
+    ListMeta:
+      type: object
+      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: Token used to retrieve the next page of results in a paginated list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -216,13 +120,103 @@ components:
           description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
           items:
             $ref: '#/components/schemas/OwnerReference'
+    ObjectReference:
+      type: object
+      description: A reference to an object in the cluster, used to identify the resource that an event or other resource is associated with.
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the referenced object.
+        kind:
+          type: string
+          description: Kind of the referenced object.
+        namespace:
+          type: string
+          description: Namespace of the referenced object.
+        name:
+          type: string
+          description: Name of the referenced object.
+        uid:
+          type: string
+          description: UID of the referenced object.
+    Event:
+      type: object
+      description: An Event records an occurrence in the cluster. Events capture information about resource lifecycle changes, scheduling decisions, container restarts, and error conditions. Events have a short retention period in the cluster.
+      properties:
+        apiVersion:
+          type: string
+          const: events.k8s.io/v1
+        kind:
+          type: string
+          const: Event
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        eventTime:
+          type: string
+          format: date-time
+          description: Time at which the event occurred.
+        action:
+          type: string
+          description: What action was taken (e.g. Killing, Scheduling, Pulling).
+        reason:
+          type: string
+          description: Short machine-readable reason for the event (e.g. BackOff, Created).
+        note:
+          type: string
+          description: Human-readable description of the event.
+        type:
+          type: string
+          enum:
+          - Normal
+          - Warning
+          description: Type of event. Normal for informational events, Warning for issues.
+        regarding:
+          $ref: '#/components/schemas/ObjectReference'
+        reportingComponent:
+          type: string
+          description: Name of the controller that emitted this event.
+    Status:
+      type: object
+      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Status
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable description of the status.
+        reason:
+          type: string
+          description: Machine-readable description of why the operation is in this status.
+        status:
+          type: string
+          enum:
+          - Success
+          - Failure
+          description: Outcome of the operation.
+    EventList:
+      type: object
+      description: A list of events returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: EventList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
   parameters:
-    Watch:
-      name: watch
-      in: query
-      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
-      schema:
-        type: boolean
     NamespaceParam:
       name: namespace
       in: path
@@ -230,16 +224,16 @@ components:
       description: The namespace name to scope the request to.
       schema:
         type: string
-    LabelSelector:
-      name: labelSelector
-      in: query
-      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
-      schema:
-        type: string
     FieldSelector:
       name: fieldSelector
       in: query
       description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
+      schema:
+        type: string
+    LabelSelector:
+      name: labelSelector
+      in: query
+      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
       schema:
         type: string
     Limit:
@@ -250,6 +244,12 @@ components:
         type: integer
         minimum: 1
         maximum: 500
+    Watch:
+      name: watch
+      in: query
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+      schema:
+        type: boolean
   responses:
     Unauthorized:
       description: Unauthorized — missing or invalid authentication credentials
