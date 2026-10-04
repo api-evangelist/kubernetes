@@ -61,7 +61,50 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    BadRequest:
+      description: Bad request — invalid resource specification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
   schemas:
+    ListMeta:
+      type: object
+      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: Token used to retrieve the next page of results in a paginated list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
+    ClusterRoleList:
+      type: object
+      description: A list of ClusterRoles returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: ClusterRoleList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterRole'
     OwnerReference:
       type: object
       description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
@@ -86,19 +129,47 @@ components:
         controller:
           type: boolean
           description: Whether this reference points to the managing controller.
-    ListMeta:
+    PolicyRule:
       type: object
-      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      description: A rule that grants a set of verbs on a set of resources within an API group. All fields are combined with AND logic.
       properties:
-        resourceVersion:
+        verbs:
+          type: array
+          items:
+            type: string
+          description: 'Verbs allowed on the resources. Common: get, list, watch, create, update, patch, delete, deletecollection.'
+        apiGroups:
+          type: array
+          items:
+            type: string
+          description: API groups the resources belong to. Use "" for the core group.
+        resources:
+          type: array
+          items:
+            type: string
+          description: Resources this rule applies to. Use "*" to match all resources.
+        resourceNames:
+          type: array
+          items:
+            type: string
+          description: List of resource names the rule applies to. Empty means all.
+    ClusterRole:
+      type: object
+      description: A ClusterRole defines a set of permissions applicable across the entire cluster. Rules grant access to specific API groups, resources, and verbs. ClusterRoles are bound to subjects via ClusterRoleBindings.
+      properties:
+        apiVersion:
           type: string
-          description: Resource version of the list for use in watch operations.
-        continue:
+          const: rbac.authorization.k8s.io/v1
+        kind:
           type: string
-          description: Token used to retrieve the next page of results in a paginated list request.
-        remainingItemCount:
-          type: integer
-          description: Number of items remaining in the list if pagination is in effect.
+          const: ClusterRole
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        rules:
+          type: array
+          description: List of policy rules granting permissions.
+          items:
+            $ref: '#/components/schemas/PolicyRule'
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -141,64 +212,6 @@ components:
           description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
           items:
             $ref: '#/components/schemas/OwnerReference'
-    PolicyRule:
-      type: object
-      description: A rule that grants a set of verbs on a set of resources within an API group. All fields are combined with AND logic.
-      properties:
-        verbs:
-          type: array
-          items:
-            type: string
-          description: 'Verbs allowed on the resources. Common: get, list, watch, create, update, patch, delete, deletecollection.'
-        apiGroups:
-          type: array
-          items:
-            type: string
-          description: API groups the resources belong to. Use "" for the core group.
-        resources:
-          type: array
-          items:
-            type: string
-          description: Resources this rule applies to. Use "*" to match all resources.
-        resourceNames:
-          type: array
-          items:
-            type: string
-          description: List of resource names the rule applies to. Empty means all.
-    ClusterRole:
-      type: object
-      description: A ClusterRole defines a set of permissions applicable across the entire cluster. Rules grant access to specific API groups, resources, and verbs. ClusterRoles are bound to subjects via ClusterRoleBindings.
-      properties:
-        apiVersion:
-          type: string
-          const: rbac.authorization.k8s.io/v1
-        kind:
-          type: string
-          const: ClusterRole
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        rules:
-          type: array
-          description: List of policy rules granting permissions.
-          items:
-            $ref: '#/components/schemas/PolicyRule'
-    ClusterRoleList:
-      type: object
-      description: A list of ClusterRoles returned by list operations.
-      required:
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: ClusterRoleList
-        metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClusterRole'
     Status:
       type: object
       description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
@@ -223,20 +236,13 @@ components:
           - Success
           - Failure
           description: Outcome of the operation.
-  responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
-    BadRequest:
-      description: Bad request — invalid resource specification
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
   parameters:
+    Watch:
+      name: watch
+      in: query
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+      schema:
+        type: boolean
     LabelSelector:
       name: labelSelector
       in: query
@@ -251,12 +257,6 @@ components:
         type: integer
         minimum: 1
         maximum: 500
-    Watch:
-      name: watch
-      in: query
-      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
-      schema:
-        type: boolean
   securitySchemes:
     bearerAuth:
       type: http

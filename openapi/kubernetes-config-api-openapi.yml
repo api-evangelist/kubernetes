@@ -111,6 +111,60 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Status:
+      type: object
+      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Status
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable description of the status.
+        reason:
+          type: string
+          description: Machine-readable description of why the operation is in this status.
+        status:
+          type: string
+          enum:
+          - Success
+          - Failure
+          description: Outcome of the operation.
+    ListMeta:
+      type: object
+      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: Token used to retrieve the next page of results in a paginated list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
+    SecretList:
+      type: object
+      description: A list of Secrets returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: SecretList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Secret'
     OwnerReference:
       type: object
       description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
@@ -135,19 +189,6 @@ components:
         controller:
           type: boolean
           description: Whether this reference points to the managing controller.
-    ListMeta:
-      type: object
-      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
-      properties:
-        resourceVersion:
-          type: string
-          description: Resource version of the list for use in watch operations.
-        continue:
-          type: string
-          description: Token used to retrieve the next page of results in a paginated list request.
-        remainingItemCount:
-          type: integer
-          description: Number of items remaining in the list if pagination is in effect.
     ConfigMapList:
       type: object
       description: A list of ConfigMaps returned by list operations.
@@ -165,23 +206,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ConfigMap'
-    SecretList:
+    ConfigMap:
       type: object
-      description: A list of Secrets returned by list operations.
-      required:
-      - items
+      description: A ConfigMap holds non-confidential configuration data as key-value pairs. Pods can consume ConfigMaps as environment variables, command-line arguments, or configuration files in a volume.
       properties:
         apiVersion:
           type: string
+          const: v1
         kind:
           type: string
-          const: SecretList
+          const: ConfigMap
         metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Secret'
+          $ref: '#/components/schemas/ObjectMeta'
+        data:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of UTF-8 string data. Use binaryData for binary content.
+        binaryData:
+          type: object
+          additionalProperties:
+            type: string
+            format: byte
+          description: Map of binary data. Keys must not overlap with data keys.
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -251,61 +298,26 @@ components:
           additionalProperties:
             type: string
           description: Map of plain-text string data. Values are encoded to base64 before storage. Takes precedence over data for matching keys.
-    ConfigMap:
-      type: object
-      description: A ConfigMap holds non-confidential configuration data as key-value pairs. Pods can consume ConfigMaps as environment variables, command-line arguments, or configuration files in a volume.
-      properties:
-        apiVersion:
-          type: string
-          const: v1
-        kind:
-          type: string
-          const: ConfigMap
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        data:
-          type: object
-          additionalProperties:
-            type: string
-          description: Map of UTF-8 string data. Use binaryData for binary content.
-        binaryData:
-          type: object
-          additionalProperties:
-            type: string
-            format: byte
-          description: Map of binary data. Keys must not overlap with data keys.
-    Status:
-      type: object
-      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: Status
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable description of the status.
-        reason:
-          type: string
-          description: Machine-readable description of why the operation is in this status.
-        status:
-          type: string
-          enum:
-          - Success
-          - Failure
-          description: Outcome of the operation.
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    BadRequest:
+      description: Bad request — invalid resource specification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
   parameters:
-    NamespaceParam:
-      name: namespace
-      in: path
-      required: true
-      description: The namespace name to scope the request to.
+    Watch:
+      name: watch
+      in: query
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
       schema:
-        type: string
+        type: boolean
     LabelSelector:
       name: labelSelector
       in: query
@@ -320,25 +332,13 @@ components:
         type: integer
         minimum: 1
         maximum: 500
-    Watch:
-      name: watch
-      in: query
-      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+    NamespaceParam:
+      name: namespace
+      in: path
+      required: true
+      description: The namespace name to scope the request to.
       schema:
-        type: boolean
-  responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
-    BadRequest:
-      description: Bad request — invalid resource specification
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

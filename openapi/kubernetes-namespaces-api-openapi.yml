@@ -132,30 +132,33 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    OwnerReference:
+    ServicePort:
       type: object
-      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
+      description: A port that a service exposes, mapping from a service port to a target port.
       required:
-      - apiVersion
-      - kind
-      - name
-      - uid
+      - port
       properties:
-        apiVersion:
-          type: string
-          description: API version of the owner resource.
-        kind:
-          type: string
-          description: Kind of the owner resource.
         name:
           type: string
-          description: Name of the owner resource.
-        uid:
+          description: Name of the port within the service. Required for multi-port services.
+        protocol:
           type: string
-          description: UID of the owner resource.
-        controller:
-          type: boolean
-          description: Whether this reference points to the managing controller.
+          enum:
+          - TCP
+          - UDP
+          - SCTP
+          description: IP protocol for the port. Defaults to TCP.
+        port:
+          type: integer
+          description: Port number that the service listens on.
+        targetPort:
+          description: Port on the pod that traffic is forwarded to.
+          oneOf:
+          - type: integer
+          - type: string
+        nodePort:
+          type: integer
+          description: Port on each node on which the service is exposed when type is NodePort or LoadBalancer.
     ListMeta:
       type: object
       description: Metadata that all list responses include, containing pagination state and the resource version of the list.
@@ -183,6 +186,75 @@ components:
           $ref: '#/components/schemas/ObjectMeta'
         spec:
           $ref: '#/components/schemas/ServiceSpec'
+    ServiceList:
+      type: object
+      description: A list of services returned by list operations.
+      required:
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: ServiceList
+        metadata:
+          $ref: '#/components/schemas/ListMeta'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+    OwnerReference:
+      type: object
+      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
+      required:
+      - apiVersion
+      - kind
+      - name
+      - uid
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the owner resource.
+        kind:
+          type: string
+          description: Kind of the owner resource.
+        name:
+          type: string
+          description: Name of the owner resource.
+        uid:
+          type: string
+          description: UID of the owner resource.
+        controller:
+          type: boolean
+          description: Whether this reference points to the managing controller.
+    ServiceSpec:
+      type: object
+      description: Specification for the desired behavior of a service, including the port mappings, pod selector, and service type.
+      properties:
+        type:
+          type: string
+          enum:
+          - ClusterIP
+          - NodePort
+          - LoadBalancer
+          - ExternalName
+          description: How the service is exposed. ClusterIP (default) exposes within the cluster only; NodePort adds a node-level port; LoadBalancer provisions a cloud load balancer; ExternalName maps to a DNS name.
+        selector:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of key-value pairs that identify the pods this service routes traffic to.
+        ports:
+          type: array
+          description: List of ports the service exposes.
+          items:
+            $ref: '#/components/schemas/ServicePort'
+        clusterIP:
+          type: string
+          description: IP address of the service within the cluster. Assigned automatically unless None (headless service) is specified.
+        externalName:
+          type: string
+          description: External DNS name that the service maps to. Only used when type is ExternalName.
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -225,78 +297,6 @@ components:
           description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
           items:
             $ref: '#/components/schemas/OwnerReference'
-    ServicePort:
-      type: object
-      description: A port that a service exposes, mapping from a service port to a target port.
-      required:
-      - port
-      properties:
-        name:
-          type: string
-          description: Name of the port within the service. Required for multi-port services.
-        protocol:
-          type: string
-          enum:
-          - TCP
-          - UDP
-          - SCTP
-          description: IP protocol for the port. Defaults to TCP.
-        port:
-          type: integer
-          description: Port number that the service listens on.
-        targetPort:
-          description: Port on the pod that traffic is forwarded to.
-          oneOf:
-          - type: integer
-          - type: string
-        nodePort:
-          type: integer
-          description: Port on each node on which the service is exposed when type is NodePort or LoadBalancer.
-    ServiceList:
-      type: object
-      description: A list of services returned by list operations.
-      required:
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          const: ServiceList
-        metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
-    ServiceSpec:
-      type: object
-      description: Specification for the desired behavior of a service, including the port mappings, pod selector, and service type.
-      properties:
-        type:
-          type: string
-          enum:
-          - ClusterIP
-          - NodePort
-          - LoadBalancer
-          - ExternalName
-          description: How the service is exposed. ClusterIP (default) exposes within the cluster only; NodePort adds a node-level port; LoadBalancer provisions a cloud load balancer; ExternalName maps to a DNS name.
-        selector:
-          type: object
-          additionalProperties:
-            type: string
-          description: Map of key-value pairs that identify the pods this service routes traffic to.
-        ports:
-          type: array
-          description: List of ports the service exposes.
-          items:
-            $ref: '#/components/schemas/ServicePort'
-        clusterIP:
-          type: string
-          description: IP address of the service within the cluster. Assigned automatically unless None (headless service) is specified.
-        externalName:
-          type: string
-          description: External DNS name that the service maps to. Only used when type is ExternalName.
     Status:
       type: object
       description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
@@ -321,20 +321,39 @@ components:
           - Success
           - Failure
           description: Outcome of the operation.
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    NotFound:
+      description: Not found — the specified resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    BadRequest:
+      description: Bad request — invalid resource specification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
   parameters:
-    NamespaceParam:
-      name: namespace
+    NameParam:
+      name: name
       in: path
       required: true
-      description: The namespace name to scope the request to.
+      description: The name of the resource to operate on.
       schema:
         type: string
-    FieldSelector:
-      name: fieldSelector
+    Watch:
+      name: watch
       in: query
-      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
       schema:
-        type: string
+        type: boolean
     LabelSelector:
       name: labelSelector
       in: query
@@ -349,38 +368,19 @@ components:
         type: integer
         minimum: 1
         maximum: 500
-    NameParam:
-      name: name
+    NamespaceParam:
+      name: namespace
       in: path
       required: true
-      description: The name of the resource to operate on.
+      description: The namespace name to scope the request to.
       schema:
         type: string
-    Watch:
-      name: watch
+    FieldSelector:
+      name: fieldSelector
       in: query
-      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
       schema:
-        type: boolean
-  responses:
-    NotFound:
-      description: Not found — the specified resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
-    Unauthorized:
-      description: Unauthorized — missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
-    BadRequest:
-      description: Bad request — invalid resource specification
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
