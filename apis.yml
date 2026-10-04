@@ -206,8 +206,8 @@ tags:
   - Containers
   - Deployment
   - Open Source
-  - Orchestration
   - Scaling
+  - Container Orchestration
 tags_raw:
   - Automation
   - Cloud Native
@@ -215,9 +215,9 @@ tags_raw:
   - Containers
   - Deployment
   - Open Source
-  - Orchestration
   - Scaling
   - Open-Source
+  - Container Orchestration
 kind: contract
 deliveryModel:
   model: saas
@@ -250,6 +250,9 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kubernetes.png
 access: 3rd-Party
 common:
+  - type: CapabilityMap
+    url: capabilities/kubernetes-capability-edges.yml
+    name: Kubernetes Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/kubernetes/overview
   - type: Packages
@@ -465,3 +468,5 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 specificationVersion: '0.23'
+x-tags-removed:
+- Orchestration
