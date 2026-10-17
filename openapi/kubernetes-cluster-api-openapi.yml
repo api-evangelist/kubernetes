@@ -171,25 +171,43 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    NotFound:
+      description: Not found — the specified resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    BadRequest:
+      description: Bad request — invalid resource specification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    Conflict:
+      description: Conflict — a resource with that name already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
   parameters:
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
+    NameParam:
+      name: name
+      in: path
+      required: true
+      description: The name of the resource to operate on.
       schema:
-        type: integer
-        minimum: 1
-        maximum: 500
+        type: string
     Continue:
       name: continue
       in: query
       description: Pagination token returned in a previous response's metadata.continue field. Use to retrieve the next page of results.
-      schema:
-        type: string
-    FieldSelector:
-      name: fieldSelector
-      in: query
-      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
       schema:
         type: string
     ResourceVersion:
@@ -198,11 +216,10 @@ components:
       description: When specified with a watch call, shows changes that occur after the specified resourceVersion. When specified in a list request, returns results at least as new as the specified resourceVersion.
       schema:
         type: string
-    NameParam:
-      name: name
-      in: path
-      required: true
-      description: The name of the resource to operate on.
+    FieldSelector:
+      name: fieldSelector
+      in: query
+      description: 'Selector expression to filter resources by field values. Supports equality (=, ==, !=) on specific fields. Example: status.phase=Running,spec.nodeName=node1'
       schema:
         type: string
     Watch:
@@ -211,6 +228,14 @@ components:
       description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
       schema:
         type: boolean
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of resources to return in a single response. Use with the continue parameter to paginate through large result sets.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
     LabelSelector:
       name: labelSelector
       in: query
@@ -218,24 +243,6 @@ components:
       schema:
         type: string
   schemas:
-    NodeSpec:
-      type: object
-      description: Specification of a node, including taints and configuration sources.
-      properties:
-        podCIDR:
-          type: string
-          description: Pod IP range assigned to the node.
-        providerID:
-          type: string
-          description: Provider-specific node identifier, as recognized by the cloud controller manager.
-        taints:
-          type: array
-          description: List of taints applied to the node. Pods must tolerate taints to be scheduled on the node.
-          items:
-            $ref: '#/components/schemas/Taint'
-        unschedulable:
-          type: boolean
-          description: When true, prevents new pods from being scheduled on the node.
     Taint:
       type: object
       description: A taint applied to a node that repels pods without a matching toleration. Used for dedicated nodes, nodes with special hardware, or node evictions.
@@ -256,6 +263,64 @@ components:
           - PreferNoSchedule
           - NoExecute
           description: Effect of the taint on pods without a matching toleration.
+    NodeCondition:
+      type: object
+      description: Condition describing the current state of a node component.
+      required:
+      - type
+      - status
+      properties:
+        type:
+          type: string
+          enum:
+          - Ready
+          - MemoryPressure
+          - DiskPressure
+          - PIDPressure
+          - NetworkUnavailable
+          description: Type of node condition.
+        status:
+          type: string
+          enum:
+          - 'True'
+          - 'False'
+          - Unknown
+          description: Status of the condition.
+        message:
+          type: string
+          description: Human-readable message indicating details about the condition.
+        reason:
+          type: string
+          description: Machine-readable reason for the condition's last transition.
+    Namespace:
+      type: object
+      description: A Namespace provides a mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. Namespace-based scoping is applicable only for namespaced objects.
+      properties:
+        apiVersion:
+          type: string
+          const: v1
+        kind:
+          type: string
+          const: Namespace
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          type: object
+          properties:
+            finalizers:
+              type: array
+              items:
+                type: string
+              description: List of finalizers that must all be empty before the namespace is fully deleted.
+        status:
+          type: object
+          properties:
+            phase:
+              type: string
+              enum:
+              - Active
+              - Terminating
+              description: Current lifecycle phase of the namespace.
     NamespaceList:
       type: object
       description: A list of namespaces returned by list operations.
@@ -273,6 +338,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Namespace'
+    NodeStatus:
+      type: object
+      description: Most recently observed status of the node including capacity, allocatable resources, conditions, and system info.
+      properties:
+        capacity:
+          type: object
+          additionalProperties:
+            type: string
+          description: Total resources available on the node including CPU and memory.
+        allocatable:
+          type: object
+          additionalProperties:
+            type: string
+          description: Resources available for pods on the node after system overhead.
+        conditions:
+          type: array
+          description: Current conditions of the node such as Ready, MemoryPressure, DiskPressure.
+          items:
+            $ref: '#/components/schemas/NodeCondition'
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -315,76 +399,24 @@ components:
           description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
           items:
             $ref: '#/components/schemas/OwnerReference'
-    NodeList:
+    NodeSpec:
       type: object
-      description: A list of nodes returned by list operations.
-      required:
-      - items
+      description: Specification of a node, including taints and configuration sources.
       properties:
-        apiVersion:
+        podCIDR:
           type: string
-        kind:
+          description: Pod IP range assigned to the node.
+        providerID:
           type: string
-          const: NodeList
-        metadata:
-          $ref: '#/components/schemas/ListMeta'
-        items:
+          description: Provider-specific node identifier, as recognized by the cloud controller manager.
+        taints:
           type: array
+          description: List of taints applied to the node. Pods must tolerate taints to be scheduled on the node.
           items:
-            $ref: '#/components/schemas/Node'
-    NodeCondition:
-      type: object
-      description: Condition describing the current state of a node component.
-      required:
-      - type
-      - status
-      properties:
-        type:
-          type: string
-          enum:
-          - Ready
-          - MemoryPressure
-          - DiskPressure
-          - PIDPressure
-          - NetworkUnavailable
-          description: Type of node condition.
-        status:
-          type: string
-          enum:
-          - 'True'
-          - 'False'
-          - Unknown
-          description: Status of the condition.
-        message:
-          type: string
-          description: Human-readable message indicating details about the condition.
-        reason:
-          type: string
-          description: Machine-readable reason for the condition's last transition.
-    OwnerReference:
-      type: object
-      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
-      required:
-      - apiVersion
-      - kind
-      - name
-      - uid
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the owner resource.
-        kind:
-          type: string
-          description: Kind of the owner resource.
-        name:
-          type: string
-          description: Name of the owner resource.
-        uid:
-          type: string
-          description: UID of the owner resource.
-        controller:
+            $ref: '#/components/schemas/Taint'
+        unschedulable:
           type: boolean
-          description: Whether this reference points to the managing controller.
+          description: When true, prevents new pods from being scheduled on the node.
     Status:
       type: object
       description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
@@ -422,54 +454,23 @@ components:
         remainingItemCount:
           type: integer
           description: Number of items remaining in the list if pagination is in effect.
-    Namespace:
+    NodeList:
       type: object
-      description: A Namespace provides a mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. Namespace-based scoping is applicable only for namespaced objects.
+      description: A list of nodes returned by list operations.
+      required:
+      - items
       properties:
         apiVersion:
           type: string
-          const: v1
         kind:
           type: string
-          const: Namespace
+          const: NodeList
         metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        spec:
-          type: object
-          properties:
-            finalizers:
-              type: array
-              items:
-                type: string
-              description: List of finalizers that must all be empty before the namespace is fully deleted.
-        status:
-          type: object
-          properties:
-            phase:
-              type: string
-              enum:
-              - Active
-              - Terminating
-              description: Current lifecycle phase of the namespace.
-    NodeStatus:
-      type: object
-      description: Most recently observed status of the node including capacity, allocatable resources, conditions, and system info.
-      properties:
-        capacity:
-          type: object
-          additionalProperties:
-            type: string
-          description: Total resources available on the node including CPU and memory.
-        allocatable:
-          type: object
-          additionalProperties:
-            type: string
-          description: Resources available for pods on the node after system overhead.
-        conditions:
+          $ref: '#/components/schemas/ListMeta'
+        items:
           type: array
-          description: Current conditions of the node such as Ready, MemoryPressure, DiskPressure.
           items:
-            $ref: '#/components/schemas/NodeCondition'
+            $ref: '#/components/schemas/Node'
     Node:
       type: object
       description: A Node is a worker machine in Kubernetes. Each node contains the services necessary to run pods and is managed by the control plane. Nodes have resources including CPU, memory, and storage that pods consume.
@@ -486,31 +487,30 @@ components:
           $ref: '#/components/schemas/NodeSpec'
         status:
           $ref: '#/components/schemas/NodeStatus'
-  responses:
-    Conflict:
-      description: Conflict — a resource with that name already exists
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
-    NotFound:
-      description: Not found — the specified resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
-    BadRequest:
-      description: Bad request — invalid resource specification
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
-    Unauthorized:
-      description: Unauthorized — missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
+    OwnerReference:
+      type: object
+      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
+      required:
+      - apiVersion
+      - kind
+      - name
+      - uid
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the owner resource.
+        kind:
+          type: string
+          description: Kind of the owner resource.
+        name:
+          type: string
+          description: Name of the owner resource.
+        uid:
+          type: string
+          description: UID of the owner resource.
+        controller:
+          type: boolean
+          description: Whether this reference points to the managing controller.
   securitySchemes:
     bearerAuth:
       type: http

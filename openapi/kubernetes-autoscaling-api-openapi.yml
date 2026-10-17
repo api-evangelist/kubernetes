@@ -64,33 +64,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
-    BadRequest:
-      description: Bad request — invalid resource specification
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Status'
   schemas:
-    ListMeta:
-      type: object
-      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
-      properties:
-        resourceVersion:
-          type: string
-          description: Resource version of the list for use in watch operations.
-        continue:
-          type: string
-          description: Token used to retrieve the next page of results in a paginated list request.
-        remainingItemCount:
-          type: integer
-          description: Number of items remaining in the list if pagination is in effect.
     HorizontalPodAutoscalerList:
       type: object
       description: A list of HPAs returned by list operations.
@@ -108,30 +82,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/HorizontalPodAutoscaler'
-    OwnerReference:
-      type: object
-      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
-      required:
-      - apiVersion
-      - kind
-      - name
-      - uid
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the owner resource.
-        kind:
-          type: string
-          description: Kind of the owner resource.
-        name:
-          type: string
-          description: Name of the owner resource.
-        uid:
-          type: string
-          description: UID of the owner resource.
-        controller:
-          type: boolean
-          description: Whether this reference points to the managing controller.
     HorizontalPodAutoscaler:
       type: object
       description: A HorizontalPodAutoscaler automatically scales the number of pod replicas in a workload based on observed resource metrics (CPU, memory) or custom metrics from external sources.
@@ -180,6 +130,43 @@ components:
               type: string
               format: date-time
               description: Timestamp of the last scaling action.
+    Status:
+      type: object
+      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          const: Status
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable description of the status.
+        reason:
+          type: string
+          description: Machine-readable description of why the operation is in this status.
+        status:
+          type: string
+          enum:
+          - Success
+          - Failure
+          description: Outcome of the operation.
+    ListMeta:
+      type: object
+      description: Metadata that all list responses include, containing pagination state and the resource version of the list.
+      properties:
+        resourceVersion:
+          type: string
+          description: Resource version of the list for use in watch operations.
+        continue:
+          type: string
+          description: Token used to retrieve the next page of results in a paginated list request.
+        remainingItemCount:
+          type: integer
+          description: Number of items remaining in the list if pagination is in effect.
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata included on all persistent resources. Contains identifying information, ownership references, and system-managed fields like resourceVersion and uid.
@@ -222,43 +209,44 @@ components:
           description: List of objects that own this object. Garbage collection will delete this object when all owners are deleted.
           items:
             $ref: '#/components/schemas/OwnerReference'
-    Status:
+    OwnerReference:
       type: object
-      description: Status is a return value for calls that don't return other objects. It is used to convey error messages, reasons, and codes for both success and failure responses.
+      description: Reference to an owning resource that manages this object's lifecycle via garbage collection.
+      required:
+      - apiVersion
+      - kind
+      - name
+      - uid
       properties:
         apiVersion:
           type: string
+          description: API version of the owner resource.
         kind:
           type: string
-          const: Status
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
+          description: Kind of the owner resource.
+        name:
           type: string
-          description: Human-readable description of the status.
-        reason:
+          description: Name of the owner resource.
+        uid:
           type: string
-          description: Machine-readable description of why the operation is in this status.
-        status:
-          type: string
-          enum:
-          - Success
-          - Failure
-          description: Outcome of the operation.
+          description: UID of the owner resource.
+        controller:
+          type: boolean
+          description: Whether this reference points to the managing controller.
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
+    BadRequest:
+      description: Bad request — invalid resource specification
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status'
   parameters:
-    Watch:
-      name: watch
-      in: query
-      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
-      schema:
-        type: boolean
-    LabelSelector:
-      name: labelSelector
-      in: query
-      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -267,11 +255,23 @@ components:
         type: integer
         minimum: 1
         maximum: 500
+    Watch:
+      name: watch
+      in: query
+      description: Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion to watch from a specific version.
+      schema:
+        type: boolean
     NamespaceParam:
       name: namespace
       in: path
       required: true
       description: The namespace name to scope the request to.
+      schema:
+        type: string
+    LabelSelector:
+      name: labelSelector
+      in: query
+      description: 'Selector expression to filter resources by label. Supports equality (=, ==, !=), set-based (in, notin, exists) operations. Example: app=nginx,tier=frontend'
       schema:
         type: string
   securitySchemes:
