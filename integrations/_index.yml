@@ -95,3 +95,84 @@
     detected: '2026-10-19'
   status: not-a-workflow
   arazzo: null
+- slug: kubernetes-homebrew
+  label: Homebrew
+  partner: homebrew
+  partner_name: Homebrew
+  category: official CLI (Homebrew)
+  type: register
+  channel: package-registry
+  evidence: https://formulae.brew.sh/formula/kubernetes-cli
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Homebrew (public package index)
+    spec_file: null
+    packages:
+    - name: kubernetes-cli
+      kind: formula
+      version: 1.37.1
+      released: null
+      lapsed: false
+      page: https://formulae.brew.sh/formula/kubernetes-cli
+      cli: 'formula desc: Kubernetes command-line interface'
+      repo_leg: domain:kubernetes.io
+      publisher_leg: artifact-shared-github-org:kubernetes
+      matched_by: domain+name-among-holders
+    - name: kubernetes-cli@1.31
+      kind: formula
+      version: 1.31.13
+      released: null
+      lapsed: true
+      page: https://formulae.brew.sh/formula/kubernetes-cli@1.31
+      cli: 'formula desc: Kubernetes command-line interface'
+      repo_leg: domain:kubernetes.io
+      publisher_leg: artifact-shared-github-org:kubernetes
+      matched_by: domain+name-among-holders
+    - name: kubernetes-cli@1.32
+      kind: formula
+      version: 1.32.13
+      released: null
+      lapsed: true
+      page: https://formulae.brew.sh/formula/kubernetes-cli@1.32
+      cli: 'formula desc: Kubernetes command-line interface'
+      repo_leg: domain:kubernetes.io
+      publisher_leg: artifact-shared-github-org:kubernetes
+      matched_by: domain+name-among-holders
+    - name: kubernetes-cli@1.33
+      kind: formula
+      version: 1.33.13
+      released: null
+      lapsed: true
+      page: https://formulae.brew.sh/formula/kubernetes-cli@1.33
+      cli: 'formula desc: Kubernetes command-line interface'
+      repo_leg: domain:kubernetes.io
+      publisher_leg: artifact-shared-github-org:kubernetes
+      matched_by: domain+name-among-holders
+    - name: kubernetes-cli@1.34
+      kind: formula
+      version: 1.34.12
+      released: null
+      lapsed: true
+      page: https://formulae.brew.sh/formula/kubernetes-cli@1.34
+      cli: 'formula desc: Kubernetes command-line interface'
+      repo_leg: domain:kubernetes.io
+      publisher_leg: artifact-shared-github-org:kubernetes
+      matched_by: domain+name-among-holders
+    - name: kubernetes-cli@1.35
+      kind: formula
+      version: 1.35.9
+      released: null
+      lapsed: true
+      page: https://formulae.brew.sh/formula/kubernetes-cli@1.35
+      cli: 'formula desc: Kubernetes command-line interface'
+      repo_leg: domain:kubernetes.io
+      publisher_leg: artifact-shared-github-org:kubernetes
+      matched_by: domain+name-among-holders
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
