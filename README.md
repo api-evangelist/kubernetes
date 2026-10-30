@@ -1,4 +1,4 @@
-# Kubernetes (kubernetes)
+# Kubernetes
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,99 +66,212 @@
 
 Kubernetes, also known as K8s, is an open source system for automating deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easy management and discovery. Kubernetes builds upon 15 years of experience of running production workloads at Google, combined with best-of-breed ideas and practices from the community.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/kubernetes/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/kubernetes/refs/heads/main/apis.yml)
+**Areas:** Automation · Cloud-Native · CNCF · Containers · Deployment · Open Source · Scaling · Container Orchestration
 
-## Scope
+## Kubernetes on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Kubernetes is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kubernetes/](https://apis.io/providers/kubernetes/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Automation
-- Cloud Native
-- CNCF
-- Containers
-- Deployment
-- Open Source
-- Orchestration
-- Scaling
+- [Kubernetes Autoscaling API](https://apis.io/apis/kubernetes/kubernetes-autoscaling-api/) — Autoscaling resources including HorizontalPodAutoscalers for automatically scaling workloads based on observed metrics.
+- [Kubernetes Cluster API](https://apis.io/apis/kubernetes/kubernetes-cluster-api/) — Cluster-level resources including Namespaces, Nodes, ServiceAccounts, and RBAC resources for cluster administration.
+- [Kubernetes Config API](https://apis.io/apis/kubernetes/kubernetes-config-api/) — Configuration and storage resources including ConfigMaps, Secrets, PersistentVolumes, and PersistentVolumeClaims.
+- [Kubernetes Events API](https://apis.io/apis/kubernetes/kubernetes-events-api/) — Event resources capturing occurrences within the cluster such as pod scheduling, container restarts, and resource state changes.
+- [Kubernetes Namespaces API](https://apis.io/apis/kubernetes/kubernetes-namespaces-api/) — The Namespaces API from Kubernetes — 2 operation(s) for namespaces.
+- [Kubernetes RBAC API](https://apis.io/apis/kubernetes/kubernetes-rbac-api/) — Role-based access control resources including Roles, RoleBindings, ClusterRoles, and ClusterRoleBindings for managing authorization.
+- [Kubernetes Workloads API](https://apis.io/apis/kubernetes/kubernetes-workloads-api/) — Workload resources including Pods, Deployments, StatefulSets, DaemonSets, ReplicaSets, Jobs, and CronJobs for managing containerized applications.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-06-05
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (16)
 
-### Kubernetes API
+Multi-step workflows that chain operations into a business task.
 
-The Kubernetes API lets you query and manipulate the state of objects in Kubernetes. The core of Kubernetes control plane is the API server and the HTTP API that it exposes. Users, the different parts of your cluster, and external components all communicate with one another through the API server.
+- [Kubernetes Attach a HorizontalPodAutoscaler to a Deployment](https://apis.io/arazzos/kubernetes/kubernetes-autoscale-deployment-workflow/)
+- [Kubernetes Audit Cluster Node Capacity](https://apis.io/arazzos/kubernetes/kubernetes-cluster-capacity-audit-workflow/)
+- [Kubernetes Publish a ConfigMap and Roll Out Its Consumers](https://apis.io/arazzos/kubernetes/kubernetes-config-rollout-workflow/)
+- [Kubernetes Deploy an Application into a New Namespace](https://apis.io/arazzos/kubernetes/kubernetes-deploy-application-workflow/)
+- [Kubernetes Expose a Deployment Behind a Service](https://apis.io/arazzos/kubernetes/kubernetes-expose-deployment-workflow/)
+- [Kubernetes Apply Governance Labels to a Namespace](https://apis.io/arazzos/kubernetes/kubernetes-namespace-labeling-workflow/)
+- [Kubernetes Provision a ClusterRole If Missing](https://apis.io/arazzos/kubernetes/kubernetes-provision-cluster-role-workflow/)
+- [Kubernetes Quarantine a Failing Pod for Inspection](https://apis.io/arazzos/kubernetes/kubernetes-quarantine-pod-workflow/)
+- [Kubernetes Restart a Pod by Deleting It](https://apis.io/arazzos/kubernetes/kubernetes-restart-pod-workflow/)
+- [Kubernetes Retire an Application from a Namespace](https://apis.io/arazzos/kubernetes/kubernetes-retire-application-workflow/)
+- [Kubernetes Roll Out a New Container Image](https://apis.io/arazzos/kubernetes/kubernetes-rolling-update-workflow/)
+- [Kubernetes Rotate a Secret and Restart Its Consumers](https://apis.io/arazzos/kubernetes/kubernetes-rotate-secret-workflow/)
+- [Kubernetes Run a One-Off Task Pod and Collect Its Output](https://apis.io/arazzos/kubernetes/kubernetes-run-one-off-pod-workflow/)
+- [Kubernetes Scale a Deployment and Verify Replicas](https://apis.io/arazzos/kubernetes/kubernetes-scale-deployment-workflow/)
+- [Kubernetes Inventory and Tear Down a Namespace](https://apis.io/arazzos/kubernetes/kubernetes-teardown-namespace-workflow/)
+- [Kubernetes Troubleshoot a Failing Pod](https://apis.io/arazzos/kubernetes/kubernetes-troubleshoot-pod-workflow/)
 
-- **Human URL:** [https://kubernetes.io/docs/concepts/overview/kubernetes-api/](https://kubernetes.io/docs/concepts/overview/kubernetes-api/)
-- **Base URL:** `https://kubernetes.default.svc`
+#### AsyncAPI (1)
 
-#### Tags
+Event-driven and webhook contracts.
 
-- Automation
-- Cloud Native
-- CNCF
-- Containers
-- Deployment
-- Orchestration
-- Scaling
+- [Kubernetes Watch Events](https://apis.io/asyncapis/kubernetes/kubernetes-watch-asyncapi/)
 
-#### Properties
+#### Event channels (7)
 
-- [Documentation](https://kubernetes.io/docs/concepts/overview/kubernetes-api/)
-- [API Reference](https://kubernetes.io/docs/reference/kubernetes-api/)
-- [OpenAPI](https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Open A P I Repository](https://github.com/kubernetes/kubernetes/tree/master/api/openapi-spec)
-- [Authentication](https://kubernetes.io/docs/reference/access-authn-authz/)
-- [Client  Libraries](https://kubernetes.io/docs/reference/using-api/client-libraries/)
-- [Migration  Guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/)
-- [OpenAPI](openapi/kubernetes-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kubernetes-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kubernetes-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/kubernetes-watch-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [JSON Schema](json-schema/kubernetes-resource-schema.json) — [JSON Schema](https://json-schema.org/specification)
+Individual events and webhooks the provider emits.
 
-## Common Properties
+- [/api/v1/namespaces](https://apis.io/channels/kubernetes/api-v1-namespaces/)
+- [/api/v1/namespaces/{namespace}/pods](https://apis.io/channels/kubernetes/api-v1-namespaces-namespace-pods/)
+- [/api/v1/namespaces/{namespace}/services](https://apis.io/channels/kubernetes/api-v1-namespaces-namespace-services/)
+- [/api/v1/nodes](https://apis.io/channels/kubernetes/api-v1-nodes/)
+- [/api/v1/pods](https://apis.io/channels/kubernetes/api-v1-pods/)
+- [/apis/apps/v1/namespaces/{namespace}/deployments](https://apis.io/channels/kubernetes/apis-apps-v1-namespaces-namespace-deployments/)
+- [/apis/events.k8s.io/v1/namespaces/{namespace}/events](https://apis.io/channels/kubernetes/apis-events-k8s-io-v1-namespaces-namespace-events/)
 
-- [LinkedIn](https://www.linkedin.com/company/kubernetes)
-- [GitHub Organization](https://github.com/kubernetes)
-- [GitHub Repository](https://github.com/kubernetes/kubernetes)
-- [GitHub Repository](https://github.com/kubernetes/community)
-- [GitHub Repository](https://github.com/kubernetes/kube-openapi)
-- [Bluesky](https://bsky.app/profile/kubernetes.io)
-- [X (Twitter)](https://x.com/kubernetesio)
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [kubernetes-mcp.yml](https://apis.io/servers/kubernetes/kubernetes-mcp-yml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Kubernetes Agentic Access](https://apis.io/agentic-access/kubernetes/kubernetes-agentic-access/)
+
+#### JSON Schema (1)
+
+The data models the API reads and writes.
+
+- [Kubernetes Resource](https://apis.io/schemas/kubernetes/kubernetes-resource/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Kubernetes Context](https://apis.io/jsonld/kubernetes/kubernetes-context/)
+
+#### Collections (15)
+
+Postman and Open Collection request collections.
+
+- [Kubernetes API](https://apis.io/collections/kubernetes/open-kubernetes-api/)
+- [Kubernetes Autoscaling API](https://apis.io/collections/kubernetes/open-kubernetes-autoscaling-api/)
+- [Kubernetes Autoscaling Cluster API](https://apis.io/collections/kubernetes/open-kubernetes-cluster-api/)
+- [Kubernetes Autoscaling Config API](https://apis.io/collections/kubernetes/open-kubernetes-config-api/)
+- [Kubernetes Autoscaling Events API](https://apis.io/collections/kubernetes/open-kubernetes-events-api/)
+- [Kubernetes Autoscaling Namespaces API](https://apis.io/collections/kubernetes/open-kubernetes-namespaces-api/)
+- [Kubernetes Autoscaling RBAC API](https://apis.io/collections/kubernetes/open-kubernetes-rbac-api/)
+- [Kubernetes Autoscaling Workloads API](https://apis.io/collections/kubernetes/open-kubernetes-workloads-api/)
+- [Kubernetes Autoscaling API](https://apis.io/collections/kubernetes/postman-kubernetes-autoscaling-api/)
+- [Kubernetes Autoscaling Cluster API](https://apis.io/collections/kubernetes/postman-kubernetes-cluster-api/)
+- [Kubernetes Autoscaling Config API](https://apis.io/collections/kubernetes/postman-kubernetes-config-api/)
+- [Kubernetes Autoscaling Events API](https://apis.io/collections/kubernetes/postman-kubernetes-events-api/)
+- [Kubernetes Autoscaling Namespaces API](https://apis.io/collections/kubernetes/postman-kubernetes-namespaces-api/)
+- [Kubernetes Autoscaling RBAC API](https://apis.io/collections/kubernetes/postman-kubernetes-rbac-api/)
+- [Kubernetes Autoscaling Workloads API](https://apis.io/collections/kubernetes/postman-kubernetes-workloads-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Kubernetes Api Overlay](https://apis.io/overlays/kubernetes/kubernetes-api-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Kubernetes — asyncapi rules](https://apis.io/rules/kubernetes/kubernetes-asyncapi-spectral-rules/)
+- [Kubernetes — jsonschema rules](https://apis.io/rules/kubernetes/kubernetes-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Kubernetes Authentication](https://apis.io/security/kubernetes/kubernetes-authentication/)
+- [Kubernetes Domain Security](https://apis.io/security/kubernetes/kubernetes-domain-security/)
+- [Kubernetes Vulnerability Disclosure](https://apis.io/security/kubernetes/kubernetes-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Kubernetes Plans Pricing](https://apis.io/plans/kubernetes/kubernetes-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Kubernetes Rate Limits](https://apis.io/rate-limits/kubernetes/kubernetes-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Kubernetes Finops](https://apis.io/finops/kubernetes/kubernetes-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://kubernetes.io/)
 - [Documentation](https://kubernetes.io/docs/home/)
-- [API Reference](https://kubernetes.io/docs/reference/kubernetes-api/)
-- [Blog](https://kubernetes.io/blog/)
-- [Training](https://kubernetes.io/training/)
-- [Partners](https://kubernetes.io/partners/)
+- [Getting started](https://kubernetes.io/docs/setup/)
+- [API reference](https://kubernetes.io/docs/reference/kubernetes-api/)
 - [Changelog](https://kubernetes.io/releases/)
-- [Community](https://kubernetes.io/community/)
-- [Forum](https://discuss.kubernetes.io/)
-- [Slack](https://kubernetes.slack.com)
-- [Sign Up](https://slack.k8s.io)
-- [YouTube](https://www.youtube.com/@KubernetesCommunity)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/kubernetes)
-- [License](https://github.com/kubernetes/kubernetes/blob/master/LICENSE)
+- [Blog](https://kubernetes.io/blog/)
 - [Security](https://kubernetes.io/docs/concepts/security/)
-- [Security Policy](https://github.com/kubernetes/kubernetes/security/policy)
-- [Foundation](https://www.cncf.io/projects/kubernetes/)
-- [Newsletter](https://www.cncf.io/kubeweekly/)
-- [Getting Started](https://kubernetes.io/docs/setup/)
-- [Tutorials](https://kubernetes.io/docs/tutorials/)
-- [Case Studies](https://kubernetes.io/case-studies/)
-- [Code Of Conduct](https://kubernetes.io/community/code-of-conduct/)
-- [Deprecation Policy](https://kubernetes.io/docs/reference/using-api/deprecation-policy/)
-- [JSON Schema](json-schema/kubernetes-resource-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/kubernetes-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [GitHub](https://github.com/kubernetes)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 47.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 62.9 |
+| Contract governance | 18.2 |
+| Operational transparency | 47.4 |
+| Developer ergonomics | 59.0 |
+| Access clarity | 21.1 |
+
+**Agent readiness 19.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kubernetes/](https://apis.io/providers/kubernetes/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kubernetes: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kubernetes/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
